@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rb;
-    PartyManager pm;
-    TaskController tc;
+    InteractTask it;
     public float speed = 1;
     private bool collided = false;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        pm = FindObjectOfType<PartyManager>();
+
     }
 
     // Update is called once per frame
@@ -33,15 +30,11 @@ public class PlayerController : MonoBehaviour
 
     void PlayerTaskInteract()
     {
-        if (collided && tc.inDanger)
+        if (collided)
         {
             if (Input.GetButtonDown("Interact"))
             {
-                tc.GetComponent<SpriteRenderer>().color = Color.white;
-                tc.inDanger = false;
-                tc.eventOccurCoroutine();
-                pm.StopRepeatingActionCoroutine();
-                pm.RepeatingActionCoroutine('+', 10);
+                it.PlayerInteracted();
             }
         }
     }
@@ -55,13 +48,16 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.name == "TaskPrefab")
         {
-            tc = collision.gameObject.GetComponent<TaskController>();
+            it = collision.gameObject.GetComponent<InteractTask>();
             collided = true;
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        collided = false;
+        if (collision.gameObject.name == "TaskPrefab")
+        {
+            collided = false;
+        }
     }
 }
