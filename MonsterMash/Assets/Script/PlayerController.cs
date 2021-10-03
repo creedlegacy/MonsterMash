@@ -33,15 +33,11 @@ public class PlayerController : MonoBehaviour
 
     void PlayerTaskInteract()
     {
-        if (collided && tc.inDanger)
+        if (collided)
         {
             if (Input.GetButtonDown("Interact"))
             {
-                tc.GetComponent<SpriteRenderer>().color = Color.white;
-                tc.inDanger = false;
-                tc.eventOccurCoroutine();
-                pm.StopRepeatingActionCoroutine();
-                pm.RepeatingActionCoroutine('+', 10);
+                tc.PlayerInteracted();
             }
         }
     }
@@ -62,6 +58,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        collided = false;
+        if (collision.gameObject.name == "TaskPrefab")
+        {
+            collided = false;
+        }
     }
 }

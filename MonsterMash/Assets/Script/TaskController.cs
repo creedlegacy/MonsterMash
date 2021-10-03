@@ -22,6 +22,8 @@ public class TaskController : MonoBehaviour
 
     public int minOccurTime = 5;
     public int maxOccurTime = 15;
+    public int decrementMeter = 5;
+    public int incrementMeter = 10;
 
     public bool inDanger = false;
     
@@ -35,14 +37,14 @@ public class TaskController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         if (taskType == TaskType.Repeating)
         {
-            pm.RepeatingActionCoroutine('+', 10);
-            eventOccurCoroutine();
+            pm.RepeatingActionCoroutine('+', incrementMeter);
+            EventOccurCoroutine();
 
 
         }
     }
 
-    public void eventOccurCoroutine()
+    public void EventOccurCoroutine()
     {
         StartCoroutine(EventOccur());
     }
@@ -55,11 +57,22 @@ public class TaskController : MonoBehaviour
         sr.color = Color.red;
         inDanger = true;
         pm.StopRepeatingActionCoroutine();
-        pm.RepeatingActionCoroutine('-', 5);
+        pm.RepeatingActionCoroutine('-', decrementMeter);
 
     }
 
+    public void PlayerInteracted()
+    {
+        if (inDanger)
+        {
+            sr.color = Color.white;
+            inDanger = false;
+            EventOccurCoroutine();
+            pm.StopRepeatingActionCoroutine();
+            pm.RepeatingActionCoroutine('+', incrementMeter);
+        }
 
+    } 
     // Update is called once per frame
     void Update()
     {
