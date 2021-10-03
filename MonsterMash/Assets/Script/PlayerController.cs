@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    Rigidbody2D rb;
+    PartyManager pm;
+    TaskController tc;
     public float speed = 1;
+    private bool collided = false;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        pm = FindObjectOfType<PartyManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         PlayerMovement();
+        PlayerTaskInteract();
     }
 
     void PlayerMovement()
@@ -24,5 +29,39 @@ public class PlayerController : MonoBehaviour
         Vector2 axisMovement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         axisMovement.Normalize();
         transform.Translate(axisMovement * speed * Time.deltaTime);
+    }
+
+    void PlayerTaskInteract()
+    {
+        if (collided && tc.inDanger)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                tc.GetComponent<SpriteRenderer>().color = Color.white;
+                tc.inDanger = false;
+                tc.eventOccurCoroutine();
+                pm.StopRepeatingActionCoroutine();
+                pm.RepeatingActionCoroutine('+', 10);
+            }
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+      
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "TaskPrefab")
+        {
+            tc = collision.gameObject.GetComponent<TaskController>();
+            collided = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        collided = false;
     }
 }
