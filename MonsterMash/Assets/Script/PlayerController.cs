@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rb;
-    PartyManager pm;
-    TaskController tc;
+    InteractTask it;
     public float speed = 1;
     private bool collided = false;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        pm = FindObjectOfType<PartyManager>();
+
     }
 
     // Update is called once per frame
@@ -37,7 +34,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact"))
             {
-                tc.PlayerInteracted();
+                it.PlayerInteracted();
             }
         }
     }
@@ -51,7 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.name == "TaskPrefab")
         {
-            tc = collision.gameObject.GetComponent<TaskController>();
+            it = collision.gameObject.GetComponent<InteractTask>();
             collided = true;
         }
     }
