@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    InteractTask it;
+  
     public float speed = 1;
-    private bool collided = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +16,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerMovement();
-        PlayerTaskInteract();
     }
 
     void PlayerMovement()
@@ -28,36 +26,6 @@ public class PlayerController : MonoBehaviour
         transform.Translate(axisMovement * speed * Time.deltaTime);
     }
 
-    void PlayerTaskInteract()
-    {
-        if (collided)
-        {
-            if (Input.GetButtonDown("Interact"))
-            {
-                it.PlayerInteracted();
-            }
-        }
-    }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-      
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.name == "TaskPrefab")
-        {
-            it = collision.gameObject.GetComponent<InteractTask>();
-            collided = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.name == "TaskPrefab")
-        {
-            collided = false;
-        }
-    }
+   
 }

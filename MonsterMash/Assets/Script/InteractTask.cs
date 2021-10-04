@@ -24,7 +24,7 @@ public class InteractTask : MonoBehaviour
     public int maxOccurTime = 15;
     public int decrementMeter = 5;
     public int incrementMeter = 10;
-
+    private bool collidedPlayer = false;
     public bool inDanger = false;
     
    
@@ -61,21 +61,44 @@ public class InteractTask : MonoBehaviour
 
     }
 
-    public void PlayerInteracted()
-    {
-        if (inDanger)
-        {
-            sr.color = Color.white;
-            inDanger = false;
-            EventOccurCoroutine();
-            pm.StopRepeatingActionCoroutine();
-            pm.RepeatingActionCoroutine('+', incrementMeter);
-        }
 
-    } 
     // Update is called once per frame
     void Update()
     {
-        
+        PlayerTaskInteract();
+    }
+
+    void PlayerTaskInteract()
+    {
+        if (collidedPlayer)
+        {
+            if (Input.GetButtonDown("Interact") && inDanger)
+            {
+              
+                sr.color = Color.white;
+                inDanger = false;
+                EventOccurCoroutine();
+                pm.StopRepeatingActionCoroutine();
+                pm.RepeatingActionCoroutine('+', incrementMeter);
+                
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+
+            collidedPlayer = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Player")
+        {
+            collidedPlayer = false;
+        }
     }
 }
