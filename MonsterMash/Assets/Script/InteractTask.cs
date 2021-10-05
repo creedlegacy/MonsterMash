@@ -86,6 +86,7 @@ public class InteractTask : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     public void RepeatingActionCoroutine(char type, int value)
     {
         repeatingActionCoroutine = RepeatingAction(type, value);
@@ -113,6 +114,9 @@ public class InteractTask : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
+=======
+    private void OnTriggerEnter2D(Collider2D collision)
+>>>>>>> origin/YiboP
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -121,7 +125,7 @@ public class InteractTask : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player")
         {

@@ -50,9 +50,13 @@ public class PartyManager : MonoBehaviour
         while (continueCoroutine)
         {
             if (type == '+')
+            {
                 partyMeterValue += value;
+            }
             else
+            { 
                 partyMeterValue -= value;
+            }
             partymeter.value = partyMeterValue;
             Debug.Log(partymeter.value);
             yield return new WaitForSeconds(1f);
