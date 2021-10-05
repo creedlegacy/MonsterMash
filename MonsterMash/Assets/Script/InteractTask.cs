@@ -26,8 +26,9 @@ public class InteractTask : MonoBehaviour
     public int incrementMeter = 10;
     private bool collidedPlayer = false;
     public bool inDanger = false;
-    
-   
+    private IEnumerator repeatingActionCoroutine;
+
+
     PartyManager pm;
     SpriteRenderer sr;
 
@@ -37,7 +38,7 @@ public class InteractTask : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         //if (taskType == TaskType.Repeating)
         //{
-            pm.RepeatingActionCoroutine('+', incrementMeter);
+            RepeatingActionCoroutine('+', incrementMeter);
             EventOccurCoroutine();
 
 
@@ -56,8 +57,8 @@ public class InteractTask : MonoBehaviour
         yield return new WaitForSeconds(randomOccurTime);
         sr.color = Color.red;
         inDanger = true;
-        pm.StopRepeatingActionCoroutine();
-        pm.RepeatingActionCoroutine('-', decrementMeter);
+        StopRepeatingActionCoroutine();
+        RepeatingActionCoroutine('-', decrementMeter);
 
     }
 
@@ -78,10 +79,36 @@ public class InteractTask : MonoBehaviour
                 sr.color = Color.white;
                 inDanger = false;
                 EventOccurCoroutine();
-                pm.StopRepeatingActionCoroutine();
-                pm.RepeatingActionCoroutine('+', incrementMeter);
+                StopRepeatingActionCoroutine();
+                RepeatingActionCoroutine('+', incrementMeter);
                 
             }
+        }
+    }
+
+    public void RepeatingActionCoroutine(char type, int value)
+    {
+        repeatingActionCoroutine = RepeatingAction(type, value);
+        StartCoroutine(repeatingActionCoroutine);
+    }
+
+    public void StopRepeatingActionCoroutine()
+    {
+        StopCoroutine(repeatingActionCoroutine);
+    }
+
+    IEnumerator RepeatingAction(char type, int value)
+
+    {
+        while (pm.continueCoroutine)
+        {
+            if (type == '+')
+                pm.partyMeterValue += value;
+            else
+                pm.partyMeterValue -= value;
+            pm.partymeter.value = pm.partyMeterValue;
+            Debug.Log(pm.partymeter.value);
+            yield return new WaitForSeconds(1f);
         }
     }
 
