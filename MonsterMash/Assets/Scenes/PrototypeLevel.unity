@@ -421,6 +421,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskPrefab (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -643,6 +647,10 @@ PrefabInstance:
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -967,6 +975,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskPrefab (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -1138,6 +1150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1230,6 +1246,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskPrefab (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -1290,6 +1310,10 @@ PrefabInstance:
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -2383,6 +2407,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 666118401}
     m_Modifications:
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: taskType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: decrementMeter
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: incrementMeter
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: randomCountdown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab
@@ -3133,6 +3185,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskPrefab (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3456,6 +3512,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskPrefab (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -3513,9 +3573,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 666118401}
     m_Modifications:
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: taskType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: decrementMeter
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: incrementMeter
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: randomCountdown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -3988,6 +4080,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskPrefab (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -4072,8 +4168,8 @@ MonoBehaviour:
   continueCoroutine: 1
   partyTimeStarted: 0
   dangerState: 0
-  partyTime: 61
-  dangerTime: 100
+  partyTime: 60
+  dangerTime: 6
 --- !u!4 &995449512
 Transform:
   m_ObjectHideFlags: 0
@@ -4261,6 +4357,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskPrefab (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -4322,6 +4422,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskPrefab (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -4382,6 +4486,10 @@ PrefabInstance:
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -4633,9 +4741,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 666118401}
     m_Modifications:
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: taskType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: decrementMeter
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: incrementMeter
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: randomCountdown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -4697,6 +4837,10 @@ PrefabInstance:
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -4920,6 +5064,10 @@ PrefabInstance:
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -5384,6 +5532,10 @@ PrefabInstance:
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -6142,9 +6294,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 666118401}
     m_Modifications:
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: taskType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: decrementMeter
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: incrementMeter
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: randomCountdown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -6337,6 +6521,10 @@ PrefabInstance:
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -6723,6 +6911,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskPrefab (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -6811,9 +7003,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 666118401}
     m_Modifications:
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450223532192215704, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: taskType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: decrementMeter
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: incrementMeter
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: randomCountdown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -7006,6 +7230,10 @@ PrefabInstance:
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder

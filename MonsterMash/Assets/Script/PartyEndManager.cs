@@ -24,7 +24,7 @@ public class PartyEndManager : MonoBehaviour
 
     public void Restart()
     {
-        Debug.Log("test");
+  
         SceneManager.LoadScene(PlayerPrefs.GetString("LastPartyScene"));
     }
 }

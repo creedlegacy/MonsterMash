@@ -42,7 +42,6 @@ public class PartyManager : MonoBehaviour
         {
             partyTimeStarted = true;
             partyTime -= Time.deltaTime;
-            Debug.Log(Mathf.FloorToInt(partyTime));
             int minutes = Mathf.FloorToInt(partyTime / 60F);
             int seconds = Mathf.FloorToInt(partyTime - minutes * 60);
             string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);

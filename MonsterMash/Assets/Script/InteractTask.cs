@@ -6,24 +6,17 @@ using UnityEngine;
 public class InteractTask : MonoBehaviour
 {
     //[System.Serializable]
-   
-    //public enum TaskType
-    //{
-    //    Repeating,
-    //    Random
-    //}
-    //public TaskType taskType;
 
-    //public enum TaskAction
-    //{
-    //    Come_and_Interact
-    //}
-    //public TaskAction taskAction;
+    public enum TaskType
+    {
+        Repeating,
+        Random
+    }
+    public TaskType taskType;
 
-    public int minOccurTime = 5;
-    public int maxOccurTime = 15;
-    public int decrementMeter = 5;
-    public int incrementMeter = 10;
+    public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
+    public float randomCountdown = 3f;
+    private float tempRandomCountdown = 3f;
     private bool collidedPlayer = false;
     public bool inDanger = false;
     private IEnumerator repeatingActionCoroutine;
@@ -36,18 +29,19 @@ public class InteractTask : MonoBehaviour
     {
         pm = FindObjectOfType<PartyManager>();
         sr = GetComponent<SpriteRenderer>();
-        //if (taskType == TaskType.Repeating)
-        //{
-            RepeatingActionCoroutine('+', incrementMeter);
-            EventOccurCoroutine();
-
-
-        //}
+        // Start courutine to determine how many seconds until event for this task
+        EventOccurCoroutine();
+        // If repeating start adding party score on start per second
+        if (taskType == TaskType.Repeating)
+        {
+            RepeatingActionCoroutine('+', incrementMeter); 
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        RandomTaskCountdown();
         PlayerTaskInteract();
     }
 
@@ -61,11 +55,19 @@ public class InteractTask : MonoBehaviour
         
         int randomOccurTime = Random.Range(minOccurTime, maxOccurTime);
         yield return new WaitForSeconds(randomOccurTime);
-        sr.color = Color.red;
         inDanger = true;
-        StopRepeatingActionCoroutine();
-        RepeatingActionCoroutine('-', decrementMeter);
-
+        if (taskType == TaskType.Repeating)
+        {
+            sr.color = Color.red;
+            StopRepeatingActionCoroutine();
+            RepeatingActionCoroutine('-', decrementMeter);
+        }
+        else
+        {
+            sr.color = Color.magenta;
+            tempRandomCountdown = randomCountdown;
+        }
+            
     }
 
     void PlayerTaskInteract()
@@ -74,12 +76,23 @@ public class InteractTask : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact") && inDanger)
             {
-              
-                sr.color = Color.white;
                 inDanger = false;
+                if (taskType == TaskType.Repeating)
+                {
+                    sr.color = Color.white;
+                    StopRepeatingActionCoroutine();
+                    RepeatingActionCoroutine('+', incrementMeter);
+                }
+                else
+                {
+                    sr.color = Color.black;
+                    pm.partymeter.value += incrementMeter;
+                    Debug.Log(pm.partymeter.value);
+                }
+                
+                
                 EventOccurCoroutine();
-                StopRepeatingActionCoroutine();
-                RepeatingActionCoroutine('+', incrementMeter);
+               
                 
             }
         }
@@ -127,6 +140,27 @@ public class InteractTask : MonoBehaviour
             pm.partymeter.value = pm.partyMeterValue;
             Debug.Log(pm.partyMeterValue);
             yield return new WaitForSeconds(1f);
+        }
+    }
+
+    private void RandomTaskCountdown()
+    {
+        if (inDanger && taskType == TaskType.Random)
+        {
+            if (tempRandomCountdown > 0)
+            {
+                tempRandomCountdown -= Time.deltaTime;
+
+            }
+            else
+            {
+                inDanger = false;
+                sr.color = Color.black;
+                pm.partymeter.value -= decrementMeter;
+                Debug.Log(pm.partymeter.value);
+                EventOccurCoroutine();
+
+            }
         }
     }
 
