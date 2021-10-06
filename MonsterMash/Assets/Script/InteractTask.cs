@@ -45,6 +45,12 @@ public class InteractTask : MonoBehaviour
         //}
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        PlayerTaskInteract();
+    }
+
     public void EventOccurCoroutine()
     {
         StartCoroutine(EventOccur());
@@ -60,13 +66,6 @@ public class InteractTask : MonoBehaviour
         StopRepeatingActionCoroutine();
         RepeatingActionCoroutine('-', decrementMeter);
 
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        PlayerTaskInteract();
     }
 
     void PlayerTaskInteract()
@@ -86,7 +85,6 @@ public class InteractTask : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
     public void RepeatingActionCoroutine(char type, int value)
     {
         repeatingActionCoroutine = RepeatingAction(type, value);
@@ -104,19 +102,38 @@ public class InteractTask : MonoBehaviour
         while (pm.continueCoroutine)
         {
             if (type == '+')
-                pm.partyMeterValue += value;
+            {
+                if (pm.partyMeterValue < pm.partymeter.maxValue)
+                {
+                    pm.partyMeterValue += value;
+                    if(pm.partyMeterValue > pm.partymeter.maxValue)
+                    {
+                        pm.partyMeterValue = (int)pm.partymeter.maxValue;
+                    }
+                }
+            }
             else
-                pm.partyMeterValue -= value;
+            {
+                if (pm.partyMeterValue > pm.partymeter.minValue)
+                {
+                    pm.partyMeterValue -= value;
+                    if (pm.partyMeterValue < pm.partymeter.minValue)
+                    {
+                        pm.partyMeterValue = (int)pm.partymeter.minValue;
+                    }
+                }
+            }
+               
             pm.partymeter.value = pm.partyMeterValue;
-            Debug.Log(pm.partymeter.value);
+            Debug.Log(pm.partyMeterValue);
             yield return new WaitForSeconds(1f);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-=======
+    //private void OnCollisionEnter2D(Collision2D collision)
+
     private void OnTriggerEnter2D(Collider2D collision)
->>>>>>> origin/YiboP
+
     {
         if (collision.gameObject.tag == "Player")
         {
