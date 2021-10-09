@@ -15,9 +15,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMovement();
+        
     }
 
+    void FixedUpdate()
+    {
+    	PlayerMovement();
+    }
     void PlayerMovement()
     {
         //Controls horizontal and vertical movement of the player
