@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class InteractTask : MonoBehaviour
@@ -20,7 +21,7 @@ public class InteractTask : MonoBehaviour
     private bool collidedPlayer = false;
     public bool inDanger = false;
     private IEnumerator continuousActionCoroutine;
-    private GameObject successReaction, failReaction;
+    private GameObject successReaction, failReaction, countdownDial, countdownDialFill;
 
 
     PartyManager pm;
@@ -32,6 +33,9 @@ public class InteractTask : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
+        countdownDial = gameObject.transform.Find("Canvas/CountdownDial").gameObject;
+        countdownDialFill = countdownDial.transform.Find("CountdownDialFill").gameObject;
+        //countdownDialFill.GetComponent<Image>().fillAmount = 
         // Start courutine to determine how many seconds until event for this task
         EventOccurCoroutine();
         // If continuous start adding party score on start per second
@@ -93,6 +97,7 @@ public class InteractTask : MonoBehaviour
                 }
                 else
                 {
+                    countdownDial.SetActive(false);
                     sr.color = Color.black;
                     pm.partymeter.value += incrementMeter;
                     Debug.Log(pm.partymeter.value);
@@ -168,11 +173,14 @@ public class InteractTask : MonoBehaviour
             if (tempInstantCountdown > 0)
             {
                 tempInstantCountdown -= Time.deltaTime;
-
+                countdownDial.SetActive(true);
+                //Lerp to linearly interpolate between 1 to 0
+                countdownDialFill.GetComponent<Image>().fillAmount = 1 - Mathf.Lerp(1, 0, tempInstantCountdown / instantCountdown);
             }
             else
             {
                 inDanger = false;
+                countdownDial.SetActive(false);
                 failReaction.SetActive(true);
                 failReaction.GetComponent<Animator>().Play("TaskReactionMovement", -1, 0f);
                 sr.color = Color.black;

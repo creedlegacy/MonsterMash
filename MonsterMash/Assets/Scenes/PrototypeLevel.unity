@@ -431,7 +431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -445,6 +445,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (12)
@@ -455,7 +459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -755,6 +759,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1225871474}
     m_Modifications:
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: taskType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: maxOccurTime
       value: 25
@@ -1108,7 +1116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -1122,6 +1130,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (19)
@@ -1132,7 +1144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -1394,7 +1406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: maxOccurTime
@@ -1416,6 +1428,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab
@@ -1426,7 +1442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -1530,7 +1546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -1544,6 +1560,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (18)
@@ -1554,7 +1574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -1627,7 +1647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: maxOccurTime
@@ -1649,6 +1669,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (2)
@@ -1659,7 +1683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -2276,7 +2300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 542434537}
   m_Layer: 0
-  m_Name: RandomTasks
+  m_Name: InstantTasks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2784,7 +2808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -2797,6 +2821,10 @@ PrefabInstance:
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: randomCountdown
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
@@ -3778,7 +3806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: maxOccurTime
@@ -3800,6 +3828,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (1)
@@ -3810,7 +3842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -4145,7 +4177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -4159,6 +4191,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (15)
@@ -4169,7 +4205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -4242,7 +4278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -4256,6 +4292,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (11)
@@ -4266,7 +4306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -4758,7 +4798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: maxOccurTime
@@ -4780,6 +4820,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (4)
@@ -4790,7 +4834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -5075,7 +5119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -5089,6 +5133,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (10)
@@ -5099,7 +5147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -5172,7 +5220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: maxOccurTime
@@ -5194,6 +5242,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (6)
@@ -5204,7 +5256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -5428,7 +5480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1225871474}
   m_Layer: 0
-  m_Name: RepeatingTasks
+  m_Name: ContinuousTasks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5472,7 +5524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -5486,6 +5538,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (16)
@@ -5496,7 +5552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -5555,6 +5611,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1225871474}
     m_Modifications:
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: taskType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: maxOccurTime
       value: 25
@@ -5808,7 +5868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -5822,6 +5882,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (14)
@@ -5832,7 +5896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -6466,7 +6530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -6480,6 +6544,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (21)
@@ -6490,7 +6558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -7552,7 +7620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: maxOccurTime
@@ -7574,6 +7642,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (5)
@@ -7584,7 +7656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -7981,7 +8053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -7995,6 +8067,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (13)
@@ -8005,7 +8081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -8109,7 +8185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: taskType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: decrementMeter
@@ -8123,6 +8199,10 @@ PrefabInstance:
       propertyPath: randomCountdown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: instantCountdown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_Name
       value: TaskPrefab (3)
@@ -8133,7 +8213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2750585976383026062, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145052298739726442, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: m_RootOrder
@@ -8323,6 +8403,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1225871474}
     m_Modifications:
+    - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
+      propertyPath: taskType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919120257221390459, guid: 442359fc01699c843bea5ec2b3d6a92c, type: 3}
       propertyPath: maxOccurTime
       value: 25
