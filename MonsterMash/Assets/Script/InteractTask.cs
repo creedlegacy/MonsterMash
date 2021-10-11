@@ -9,17 +9,18 @@ public class InteractTask : MonoBehaviour
 
     public enum TaskType
     {
-        Repeating,
-        Random
+        Instant,
+        Continuous
     }
     public TaskType taskType;
 
     public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
-    public float randomCountdown = 3f;
-    private float tempRandomCountdown = 3f;
+    public float instantCountdown = 3f;
+    private float tempInstantCountdown = 3f;
     private bool collidedPlayer = false;
     public bool inDanger = false;
-    private IEnumerator repeatingActionCoroutine;
+    private IEnumerator continuousActionCoroutine;
+    private GameObject successReaction, failReaction;
 
 
     PartyManager pm;
@@ -29,19 +30,23 @@ public class InteractTask : MonoBehaviour
     {
         pm = FindObjectOfType<PartyManager>();
         sr = GetComponent<SpriteRenderer>();
+        successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
+        failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
         // Start courutine to determine how many seconds until event for this task
         EventOccurCoroutine();
-        // If repeating start adding party score on start per second
-        if (taskType == TaskType.Repeating)
+        // If continuous start adding party score on start per second
+        if (taskType == TaskType.Continuous)
         {
-            RepeatingActionCoroutine('+', incrementMeter); 
+            successReaction.SetActive(true);
+            ContinuousActionCoroutine('+', incrementMeter); 
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        RandomTaskCountdown();
+        InstantTaskCountdown();
         PlayerTaskInteract();
     }
 
@@ -56,16 +61,17 @@ public class InteractTask : MonoBehaviour
         int randomOccurTime = Random.Range(minOccurTime, maxOccurTime);
         yield return new WaitForSeconds(randomOccurTime);
         inDanger = true;
-        if (taskType == TaskType.Repeating)
+        if (taskType == TaskType.Continuous)
         {
             sr.color = Color.red;
-            StopRepeatingActionCoroutine();
-            RepeatingActionCoroutine('-', decrementMeter);
+            StopContinuousActionCoroutine();
+            failReaction.SetActive(true);
+            ContinuousActionCoroutine('-', decrementMeter);
         }
         else
         {
             sr.color = Color.magenta;
-            tempRandomCountdown = randomCountdown;
+            tempInstantCountdown = instantCountdown;
         }
             
     }
@@ -77,17 +83,21 @@ public class InteractTask : MonoBehaviour
             if (Input.GetButtonDown("Interact") && inDanger)
             {
                 inDanger = false;
-                if (taskType == TaskType.Repeating)
+                if (taskType == TaskType.Continuous)
                 {
                     sr.color = Color.white;
-                    StopRepeatingActionCoroutine();
-                    RepeatingActionCoroutine('+', incrementMeter);
+                    StopContinuousActionCoroutine();
+                    ContinuousActionCoroutine('+', incrementMeter);
+
+                    
                 }
                 else
                 {
                     sr.color = Color.black;
                     pm.partymeter.value += incrementMeter;
                     Debug.Log(pm.partymeter.value);
+                    successReaction.SetActive(true);
+                    successReaction.GetComponent<Animator>().Play("TaskReactionMovement", -1, 0f);
                 }
                 
                 
@@ -98,18 +108,18 @@ public class InteractTask : MonoBehaviour
         }
     }
 
-    public void RepeatingActionCoroutine(char type, int value)
+    public void ContinuousActionCoroutine(char type, int value)
     {
-        repeatingActionCoroutine = RepeatingAction(type, value);
-        StartCoroutine(repeatingActionCoroutine);
+        continuousActionCoroutine = ContinuousAction(type, value);
+        StartCoroutine(continuousActionCoroutine);
     }
 
-    public void StopRepeatingActionCoroutine()
+    public void StopContinuousActionCoroutine()
     {
-        StopCoroutine(repeatingActionCoroutine);
+        StopCoroutine(continuousActionCoroutine);
     }
 
-    IEnumerator RepeatingAction(char type, int value)
+    IEnumerator ContinuousAction(char type, int value)
 
     {
         while (pm.continueCoroutine)
@@ -119,7 +129,11 @@ public class InteractTask : MonoBehaviour
                 if (pm.partyMeterValue < pm.partymeter.maxValue)
                 {
                     pm.partyMeterValue += value;
-                    if(pm.partyMeterValue > pm.partymeter.maxValue)
+                    failReaction.SetActive(false);
+                    successReaction.SetActive(true);
+                    successReaction.GetComponent<Animator>().Play("TaskReactionMovement", -1, 0f);
+
+                    if (pm.partyMeterValue > pm.partymeter.maxValue)
                     {
                         pm.partyMeterValue = (int)pm.partymeter.maxValue;
                     }
@@ -130,6 +144,10 @@ public class InteractTask : MonoBehaviour
                 if (pm.partyMeterValue > pm.partymeter.minValue)
                 {
                     pm.partyMeterValue -= value;
+                    successReaction.SetActive(false);
+                    failReaction.SetActive(true);
+                    failReaction.GetComponent<Animator>().Play("TaskReactionMovement", -1, 0f);
+
                     if (pm.partyMeterValue < pm.partymeter.minValue)
                     {
                         pm.partyMeterValue = (int)pm.partymeter.minValue;
@@ -143,18 +161,20 @@ public class InteractTask : MonoBehaviour
         }
     }
 
-    private void RandomTaskCountdown()
+    private void InstantTaskCountdown()
     {
-        if (inDanger && taskType == TaskType.Random)
+        if (inDanger && taskType == TaskType.Instant)
         {
-            if (tempRandomCountdown > 0)
+            if (tempInstantCountdown > 0)
             {
-                tempRandomCountdown -= Time.deltaTime;
+                tempInstantCountdown -= Time.deltaTime;
 
             }
             else
             {
                 inDanger = false;
+                failReaction.SetActive(true);
+                failReaction.GetComponent<Animator>().Play("TaskReactionMovement", -1, 0f);
                 sr.color = Color.black;
                 pm.partymeter.value -= decrementMeter;
                 Debug.Log(pm.partymeter.value);
