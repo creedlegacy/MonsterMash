@@ -10,25 +10,30 @@ public class MusicRequestTask : MonoBehaviour
 
     public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
     public float initialCountdown = 5f, taskActivatedCountdown = 10f;
+    public string requestedShape;
     private float tempInitialCountdown = 5f, tempTaskActivatedCountdown = 10f;
     private bool collidedPlayer = false;
     public bool inDanger = false, taskActivated = false;
     private IEnumerator continuousActionCoroutine;
-    private GameObject successReaction, failReaction, countdownDial, countdownDialFill, taskAlert;
+    private GameObject successReaction, failReaction, countdownDial, countdownDialFill, taskAlert, bubble, shape;
 
     PartyManager pm;
     SpriteRenderer sr;
+    MusicPlayer mp;
 
     void Start()
     {
         pm = FindObjectOfType<PartyManager>();
         sr = gameObject.transform.Find("TaskSprite").gameObject.GetComponent<SpriteRenderer>();
+        mp = FindObjectOfType<MusicPlayer>();
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
         countdownDial = gameObject.transform.Find("Canvas/CountdownDial").gameObject;
         countdownDialFill = countdownDial.transform.Find("CountdownDialFill").gameObject;
         taskAlert = gameObject.transform.Find("TaskAlert").gameObject;
-        
+        bubble = gameObject.transform.Find("Canvas/BubbleSprite").gameObject;
+        shape = gameObject.transform.Find("Canvas/Shape").gameObject;
+
 
         // Start courutine to determine how many seconds until event for this task
         EventOccurCoroutine();
@@ -68,10 +73,14 @@ public class MusicRequestTask : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact") && inDanger)
             {
+                GetRandomShape();
                 inDanger = false;
                 taskActivated = true;
+                mp.allowInteract = !mp.allowInteract;
                 taskAlert.SetActive(false);
-
+                bubble.SetActive(true);
+                shape.SetActive(true);
+                
                 //countdownDial.SetActive(false);
 
                 //pm.partymeter.value += incrementMeter;
@@ -128,14 +137,54 @@ public class MusicRequestTask : MonoBehaviour
             {
                 taskActivated = false;
                 countdownDial.SetActive(false);
+                bubble.SetActive(false);
+                shape.SetActive(false);
                 failReaction.SetActive(true);
                 failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
                 pm.partymeter.value -= decrementMeter;
                 Debug.Log(pm.partymeter.value);
+                //call function in music player class to turn off music player elements such as UI and returning player movement
+                mp.MusicPlayerOff();
                 EventOccurCoroutine();
 
             }
         }
+    }
+
+    private void GetRandomShape()
+    {   
+
+        int shapeIndex = Random.Range(0,mp.ListOfShapes.Count);
+        requestedShape = mp.ListOfNames[shapeIndex];
+        shape.GetComponent<Image>().sprite = mp.ListOfShapes[shapeIndex];
+        shape.GetComponent<Image>().color = mp.ListOfColors[shapeIndex];
+  
+    }
+
+    public void MusicRequestSuccess()
+    {
+        taskActivated = false;
+        countdownDial.SetActive(false);
+        bubble.SetActive(false);
+        shape.SetActive(false);
+        pm.partymeter.value += incrementMeter;
+        Debug.Log(pm.partymeter.value);
+        successReaction.SetActive(true);
+        successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
+        EventOccurCoroutine();
+    }
+
+    public void MusicRequestFail()
+    {
+        taskActivated = false;
+        countdownDial.SetActive(false);
+        bubble.SetActive(false);
+        shape.SetActive(false);
+        pm.partymeter.value -= incrementMeter;
+        Debug.Log(pm.partymeter.value);
+        failReaction.SetActive(true);
+        failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
+        EventOccurCoroutine();
     }
 
     //private void OnCollisionEnter2D(Collision2D collision)
@@ -147,6 +196,11 @@ public class MusicRequestTask : MonoBehaviour
         {
 
             collidedPlayer = true;
+            if (taskActivated)
+            {
+                bubble.SetActive(true);
+                shape.SetActive(true);
+            }
         }
     }
 
@@ -155,6 +209,9 @@ public class MusicRequestTask : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             collidedPlayer = false;
+            bubble.SetActive(false);
+            shape.SetActive(false);
         }
+        
     }
 }

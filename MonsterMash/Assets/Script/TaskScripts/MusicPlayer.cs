@@ -8,14 +8,20 @@ public class MusicPlayer : MonoBehaviour
     public List<Sprite> ListOfShapes = new List<Sprite>();
     public List<Color> ListOfColors = new List<Color>();
     public List<string> ListOfNames = new List<string>();
-    private bool collidedPlayer = false, interactedState = false, allowInteract = false;
+    public bool allowInteract = false;
+    //it is implied that selected shape is always the shape on position 2 order, because position 2 is the middle shape in the order
+    public string selectedShape;
+    private bool collidedPlayer = false, interactedState = false;
     private int position1Order = 0 , position2Order = 1, position3Order = 2;
     private GameObject position1, position2, position3, arrowLeft, arrowRight, bubbleSprite;
     PlayerController pc;
+    MusicRequestTask mrt;
+
     // Start is called before the first frame update
     void Start()
     {
         pc = FindObjectOfType<PlayerController>();
+        mrt = FindObjectOfType<MusicRequestTask>();
         position1 = gameObject.transform.Find("Canvas/Position1").gameObject;
         position2 = gameObject.transform.Find("Canvas/Position2").gameObject;
         position3 = gameObject.transform.Find("Canvas/Position3").gameObject;
@@ -34,6 +40,9 @@ public class MusicPlayer : MonoBehaviour
         position3.GetComponent<Image>().sprite = ListOfShapes[position3Order];
         position3.GetComponent<Image>().color = ListOfColors[position3Order];
 
+        //it is implied that selected shape is always the shape on position 2 order, because position 2 is the middle shape in the order
+        selectedShape = ListOfNames[position2Order];
+
 
     }
 
@@ -45,7 +54,7 @@ public class MusicPlayer : MonoBehaviour
 
     void PlayerInteracted()
     {
-        if (collidedPlayer)
+        if (collidedPlayer && allowInteract)
         {
             if (Input.GetButtonDown("Interact"))
             {
@@ -57,6 +66,19 @@ public class MusicPlayer : MonoBehaviour
                 arrowLeft.SetActive(interactedState);
                 arrowRight.SetActive(interactedState);
                 bubbleSprite.SetActive(interactedState);
+                if (!interactedState)
+                {
+                    if(mrt.requestedShape == selectedShape)
+                    {
+                        mrt.MusicRequestSuccess();
+                        MusicPlayerOff();
+                    }
+                    else
+                    {
+                        mrt.MusicRequestFail();
+                        MusicPlayerOff();
+                    }
+                }
             }
             if (interactedState)
             {
@@ -88,7 +110,7 @@ public class MusicPlayer : MonoBehaviour
                     position3.GetComponent<Image>().sprite = ListOfShapes[position3Order];
                     position3.GetComponent<Image>().color = ListOfColors[position3Order];
 
-
+                    selectedShape = ListOfNames[position2Order];
                 }
                 else if (Input.GetButtonDown("Right"))
                 {
@@ -116,12 +138,36 @@ public class MusicPlayer : MonoBehaviour
                     position2.GetComponent<Image>().color = ListOfColors[position2Order];
                     position3.GetComponent<Image>().sprite = ListOfShapes[position3Order];
                     position3.GetComponent<Image>().color = ListOfColors[position3Order];
-                }
 
-            
+                    selectedShape = ListOfNames[position2Order];
+                }
+                else if (Input.GetButtonDown("close_task"))
+                {
+                    pc.allowMovement = true;
+                    interactedState = false;
+                    position1.SetActive(interactedState);
+                    position2.SetActive(interactedState);
+                    position3.SetActive(interactedState);
+                    arrowLeft.SetActive(interactedState);
+                    arrowRight.SetActive(interactedState);
+                    bubbleSprite.SetActive(interactedState);
+                }
             }
         }
            
+    }
+
+    public void MusicPlayerOff()
+    {
+        allowInteract = false;
+        pc.allowMovement = true;
+        interactedState = false;
+        position1.SetActive(interactedState);
+        position2.SetActive(interactedState);
+        position3.SetActive(interactedState);
+        arrowLeft.SetActive(interactedState);
+        arrowRight.SetActive(interactedState);
+        bubbleSprite.SetActive(interactedState);
     }
 
     IEnumerator ButtonDownColorChange(string direction)
