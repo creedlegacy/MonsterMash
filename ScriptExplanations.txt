@@ -1,0 +1,75 @@
+*GENERAL SCRIPTS*
+
+-PlayerController
+/Assets/Script
+This script is used in relation to anything that controls the player (mostly movement).
+--PlayerMovement()
+Generate player movement.
+
+-PartyManager
+/Assets/Script
+This script is used in managing the underlying systems running during a level such as the timer, party meter value and 0 party meter..etc.
+--PartyTime()
+Create and manages timer for the party.
+--EmptyPartyMeterCheck()
+Create countdown before game ends if party meter is 0
+
+-PartyEndManager
+/Assets/Script
+Manages and shows related data to the party end scene.
+--Restart()
+Restarts the level
+
+*TASKS SCRIPT*
+
+-InteractTask
+/Assets/Script/TaskScripts
+Task where you need to come to the location and press the interact button, interact task could be either instant or continuous
+--EventOccurCoroutine()
+Starts the EventOccur() Coroutine function
+--EventOccur()
+Determines when the task will enter an activated state where the task needs the player's response and what happens when it entered that state.
+--PlayerTaskInteract()
+Function that determines what happens if player interacts with the task
+--ContinuousActionCoroutine()
+Starts ContinuousAction() Coroutine function determined by parameters
+--StopContinuousActionCoroutine()
+Stops ContinuousAction() Coroutine
+--ContinuousAction()
+Increment or decrement the party meter per second (Continuous task)
+--InstantTaskCountdown()
+Show countdown for instant tasks, if time runs out reduct party meter
+
+-MusicPlayer
+/Assets/Script/TaskScripts
+Script that controls the overall functionality of the music player. Shapes data are also stored here.
+--PlayerInteracted()
+What happens if player interacts with the music player.
+--MusicPlayerOff()
+Restore movement, related states and remove music player UI
+--ButtonDownColorChange()
+Coroutine for changing arrow color be more intuitive
+
+-MusicRequestTask
+/Assets/Script/TaskScripts
+Starting point for the music request task that have a relationship with the MusicPlayer script. Determines the state of the task, UI, influencing the party meter.
+--EventOccurCoroutine()
+Starts the EventOccur() Coroutine function.
+--EventOccur()
+Determines when the task will enter an activated state where the task needs the player's response and what happens when it entered that state.
+--PlayerTaskInteract()
+Function that determines what happens if player interacts with the task
+--InitialTaskCountdown()
+The countdown that occurs if the task requires the player's attention so the player never interacts with the task yet.
+--TaskActivatedCountdown()
+The countdown that occurs when the task is already interacted with and active.
+--GetRandomShape()
+Get random shape from MusicPlayer script, to show as npc task request
+--MusicRequestSuccess()
+Function if task is successful
+--MusicRequestFail()
+Function if task is failed
+
+
+
+
