@@ -37,13 +37,26 @@ public class PlayerController : MonoBehaviour
         {
             //Controls horizontal and vertical movement of the player
             Vector2 axisMovement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            
             if(axisMovement.x > 0)
             {
-                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                float minusScale;
+                if (gameObject.transform.localScale.x > 0)
+                {
+                    minusScale = -gameObject.transform.localScale.x;
+                    gameObject.transform.localScale = new Vector3(minusScale, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+                }
+                    
+                
             }
             else if(axisMovement.x < 0)
             {
-                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                float plusScale;
+                if (gameObject.transform.localScale.x < 0)
+                {
+                    plusScale = Mathf.Abs(gameObject.transform.localScale.x);
+                    gameObject.transform.localScale = new Vector3(plusScale, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+                }
             }
 
             if(axisMovement.x > 0 || axisMovement.x < 0 || axisMovement.y > 0 || axisMovement.y < 0)
