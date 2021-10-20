@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 1;
-    public bool allowMovement = true, isWalking = false, isIdle = false;
-    private bool collidedPickup = false, pickupFull = false;
+    public bool allowMovement = true, isWalking = false, isIdle = false, pickupFull = false;
+    public string pickupItemName;
+    private bool collidedPickup = false;
     private GameObject pickedUpItem, pickupableGameObject;
     SpriteRenderer pickedUpSpriteRenderer;
     // Start is called before the first frame update
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
                     {
                         pickupableGameObject.SetActive(false);
                         pickedUpItem.SetActive(true);
+                        pickupItemName = pickupableGameObject.GetComponent<PickupItemClass>().uniqueName;
                         pickedUpSpriteRenderer.sprite = pickupableGameObject.GetComponent<SpriteRenderer>().sprite;
                         //if item y dimension is longer than x, flip item
                         if (pickedUpSpriteRenderer.bounds.size.x < pickedUpSpriteRenderer.bounds.size.y)
@@ -86,6 +88,7 @@ public class PlayerController : MonoBehaviour
                 pickupableGameObject.SetActive(true);
                 pickedUpItem.SetActive(false);
                 pickupableGameObject = null;
+                pickupItemName = null;
                 if (pickedUpSpriteRenderer.bounds.size.x < pickedUpSpriteRenderer.bounds.size.y)
                 {
                     pickedUpItem.transform.Rotate(0, 0, 0);
@@ -104,6 +107,7 @@ public class PlayerController : MonoBehaviour
             if (!pickupFull)
             {
                 pickupableGameObject = collision.gameObject;
+ 
             }
             
             collidedPickup = true;
@@ -115,7 +119,6 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Pickupable")
         {
             collidedPickup = false;
-            Debug.Log(collidedPickup);
         }
     }
 

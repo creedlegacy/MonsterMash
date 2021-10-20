@@ -148,6 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   allowMovement: 1
+  isWalking: 0
+  isIdle: 0
 --- !u!70 &8942896185339890051
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
