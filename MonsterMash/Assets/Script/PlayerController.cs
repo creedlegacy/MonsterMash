@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 1;
-    public bool allowMovement = true;
+    public bool allowMovement = true, isWalking = false, isIdle = false;
     private bool collidedPickup = false, pickupFull = false;
     private GameObject pickedUpItem, pickupableGameObject;
     SpriteRenderer pickedUpSpriteRenderer;
@@ -32,8 +32,28 @@ public class PlayerController : MonoBehaviour
         {
             //Controls horizontal and vertical movement of the player
             Vector2 axisMovement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            if(axisMovement.x > 0)
+            {
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else if(axisMovement.x < 0)
+            {
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            }
+
+            if(axisMovement.x > 0 || axisMovement.x < 0 || axisMovement.y > 0 || axisMovement.y < 0)
+            {
+                isWalking = true;
+                isIdle = false;
+            }
+            else
+            {
+                isWalking = false;
+                isIdle = true;
+            }
             axisMovement.Normalize();
             transform.Translate(axisMovement * speed * Time.deltaTime);
+
         }
     }
 
