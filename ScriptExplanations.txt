@@ -5,6 +5,8 @@
 This script is used in relation to anything that controls the player (mostly movement).
 --PlayerMovement()
 Generate player movement.
+--PlayerPickUp()
+Functionality in picking up objects in the level.
 
 -PartyManager
 /Assets/Script
