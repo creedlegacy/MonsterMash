@@ -14,17 +14,14 @@ public class MusicRequestTask : MonoBehaviour
     private float tempInitialCountdown = 5f, tempTaskActivatedCountdown = 10f;
     private bool collidedPlayer = false;
     public bool inDanger = false, taskActivated = false;
-    private IEnumerator continuousActionCoroutine;
     private GameObject successReaction, failReaction, countdownDial, countdownDialFill, taskAlert, bubble, shape;
 
     PartyManager pm;
-    SpriteRenderer sr;
     MusicPlayer mp;
 
     void Start()
     {
         pm = FindObjectOfType<PartyManager>();
-        sr = gameObject.transform.Find("TaskSprite").gameObject.GetComponent<SpriteRenderer>();
         mp = FindObjectOfType<MusicPlayer>();
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
@@ -206,7 +203,7 @@ public class MusicRequestTask : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             collidedPlayer = false;
             bubble.SetActive(false);
