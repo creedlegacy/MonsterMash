@@ -8,10 +8,14 @@ public class PlayerController : MonoBehaviour
     public bool allowMovement = true, isWalking = false, isIdle = false;
     private bool collidedPickup = false, pickupFull = false;
     private GameObject pickedUpItem, pickupableGameObject;
+
+    private Animator anim;
+
     SpriteRenderer pickedUpSpriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
+    	anim = GetComponent<Animator>();
         pickedUpItem = gameObject.transform.Find("PickedUpItem").gameObject;
         pickedUpSpriteRenderer = pickedUpItem.GetComponent<SpriteRenderer>();
     }
@@ -43,11 +47,13 @@ public class PlayerController : MonoBehaviour
 
             if(axisMovement.x > 0 || axisMovement.x < 0 || axisMovement.y > 0 || axisMovement.y < 0)
             {
+            	anim.SetBool("isRunning",true);
                 isWalking = true;
                 isIdle = false;
             }
             else
             {
+            	anim.SetBool("isRunning",false);
                 isWalking = false;
                 isIdle = true;
             }
