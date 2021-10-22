@@ -4,7 +4,7 @@
 /Assets/Script
 This script is used in relation to anything that controls the player (mostly movement).
 --PlayerMovement()
-Generate player movement.
+Generate player movement, manage player movement animation and player states.
 --PlayerPickUp()
 Functionality in picking up objects in the level.
 
@@ -71,6 +71,23 @@ Get random shape from MusicPlayer script, to show as npc task request
 Function if task is successful
 --MusicRequestFail()
 Function if task is failed
+
+-SkeletonPileTask
+/Assets/Script/SkeletonPileTask
+Task where a skeleton guy turns into a pile of skeleton and we need to sweep him with a broom.
+--EventOccurCoroutine()
+Starts the EventOccur() Coroutine function
+--EventOccur()
+Determines when the task will enter an activated state where the task needs the player's response and what happens when it entered that state.
+--PlayerTaskInteract()
+Function that determines what happens if player interacts with the task
+--ContinuousActionCoroutine()
+Starts ContinuousAction() Coroutine function determined by parameters
+--StopContinuousActionCoroutine()
+Stops ContinuousAction() Coroutine
+--ContinuousAction()
+Increment or decrement the party meter per second (Continuous task)
+
 
 
 
