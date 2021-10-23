@@ -74,4 +74,14 @@ Function if task is failed
 
 
 
+**Change Memo(Yibo)
+oct 22 
+- added slow and fast mode, with control of player and collision
+- changed the usability of music player, reversed the control logic from previous one.
+- added camera follow mode to test the feasiablity
+- Test version have infinite score (min value 2000)
+
+
+
+
 
