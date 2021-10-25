@@ -1,0 +1,46 @@
+**TestLevel1 Sample**
+
+Template:
+
+Parent Object
+	*Function:
+	Offspring Object
+		*Function:
+		*Assets:
+		*Scripts:
+		Offspring Object
+
+*********************************************
+
+Tasks
+	*Function: the object contains all tasks
+	ContinuousTasks
+		DinningTask
+			ServeTaskPrefab
+		BonePilePrefab
+	InstantTasks
+		RefillTasks
+		MusicRequestTask
+Main Camera
+
+Canvas
+
+EventSystem
+
+PartyManager
+
+Obstacles
+	*Function: the object contains all barriers that does NOT show on the game world
+ArtAssetList
+	*Function: the object contains all art asset, stored as a library
+Grid
+ 	*Function: the object contains all grid and tile maps
+Props
+	*Function: the object contains all props
+
+PlayerPrefab
+	*Function: the object contains player by body parts and animation
+	*Assets: Animation	
+
+Pickupableitems
+	*Function: the object contains all pickupableitem

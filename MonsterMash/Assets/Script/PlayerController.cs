@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 1;
+    public float normalSpeed = 1;
+    public float fastSpeed = 1;
+    public float slowSpeed = 1;
     public bool allowMovement = true, isWalking = false, isIdle = false, pickupFull = false;
     public string pickupItemName;
-    private bool collidedPickup = false;
+
+    private float speed = 0;
+    private bool collidedPickup = false, slowMode = false, fastMode = false;
     private GameObject pickedUpItem, pickupableGameObject;
 
     private Animator anim;
@@ -29,12 +33,41 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+    	if(Input.GetKey(KeyCode.LeftShift)){
+    		fastMode = true;
+    	}
+    	else
+    	{
+    		fastMode = false;
+    	}
+    	if(slowMode||fastMode)
+    	{
+    		if(slowMode&&!fastMode)
+    		{
+    			speed = slowSpeed;
+    		}
+    		else if(!slowMode&&fastMode)
+    		{
+    			speed = fastSpeed;
+    		}
+    		else
+    		{
+    			speed = fastSpeed*slowSpeed/normalSpeed;
+    		}
+    	} 
+
+    	else 
+    	{
+    		speed = normalSpeed;
+    	}
+
     	PlayerMovement();
     }
     void PlayerMovement()
     {
         if (allowMovement)
         {
+
             //Controls horizontal and vertical movement of the player
             Vector2 axisMovement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             
@@ -46,8 +79,7 @@ public class PlayerController : MonoBehaviour
                     minusScale = -gameObject.transform.localScale.x;
                     gameObject.transform.localScale = new Vector3(minusScale, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
                 }
-                    
-                
+                  
             }
             else if(axisMovement.x < 0)
             {
@@ -131,6 +163,11 @@ public class PlayerController : MonoBehaviour
             
             collidedPickup = true;
         }
+
+        if (collision.gameObject.tag == "SlowMonsters")
+        {   
+            slowMode = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -138,6 +175,11 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Pickupable")
         {
             collidedPickup = false;
+        }
+
+        if (collision.gameObject.tag == "SlowMonsters")
+        {   
+            slowMode = false;
         }
     }
 
