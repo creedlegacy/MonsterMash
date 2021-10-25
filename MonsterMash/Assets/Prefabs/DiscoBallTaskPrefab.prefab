@@ -111,7 +111,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2750585976383026062}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 5855589195260738242}
   - component: {fileID: 5410256145834361887}
   m_Layer: 0
-  m_Name: InteractTaskSprite
+  m_Name: DiscoBallSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

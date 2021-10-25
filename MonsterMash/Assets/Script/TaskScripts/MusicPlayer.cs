@@ -82,7 +82,7 @@ public class MusicPlayer : MonoBehaviour
             }
             if (interactedState)
             {
-                if (Input.GetButtonDown("Right"))
+                if (Input.GetButtonDown("Left"))
                 {
 
                     StartCoroutine(ButtonDownColorChange("left"));
@@ -112,7 +112,7 @@ public class MusicPlayer : MonoBehaviour
 
                     selectedShape = ListOfNames[position2Order];
                 }
-                else if (Input.GetButtonDown("Left"))
+                else if (Input.GetButtonDown("Right"))
                 {
                     StartCoroutine(ButtonDownColorChange("right"));
                     position1Order -= 1;
