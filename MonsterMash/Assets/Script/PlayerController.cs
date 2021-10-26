@@ -33,6 +33,16 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+    	/* 
+    	update the energy from task
+    	if(key input&&energy above 0){
+			fastMode = true
+			minus energy, minus amount is according to the fixed update setting in unity.
+		}
+		else{
+			fastMode = false
+		}
+		*/
     	if(Input.GetKey(KeyCode.LeftShift)){
     		fastMode = true;
     	}
@@ -40,6 +50,7 @@ public class PlayerController : MonoBehaviour
     	{
     		fastMode = false;
     	}
+    	// fastmode determine function
     	if(slowMode||fastMode)
     	{
     		if(slowMode&&!fastMode)
@@ -55,6 +66,7 @@ public class PlayerController : MonoBehaviour
     			speed = fastSpeed*slowSpeed/normalSpeed;
     		}
     	} 
+    	//set the speed with different situation, sprinting, get interfered, or sprinting in interfering
 
     	else 
     	{
