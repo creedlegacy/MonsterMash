@@ -16,26 +16,28 @@ public class InteractTask : MonoBehaviour
     public TaskType taskType;
 
     public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
-    public float instantCountdown = 3f;
+    public float instantCountdown = 3f, sprintTime = 1f;
     private float tempInstantCountdown = 3f;
     private bool collidedPlayer = false;
     public bool inDanger = false;
     private IEnumerator continuousActionCoroutine;
     private GameObject successReaction, failReaction, countdownDial, countdownDialFill;
 
-
     PartyManager pm;
     SpriteRenderer sr;
+    PlayerController pc;
 
     void Start()
     {
         pm = FindObjectOfType<PartyManager>();
+        pc = FindObjectOfType<PlayerController>();
         sr = GetComponent<SpriteRenderer>();
+
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
         countdownDial = gameObject.transform.Find("Canvas/CountdownDial").gameObject;
         countdownDialFill = countdownDial.transform.Find("CountdownDialFill").gameObject;
-        //countdownDialFill.GetComponent<Image>().fillAmount = 
+  
         // Start courutine to determine how many seconds until event for this task
         EventOccurCoroutine();
         // If continuous start adding party score on start per second
@@ -91,7 +93,7 @@ public class InteractTask : MonoBehaviour
                 {
                     sr.color = Color.white;
                     StopContinuousActionCoroutine();
-                    ContinuousActionCoroutine('+', incrementMeter);
+                    ContinuousActionCoroutine('+', incrementMeter, true);
 
                     
                 }
@@ -100,6 +102,9 @@ public class InteractTask : MonoBehaviour
                     countdownDial.SetActive(false);
                     sr.color = Color.black;
                     pm.partymeter.value += incrementMeter;
+                    pm.partyMeterValue += incrementMeter;
+
+                    pc.sprintMeter.value += sprintTime;
                     Debug.Log(pm.partymeter.value);
                     successReaction.SetActive(true);
                     successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
@@ -113,8 +118,13 @@ public class InteractTask : MonoBehaviour
         }
     }
 
-    public void ContinuousActionCoroutine(char type, int value)
+    public void ContinuousActionCoroutine(char type, int value, bool addSprint = false)
     {
+        if (type == '+' && addSprint)
+        {
+            pc.sprintMeter.value += sprintTime;
+
+        }
         continuousActionCoroutine = ContinuousAction(type, value);
         StartCoroutine(continuousActionCoroutine);
     }
@@ -161,7 +171,7 @@ public class InteractTask : MonoBehaviour
             }
                
             pm.partymeter.value = pm.partyMeterValue;
-            Debug.Log(pm.partyMeterValue);
+            Debug.Log(pm.partymeter.value);
             yield return new WaitForSeconds(1f);
         }
     }
@@ -185,6 +195,7 @@ public class InteractTask : MonoBehaviour
                 failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
                 sr.color = Color.black;
                 pm.partymeter.value -= decrementMeter;
+                pm.partyMeterValue -= decrementMeter;
                 Debug.Log(pm.partymeter.value);
                 EventOccurCoroutine();
 

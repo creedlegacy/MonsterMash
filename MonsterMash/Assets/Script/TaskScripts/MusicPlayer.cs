@@ -59,6 +59,7 @@ public class MusicPlayer : MonoBehaviour
             if (Input.GetButtonDown("Interact"))
             {
                 pc.allowMovement = !pc.allowMovement;
+                pc.anim.SetBool("isRunning", false);
                 interactedState = !interactedState;
                 position1.SetActive(interactedState);
                 position2.SetActive(interactedState);
@@ -82,7 +83,7 @@ public class MusicPlayer : MonoBehaviour
             }
             if (interactedState)
             {
-                if (Input.GetButtonDown("Right"))
+                if (Input.GetButtonDown("Left"))
                 {
 
                     StartCoroutine(ButtonDownColorChange("left"));
@@ -112,7 +113,7 @@ public class MusicPlayer : MonoBehaviour
 
                     selectedShape = ListOfNames[position2Order];
                 }
-                else if (Input.GetButtonDown("Left"))
+                else if (Input.GetButtonDown("Right"))
                 {
                     StartCoroutine(ButtonDownColorChange("right"));
                     position1Order -= 1;

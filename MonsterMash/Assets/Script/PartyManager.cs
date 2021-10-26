@@ -9,8 +9,8 @@ public class PartyManager : MonoBehaviour
     public Slider partymeter;
     public int partyMeterValue = 20;
     public bool continueCoroutine = true, partyTimeStarted = false, dangerState = false;
-    private GameObject partyTimer,dangerCountdown;
     public float partyTime = 121f, dangerTime = 6f;
+    private GameObject partyTimer,dangerCountdown;
 
     // Start is called before the first frame update
     void Start()
@@ -83,41 +83,4 @@ public class PartyManager : MonoBehaviour
         }
     }
 
-
-    //public void RepeatingActionCoroutine(char type, int value)
-    //{
-    //    repeatingActionCoroutine = RepeatingAction(type, value);
-    //    StartCoroutine(repeatingActionCoroutine);
-    //}
-
-    //public void StopRepeatingActionCoroutine()
-    //{
-    //    StopCoroutine(repeatingActionCoroutine);
-    //}
-
-    //IEnumerator RepeatingAction(char type,int value)
-    //{
-    //    while (continueCoroutine)
-    //    {
-    //        if (type == '+')
-    //        {
-    //            partyMeterValue += value;
-    //        }
-    //        else
-    //        { 
-    //            partyMeterValue -= value;
-    //        }
-    //        partymeter.value = partyMeterValue;
-    //        Debug.Log(partymeter.value);
-    //        yield return new WaitForSeconds(1f);
-    //    }
-    //}
-
-    //public void RandomAction(int value)
-    //{
-
-    //    partymeter.value -= value;
-    //    Debug.Log(partymeter.value);
-
-    //}
 }

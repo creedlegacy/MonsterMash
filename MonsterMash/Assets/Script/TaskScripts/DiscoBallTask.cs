@@ -4,17 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class SkeletonPileTask : MonoBehaviour
+public class DiscoBallTask : MonoBehaviour
 {
 
     public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
     public float sprintTime = 3f;
-    public string requiredItemName;
-    private bool collidedPlayer = false;
     public bool inDanger = false;
     private IEnumerator continuousActionCoroutine;
-    private GameObject successReaction, failReaction, skeletonSprite;
-    public Sprite spriteChange;
+    private GameObject successReaction, failReaction;
 
     PartyManager pm;
     PlayerController pc;
@@ -23,21 +20,22 @@ public class SkeletonPileTask : MonoBehaviour
     {
         pm = FindObjectOfType<PartyManager>();
         pc = FindObjectOfType<PlayerController>();
-
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
-        skeletonSprite = gameObject.transform.Find("TaskSprite").gameObject;
 
         // Start courutine to determine how many seconds until event for this task
         EventOccurCoroutine();
-       
+        // If continuous start adding party score on start per second
+        successReaction.SetActive(true);
+        ContinuousActionCoroutine('+', incrementMeter); 
+        
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerTaskInteract();
+       
     }
 
     public void EventOccurCoroutine()
@@ -47,47 +45,23 @@ public class SkeletonPileTask : MonoBehaviour
 
     IEnumerator EventOccur()
     {
-        
         int randomOccurTime = Random.Range(minOccurTime, maxOccurTime);
         yield return new WaitForSeconds(randomOccurTime);
         inDanger = true;
-        
+        StopContinuousActionCoroutine();
         failReaction.SetActive(true);
-        skeletonSprite.GetComponent<SpriteRenderer>().sprite = spriteChange;
         ContinuousActionCoroutine('-', decrementMeter);
         
-     
-            
     }
 
-    void PlayerTaskInteract()
+    
+
+    public void ContinuousActionCoroutine(char type, int value, bool addSprint = false)
     {
-        if (collidedPlayer)
+        if (type == '+' && addSprint)
         {
-            //check if there is an item being carried and that item is appropriate
-            if (Input.GetButtonDown("Interact") && inDanger && pc.pickupFull && pc.pickupItemName == requiredItemName)
-            {
-                StopContinuousActionCoroutine();
-                inDanger = false;
-                skeletonSprite.GetComponent<SpriteRenderer>().sprite = null;
-                pm.partymeter.value += incrementMeter;
-                pm.partyMeterValue += incrementMeter;
-
-                pc.sprintMeter.value += sprintTime;
-   
-                Debug.Log(pm.partymeter.value);
-                successReaction.SetActive(true);
-                successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
-                Destroy(gameObject,1);
-               
-                
-            }
+            pc.sprintMeter.value += sprintTime;
         }
-    }
-
-
-    public void ContinuousActionCoroutine(char type, int value)
-    {
         continuousActionCoroutine = ContinuousAction(type, value);
         StartCoroutine(continuousActionCoroutine);
     }
@@ -107,6 +81,7 @@ public class SkeletonPileTask : MonoBehaviour
                 if (pm.partyMeterValue < pm.partymeter.maxValue)
                 {
                     pm.partyMeterValue += value;
+                    
                     failReaction.SetActive(false);
                     successReaction.SetActive(true);
                     successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
@@ -139,24 +114,4 @@ public class SkeletonPileTask : MonoBehaviour
         }
     }
 
-   
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            collidedPlayer = true;
-            
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            collidedPlayer = false;
-        }
-    }
 }
