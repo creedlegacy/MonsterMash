@@ -9,7 +9,7 @@ public class MusicRequestTask : MonoBehaviour
     //[System.Serializable]
 
     public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
-    public float initialCountdown = 5f, taskActivatedCountdown = 10f;
+    public float initialCountdown = 5f, taskActivatedCountdown = 10f, sprintTime = 5f;
     public string requestedShape;
     private float tempInitialCountdown = 5f, tempTaskActivatedCountdown = 10f;
     private bool collidedPlayer = false;
@@ -18,11 +18,13 @@ public class MusicRequestTask : MonoBehaviour
 
     PartyManager pm;
     MusicPlayer mp;
+    PlayerController pc;
 
     void Start()
     {
         pm = FindObjectOfType<PartyManager>();
         mp = FindObjectOfType<MusicPlayer>();
+        pc = FindObjectOfType<PlayerController>();
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
         countdownDial = gameObject.transform.Find("Canvas/CountdownDial").gameObject;
@@ -78,13 +80,6 @@ public class MusicRequestTask : MonoBehaviour
                 bubble.SetActive(true);
                 shape.SetActive(true);
                 
-                //countdownDial.SetActive(false);
-
-                //pm.partymeter.value += incrementMeter;
-                //Debug.Log(pm.partymeter.value);
-                //successReaction.SetActive(true);
-                //successReaction.GetComponent<Animator>().Play("TaskReactionMovement", -1, 0f);
-
 
 
             }
@@ -112,6 +107,7 @@ public class MusicRequestTask : MonoBehaviour
                 failReaction.SetActive(true);
                 failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
                 pm.partymeter.value -= decrementMeter;
+                pm.partyMeterValue -= decrementMeter;
                 Debug.Log(pm.partymeter.value);
                 EventOccurCoroutine();
 
@@ -139,6 +135,7 @@ public class MusicRequestTask : MonoBehaviour
                 failReaction.SetActive(true);
                 failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
                 pm.partymeter.value -= decrementMeter;
+                pm.partyMeterValue -= decrementMeter;
                 Debug.Log(pm.partymeter.value);
                 //call function in music player class to turn off music player elements such as UI and returning player movement
                 mp.MusicPlayerOff();
@@ -165,6 +162,10 @@ public class MusicRequestTask : MonoBehaviour
         bubble.SetActive(false);
         shape.SetActive(false);
         pm.partymeter.value += incrementMeter;
+        pm.partyMeterValue += incrementMeter;
+
+        pc.sprintMeter.value += sprintTime;
+
         Debug.Log(pm.partymeter.value);
         successReaction.SetActive(true);
         successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
@@ -177,7 +178,8 @@ public class MusicRequestTask : MonoBehaviour
         countdownDial.SetActive(false);
         bubble.SetActive(false);
         shape.SetActive(false);
-        pm.partymeter.value -= incrementMeter;
+        pm.partymeter.value -= decrementMeter;
+        pm.partyMeterValue -= decrementMeter;
         Debug.Log(pm.partymeter.value);
         failReaction.SetActive(true);
         failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);

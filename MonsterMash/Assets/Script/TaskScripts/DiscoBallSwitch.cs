@@ -30,7 +30,7 @@ public class DiscoBallSwitch : MonoBehaviour
             {
                 discoBallTask.inDanger = false;
                 discoBallTask.StopContinuousActionCoroutine();
-                discoBallTask.ContinuousActionCoroutine('+', discoBallTask.incrementMeter);
+                discoBallTask.ContinuousActionCoroutine('+', discoBallTask.incrementMeter,true);
                 discoBallTask.EventOccurCoroutine();
 
 

@@ -8,6 +8,7 @@ public class SkeletonPileTask : MonoBehaviour
 {
 
     public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
+    public float sprintTime = 3f;
     public string requiredItemName;
     private bool collidedPlayer = false;
     public bool inDanger = false;
@@ -70,6 +71,10 @@ public class SkeletonPileTask : MonoBehaviour
                 inDanger = false;
                 skeletonSprite.GetComponent<SpriteRenderer>().sprite = null;
                 pm.partymeter.value += incrementMeter;
+                pm.partyMeterValue += incrementMeter;
+
+                pc.sprintMeter.value += sprintTime;
+   
                 Debug.Log(pm.partymeter.value);
                 successReaction.SetActive(true);
                 successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
@@ -129,7 +134,7 @@ public class SkeletonPileTask : MonoBehaviour
             }
                
             pm.partymeter.value = pm.partyMeterValue;
-            Debug.Log(pm.partyMeterValue);
+            Debug.Log(pm.partymeter.value);
             yield return new WaitForSeconds(1f);
         }
     }

@@ -7,6 +7,8 @@ This script is used in relation to anything that controls the player (mostly mov
 Generate player movement, manage player movement animation and player states.
 --PlayerPickUp()
 Functionality in picking up objects in the level.
+--AlterMovementSpeed()
+Functionality to change movement speed of the player to slow or sprinting
 
 -PartyManager
 /Assets/Script
