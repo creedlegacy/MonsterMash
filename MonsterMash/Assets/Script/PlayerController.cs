@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool collidedPickup = false, slowMode = false, fastMode = false;
     private GameObject pickedUpItem, pickupableGameObject;
 
-    private Animator anim;
+    public Animator anim;
 
     SpriteRenderer pickedUpSpriteRenderer;
     // Start is called before the first frame update
@@ -29,11 +29,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerPickUp();
+       
     }
 
     void FixedUpdate()
     {
-    	if(Input.GetKey(KeyCode.LeftShift)){
+        
+
+        if (Input.GetKey(KeyCode.LeftShift)){
     		fastMode = true;
     	}
     	else
@@ -63,6 +66,9 @@ public class PlayerController : MonoBehaviour
 
     	PlayerMovement();
     }
+
+    
+
     void PlayerMovement()
     {
         if (allowMovement)

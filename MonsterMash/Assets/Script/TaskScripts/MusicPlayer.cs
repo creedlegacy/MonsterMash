@@ -59,6 +59,7 @@ public class MusicPlayer : MonoBehaviour
             if (Input.GetButtonDown("Interact"))
             {
                 pc.allowMovement = !pc.allowMovement;
+                pc.anim.SetBool("isRunning", false);
                 interactedState = !interactedState;
                 position1.SetActive(interactedState);
                 position2.SetActive(interactedState);

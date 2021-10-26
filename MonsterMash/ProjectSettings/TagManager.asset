@@ -61,3 +61,6 @@ TagManager:
   - name: UI
     uniqueID: 1942041977
     locked: 0
+  - name: PauseMenu
+    uniqueID: 1193511893
+    locked: 0

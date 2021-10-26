@@ -22,6 +22,20 @@ Manages and shows related data to the party end scene.
 --Restart()
 Restarts the level
 
+-GameManager
+/Assets/Script
+Manages elementary systems of the game such as pausing the game, quitting the game etc.
+--PauseGame()
+Pauses the game while showing pause UI
+--UnpauseGame()
+Unpauses game.
+--RestartGame()
+Restart scene of the game.
+--QuitGame()
+Quits the game.
+
+
+
 *TASKS SCRIPT*
 
 -InteractTask
@@ -87,6 +101,28 @@ Starts ContinuousAction() Coroutine function determined by parameters
 Stops ContinuousAction() Coroutine
 --ContinuousAction()
 Increment or decrement the party meter per second (Continuous task)
+
+-DiscoBallTask
+/Assets/Script/TaskScripts
+Continuous task where a disco ball can be broken or running well.
+--EventOccurCoroutine()
+Starts the EventOccur() Coroutine function
+--EventOccur()
+Determines when the task will enter an activated state where the task needs the player's response and what happens when it entered that state.
+--ContinuousActionCoroutine()
+Starts ContinuousAction() Coroutine function determined by parameters
+--StopContinuousActionCoroutine()
+Stops ContinuousAction() Coroutine
+--ContinuousAction()
+Increment or decrement the party meter per second (Continuous task)
+
+-DiscoBallSwitch
+/Assets/Script/TaskScripts
+The switch to fix the disco ball
+--PlayerInteract()
+Interact with the switch and fix the disco ball.
+
+
 
 
 
