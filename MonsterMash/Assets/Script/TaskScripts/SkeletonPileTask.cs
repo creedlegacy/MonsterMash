@@ -6,6 +6,18 @@ using UnityEngine.UI;
 
 public class SkeletonPileTask : MonoBehaviour
 {
+    [System.Serializable]
+    //The variables inside the StageModifiers class is used to define what value is used on that specific stage
+    public class StageModifiers
+    {
+        public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
+        public float sprintTime = 3f;
+
+    }
+    public StageModifiers stage1Modifiers, stage2Modifiers, stage3Modifiers, stage4Modifiers;
+
+    //listOfStage defines at what stage does this specific task appears on
+    public List<PartyManager.Stages.Stage> listOfStage = new List<PartyManager.Stages.Stage>();
 
     public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
     public float sprintTime = 3f;
@@ -28,6 +40,12 @@ public class SkeletonPileTask : MonoBehaviour
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
         skeletonSprite = gameObject.transform.Find("TaskSprite").gameObject;
 
+        for(int i=0;i < listOfStage.Count; i++)
+        {
+            Debug.Log(listOfStage[0]);
+        }
+
+        
         // Start courutine to determine how many seconds until event for this task
         EventOccurCoroutine();
        
