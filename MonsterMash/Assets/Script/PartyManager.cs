@@ -6,6 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class PartyManager : MonoBehaviour
 {
+    //Stages in the level that controls the difficulty
+    public class Stages
+    {
+        public enum Stage
+        {
+            stage1,
+            stage2,
+            stage3,
+            stage4
+        }
+       
+    }
+
+    public Stages.Stage currentStage;
     public Slider partymeter;
     public int partyMeterValue = 20;
     public bool continueCoroutine = true, partyTimeStarted = false, dangerState = false;
