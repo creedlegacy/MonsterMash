@@ -10,8 +10,8 @@ public class MusicRequestTask : MonoBehaviour
     //The variables inside the StageModifiers class is used to define what value is used on that specific stage
     public class StageModifiers
     {
-        public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
-        public float sprintTime = 3f;
+        public int minOccurTime = 0, maxOccurTime = 0, decrementMeter = 0, incrementMeter = 0;
+        public float sprintTime = 0f;
 
     }
     [Header("Variable Values by Stage")]
@@ -27,7 +27,7 @@ public class MusicRequestTask : MonoBehaviour
     public float currentSprintTime = 5f, initialCountdown = 5f, taskActivatedCountdown = 10f;
     private float tempInitialCountdown = 5f, tempTaskActivatedCountdown = 10f;
     private bool collidedPlayer = false;
-    public bool inDanger = false, taskActivated = false;
+    public bool inDanger = false, taskActivated = false, isTutorial = false;
     private GameObject successReaction, failReaction, countdownDial, countdownDialFill, taskAlert, bubble, shape;
 
     PartyManager pm;

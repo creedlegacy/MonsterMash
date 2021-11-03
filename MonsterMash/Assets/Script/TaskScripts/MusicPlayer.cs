@@ -22,7 +22,7 @@ public class MusicPlayer : MonoBehaviour
     {
         pc = FindObjectOfType<PlayerController>();
         mrt = FindObjectsOfType<MusicRequestTask>();
-        Debug.Log(mrt.Length);
+
         position1 = gameObject.transform.Find("Canvas/Position1").gameObject;
         position2 = gameObject.transform.Find("Canvas/Position2").gameObject;
         position3 = gameObject.transform.Find("Canvas/Position3").gameObject;

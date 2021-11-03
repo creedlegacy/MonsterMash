@@ -6,20 +6,34 @@ using UnityEngine.UI;
 
 public class InteractTask : MonoBehaviour
 {
-    //[System.Serializable]
+    [System.Serializable]
+    //The variables inside the StageModifiers class is used to define what value is used on that specific stage
+    public class StageModifiers
+    {
+        public int minOccurTime = 0, maxOccurTime = 0, decrementMeter = 0, incrementMeter = 0;
+        public float sprintTime = 0f;
+
+    }
+    [Header("Variable Values by Stage")]
+    public StageModifiers stage1Modifiers;
+    public StageModifiers stage2Modifiers;
+    public StageModifiers stage3Modifiers;
+    public StageModifiers stage4Modifiers;
 
     public enum TaskType
     {
         Instant,
         Continuous
     }
+    [Header("Task Variables")]
     public TaskType taskType;
 
-    public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
-    public float instantCountdown = 3f, sprintTime = 1f;
+    public int currentMinOccurTime = 5, currentMaxOccurTime = 15, currentDecrementMeter = 5, currentIncrementMeter = 10;
+    private int currentStage;
+    public float instantCountdown = 3f, currentSprintTime = 1f;
     private float tempInstantCountdown = 3f;
     private bool collidedPlayer = false;
-    public bool inDanger = false;
+    public bool inDanger = false, isTutorial = false;
     private IEnumerator continuousActionCoroutine;
     private GameObject successReaction, failReaction, countdownDial, countdownDialFill;
 
@@ -37,14 +51,16 @@ public class InteractTask : MonoBehaviour
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
         countdownDial = gameObject.transform.Find("Canvas/CountdownDial").gameObject;
         countdownDialFill = countdownDial.transform.Find("CountdownDialFill").gameObject;
-  
+
+        //Checks what the current stage of the party is
+        CheckStage();
         // Start courutine to determine how many seconds until event for this task
         EventOccurCoroutine();
         // If continuous start adding party score on start per second
         if (taskType == TaskType.Continuous)
         {
             successReaction.SetActive(true);
-            ContinuousActionCoroutine('+', incrementMeter); 
+            ContinuousActionCoroutine('+', currentIncrementMeter); 
         }
         
     }
@@ -54,6 +70,64 @@ public class InteractTask : MonoBehaviour
     {
         InstantTaskCountdown();
         PlayerTaskInteract();
+        CheckStage();
+    }
+
+    void CheckStage()
+    {
+        if (pm.currentStage == PartyManager.Stage.stage1)
+        {
+            if (currentStage != 1)
+            {
+                currentStage = 1;
+
+                currentMinOccurTime = stage1Modifiers.minOccurTime;
+                currentMaxOccurTime = stage1Modifiers.maxOccurTime;
+                currentDecrementMeter = stage1Modifiers.decrementMeter;
+                currentIncrementMeter = stage1Modifiers.incrementMeter;
+                currentSprintTime = stage1Modifiers.sprintTime;
+            }
+
+        }
+        else if (pm.currentStage == PartyManager.Stage.stage2)
+        {
+            if (currentStage != 2)
+            {
+                currentStage = 2;
+
+                currentMinOccurTime = stage2Modifiers.minOccurTime;
+                currentMaxOccurTime = stage2Modifiers.maxOccurTime;
+                currentDecrementMeter = stage2Modifiers.decrementMeter;
+                currentIncrementMeter = stage2Modifiers.incrementMeter;
+                currentSprintTime = stage2Modifiers.sprintTime;
+            }
+        }
+        else if (pm.currentStage == PartyManager.Stage.stage3)
+        {
+            if (currentStage != 3)
+            {
+                currentStage = 3;
+
+                currentMinOccurTime = stage3Modifiers.minOccurTime;
+                currentMaxOccurTime = stage3Modifiers.maxOccurTime;
+                currentDecrementMeter = stage3Modifiers.decrementMeter;
+                currentIncrementMeter = stage3Modifiers.incrementMeter;
+                currentSprintTime = stage3Modifiers.sprintTime;
+            }
+        }
+        else if (pm.currentStage == PartyManager.Stage.stage4)
+        {
+            if (currentStage != 4)
+            {
+                currentStage = 4;
+
+                currentMinOccurTime = stage4Modifiers.minOccurTime;
+                currentMaxOccurTime = stage4Modifiers.maxOccurTime;
+                currentDecrementMeter = stage4Modifiers.decrementMeter;
+                currentIncrementMeter = stage4Modifiers.incrementMeter;
+                currentSprintTime = stage4Modifiers.sprintTime;
+            }
+        }
     }
 
     public void EventOccurCoroutine()
@@ -64,7 +138,7 @@ public class InteractTask : MonoBehaviour
     IEnumerator EventOccur()
     {
         
-        int randomOccurTime = Random.Range(minOccurTime, maxOccurTime);
+        int randomOccurTime = Random.Range(currentMinOccurTime, currentMaxOccurTime);
         yield return new WaitForSeconds(randomOccurTime);
         inDanger = true;
         if (taskType == TaskType.Continuous)
@@ -72,7 +146,7 @@ public class InteractTask : MonoBehaviour
             sr.color = Color.red;
             StopContinuousActionCoroutine();
             failReaction.SetActive(true);
-            ContinuousActionCoroutine('-', decrementMeter);
+            ContinuousActionCoroutine('-', currentDecrementMeter);
         }
         else
         {
@@ -93,7 +167,7 @@ public class InteractTask : MonoBehaviour
                 {
                     sr.color = Color.white;
                     StopContinuousActionCoroutine();
-                    ContinuousActionCoroutine('+', incrementMeter, true);
+                    ContinuousActionCoroutine('+', currentIncrementMeter, true);
 
                     
                 }
@@ -101,9 +175,9 @@ public class InteractTask : MonoBehaviour
                 {
                     countdownDial.SetActive(false);
                     sr.color = Color.black;
-                    pm.partymeter.value += incrementMeter;
+                    pm.partymeter.value += currentIncrementMeter;
 
-                    pc.sprintMeter.value += sprintTime;
+                    pc.sprintMeter.value += currentSprintTime;
                     Debug.Log(pm.partymeter.value);
                     successReaction.SetActive(true);
                     successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
@@ -121,7 +195,7 @@ public class InteractTask : MonoBehaviour
     {
         if (type == '+' && addSprint)
         {
-            pc.sprintMeter.value += sprintTime;
+            pc.sprintMeter.value += currentSprintTime;
 
         }
         continuousActionCoroutine = ContinuousAction(type, value);
@@ -186,7 +260,7 @@ public class InteractTask : MonoBehaviour
                 failReaction.SetActive(true);
                 failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
                 sr.color = Color.black;
-                pm.partymeter.value -= decrementMeter;
+                pm.partymeter.value -= currentDecrementMeter;
                 Debug.Log(pm.partymeter.value);
                 EventOccurCoroutine();
 

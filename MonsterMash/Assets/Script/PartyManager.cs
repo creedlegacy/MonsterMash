@@ -66,7 +66,8 @@ public class PartyManager : MonoBehaviour
         {
             foreach (GameObject stage2task in stage2Tasks)
             {
-                stage2task.SetActive(true);
+                if (stage2task != null)
+                    stage2task.SetActive(true);
             }
 
         }
@@ -74,14 +75,16 @@ public class PartyManager : MonoBehaviour
         {
             foreach (GameObject stage3task in stage3Tasks)
             {
-                stage3task.SetActive(true);
+                if (stage3task != null)
+                    stage3task.SetActive(true);
             }
         }
         else if (currentStage == Stage.stage4)
         {
             foreach (GameObject stage4task in stage4Tasks)
             {
-                stage4task.SetActive(true);
+                if (stage4task != null)
+                    stage4task.SetActive(true);
             }
         }
     }
@@ -97,6 +100,7 @@ public class PartyManager : MonoBehaviour
             string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
             partyTimer.GetComponent<Text>().text = formattedTime;
 
+            //Debug.Log(currentStage);
             //This is where what stage you are in are determined
             if(partyTime > partyTimeStatic - stage2TimeTreshold)
             {

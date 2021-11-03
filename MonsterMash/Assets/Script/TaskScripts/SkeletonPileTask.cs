@@ -10,18 +10,23 @@ public class SkeletonPileTask : MonoBehaviour
     //The variables inside the StageModifiers class is used to define what value is used on that specific stage
     public class StageModifiers
     {
-        public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
-        public float sprintTime = 3f;
+        public int minOccurTime = 0, maxOccurTime = 0, decrementMeter = 0, incrementMeter = 0;
+        public float sprintTime = 0f;
 
     }
-    public StageModifiers stage1Modifiers, stage2Modifiers, stage3Modifiers, stage4Modifiers;
+    [Header("Variable Values by Stage")]
+    public StageModifiers stage1Modifiers;
+    public StageModifiers stage2Modifiers;
+    public StageModifiers stage3Modifiers;
+    public StageModifiers stage4Modifiers;
 
+    [Header("Task Variables")]
+    public string requiredItemName;
     public int currentMinOccurTime = 5, currentMaxOccurTime = 15, currentDecrementMeter = 5, currentIncrementMeter = 10;
     private int currentStage;
     public float currentSprintTime = 3f;
-    public string requiredItemName;
     private bool collidedPlayer = false;
-    public bool inDanger = false;
+    public bool inDanger = false, isTutorial = false;
     private IEnumerator continuousActionCoroutine;
     private GameObject successReaction, failReaction, skeletonSprite;
     public Sprite spriteChange;
