@@ -8,20 +8,21 @@ public class MusicPlayer : MonoBehaviour
     public List<Sprite> ListOfShapes = new List<Sprite>();
     public List<Color> ListOfColors = new List<Color>();
     public List<string> ListOfNames = new List<string>();
-    public bool allowInteract = false;
+    public bool allowInteract = true;
     //it is implied that selected shape is always the shape on position 2 order, because position 2 is the middle shape in the order
     public string selectedShape;
     private bool collidedPlayer = false, interactedState = false;
     private int position1Order = 0 , position2Order = 1, position3Order = 2;
     private GameObject position1, position2, position3, arrowLeft, arrowRight, bubbleSprite;
     PlayerController pc;
-    MusicRequestTask mrt;
+    MusicRequestTask[] mrt;
 
     // Start is called before the first frame update
     void Start()
     {
         pc = FindObjectOfType<PlayerController>();
-        mrt = FindObjectOfType<MusicRequestTask>();
+        mrt = FindObjectsOfType<MusicRequestTask>();
+        Debug.Log(mrt.Length);
         position1 = gameObject.transform.Find("Canvas/Position1").gameObject;
         position2 = gameObject.transform.Find("Canvas/Position2").gameObject;
         position3 = gameObject.transform.Find("Canvas/Position3").gameObject;
@@ -50,11 +51,12 @@ public class MusicPlayer : MonoBehaviour
     void Update()
     {
         PlayerInteracted();
+        mrt = FindObjectsOfType<MusicRequestTask>();
     }
 
     void PlayerInteracted()
     {
-        if (collidedPlayer && allowInteract)
+        if (collidedPlayer)
         {
             if (Input.GetButtonDown("Interact"))
             {
@@ -69,16 +71,24 @@ public class MusicPlayer : MonoBehaviour
                 bubbleSprite.SetActive(interactedState);
                 if (!interactedState)
                 {
-                    if(mrt.requestedShape == selectedShape)
+                    foreach(MusicRequestTask thisTask in mrt)
                     {
-                        mrt.MusicRequestSuccess();
-                        MusicPlayerOff();
+                        
+                        if (thisTask.taskActivated)
+                        {
+                            if (thisTask.requestedShape == selectedShape)
+                            {
+                                thisTask.MusicRequestSuccess();
+                                MusicPlayerOff();
+                            }
+                            else
+                            {
+                                thisTask.MusicRequestFail();
+                                MusicPlayerOff();
+                            }
+                        }
                     }
-                    else
-                    {
-                        mrt.MusicRequestFail();
-                        MusicPlayerOff();
-                    }
+
                 }
             }
             if (interactedState)
@@ -160,7 +170,7 @@ public class MusicPlayer : MonoBehaviour
 
     public void MusicPlayerOff()
     {
-        allowInteract = false;
+        //allowInteract = false;
         pc.allowMovement = true;
         interactedState = false;
         position1.SetActive(interactedState);

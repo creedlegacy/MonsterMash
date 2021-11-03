@@ -102,7 +102,6 @@ public class InteractTask : MonoBehaviour
                     countdownDial.SetActive(false);
                     sr.color = Color.black;
                     pm.partymeter.value += incrementMeter;
-                    pm.partyMeterValue += incrementMeter;
 
                     pc.sprintMeter.value += sprintTime;
                     Debug.Log(pm.partymeter.value);
@@ -141,36 +140,29 @@ public class InteractTask : MonoBehaviour
         {
             if (type == '+')
             {
-                if (pm.partyMeterValue < pm.partymeter.maxValue)
+                failReaction.SetActive(false);
+                successReaction.SetActive(true);
+                successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
+                if (pm.partymeter.value < pm.partymeter.maxValue)
                 {
-                    pm.partyMeterValue += value;
-                    failReaction.SetActive(false);
-                    successReaction.SetActive(true);
-                    successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
+                    pm.partymeter.value += value;
 
-                    if (pm.partyMeterValue > pm.partymeter.maxValue)
-                    {
-                        pm.partyMeterValue = (int)pm.partymeter.maxValue;
-                    }
                 }
+               
             }
             else
             {
-                if (pm.partyMeterValue > pm.partymeter.minValue)
+                successReaction.SetActive(false);
+                failReaction.SetActive(true);
+                failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
+                if (pm.partymeter.value > pm.partymeter.minValue)
                 {
-                    pm.partyMeterValue -= value;
-                    successReaction.SetActive(false);
-                    failReaction.SetActive(true);
-                    failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
+                    pm.partymeter.value -= value;
 
-                    if (pm.partyMeterValue < pm.partymeter.minValue)
-                    {
-                        pm.partyMeterValue = (int)pm.partymeter.minValue;
-                    }
                 }
+               
             }
                
-            pm.partymeter.value = pm.partyMeterValue;
             Debug.Log(pm.partymeter.value);
             yield return new WaitForSeconds(1f);
         }
@@ -195,7 +187,6 @@ public class InteractTask : MonoBehaviour
                 failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
                 sr.color = Color.black;
                 pm.partymeter.value -= decrementMeter;
-                pm.partyMeterValue -= decrementMeter;
                 Debug.Log(pm.partymeter.value);
                 EventOccurCoroutine();
 

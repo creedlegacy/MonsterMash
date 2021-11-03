@@ -16,11 +16,9 @@ public class SkeletonPileTask : MonoBehaviour
     }
     public StageModifiers stage1Modifiers, stage2Modifiers, stage3Modifiers, stage4Modifiers;
 
-    //listOfStage defines at what stage does this specific task appears on
-    public List<PartyManager.Stages.Stage> listOfStage = new List<PartyManager.Stages.Stage>();
-
-    public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
-    public float sprintTime = 3f;
+    public int currentMinOccurTime = 5, currentMaxOccurTime = 15, currentDecrementMeter = 5, currentIncrementMeter = 10;
+    private int currentStage;
+    public float currentSprintTime = 3f;
     public string requiredItemName;
     private bool collidedPlayer = false;
     public bool inDanger = false;
@@ -40,12 +38,9 @@ public class SkeletonPileTask : MonoBehaviour
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
         skeletonSprite = gameObject.transform.Find("TaskSprite").gameObject;
 
-        for(int i=0;i < listOfStage.Count; i++)
-        {
-            Debug.Log(listOfStage[0]);
-        }
 
-        
+        CheckStage();
+
         // Start courutine to determine how many seconds until event for this task
         EventOccurCoroutine();
        
@@ -56,6 +51,7 @@ public class SkeletonPileTask : MonoBehaviour
     void Update()
     {
         PlayerTaskInteract();
+        CheckStage();
     }
 
     public void EventOccurCoroutine()
@@ -63,16 +59,74 @@ public class SkeletonPileTask : MonoBehaviour
         StartCoroutine(EventOccur());
     }
 
+    //Checks what the current stage of the party is
+    void CheckStage()
+    {
+        if(pm.currentStage == PartyManager.Stage.stage1)
+        {
+            if(currentStage != 1)
+            {
+                currentStage = 1;
+
+                currentMinOccurTime = stage1Modifiers.minOccurTime;
+                currentMaxOccurTime = stage1Modifiers.maxOccurTime;
+                currentDecrementMeter = stage1Modifiers.decrementMeter;
+                currentIncrementMeter = stage1Modifiers.incrementMeter;
+                currentSprintTime = stage1Modifiers.sprintTime;
+            }
+            
+        }
+        else if(pm.currentStage == PartyManager.Stage.stage2)
+        {
+            if (currentStage != 2)
+            {
+                currentStage = 2;
+
+                currentMinOccurTime = stage2Modifiers.minOccurTime;
+                currentMaxOccurTime = stage2Modifiers.maxOccurTime;
+                currentDecrementMeter = stage2Modifiers.decrementMeter;
+                currentIncrementMeter = stage2Modifiers.incrementMeter;
+                currentSprintTime = stage2Modifiers.sprintTime;
+            }
+        }
+        else if (pm.currentStage == PartyManager.Stage.stage3)
+        {
+            if (currentStage != 3)
+            {
+                currentStage = 3;
+
+                currentMinOccurTime = stage3Modifiers.minOccurTime;
+                currentMaxOccurTime = stage3Modifiers.maxOccurTime;
+                currentDecrementMeter = stage3Modifiers.decrementMeter;
+                currentIncrementMeter = stage3Modifiers.incrementMeter;
+                currentSprintTime = stage3Modifiers.sprintTime;
+            }
+        }
+        else if (pm.currentStage == PartyManager.Stage.stage4)
+        {
+            if (currentStage != 4)
+            {
+                currentStage = 4;
+
+                currentMinOccurTime = stage4Modifiers.minOccurTime;
+                currentMaxOccurTime = stage4Modifiers.maxOccurTime;
+                currentDecrementMeter = stage4Modifiers.decrementMeter;
+                currentIncrementMeter = stage4Modifiers.incrementMeter;
+                currentSprintTime = stage4Modifiers.sprintTime;
+            }
+        }
+    }
+
     IEnumerator EventOccur()
     {
         
-        int randomOccurTime = Random.Range(minOccurTime, maxOccurTime);
+        int randomOccurTime = Random.Range(currentMinOccurTime, currentMaxOccurTime);
         yield return new WaitForSeconds(randomOccurTime);
         inDanger = true;
         
         failReaction.SetActive(true);
         skeletonSprite.GetComponent<SpriteRenderer>().sprite = spriteChange;
-        ContinuousActionCoroutine('-', decrementMeter);
+        ContinuousActionCoroutine('-', currentDecrementMeter);
         
      
             
@@ -88,10 +142,9 @@ public class SkeletonPileTask : MonoBehaviour
                 StopContinuousActionCoroutine();
                 inDanger = false;
                 skeletonSprite.GetComponent<SpriteRenderer>().sprite = null;
-                pm.partymeter.value += incrementMeter;
-                pm.partyMeterValue += incrementMeter;
+                pm.partymeter.value += currentIncrementMeter;
 
-                pc.sprintMeter.value += sprintTime;
+                pc.sprintMeter.value += currentSprintTime;
    
                 Debug.Log(pm.partymeter.value);
                 successReaction.SetActive(true);
@@ -122,36 +175,30 @@ public class SkeletonPileTask : MonoBehaviour
         {
             if (type == '+')
             {
-                if (pm.partyMeterValue < pm.partymeter.maxValue)
+                failReaction.SetActive(false);
+                successReaction.SetActive(true);
+                successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
+                if (pm.partymeter.value < pm.partymeter.maxValue)
                 {
-                    pm.partyMeterValue += value;
-                    failReaction.SetActive(false);
-                    successReaction.SetActive(true);
-                    successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
-
-                    if (pm.partyMeterValue > pm.partymeter.maxValue)
-                    {
-                        pm.partyMeterValue = (int)pm.partymeter.maxValue;
-                    }
+                    pm.partymeter.value += value;
+                  
                 }
+
             }
             else
             {
-                if (pm.partyMeterValue > pm.partymeter.minValue)
+                successReaction.SetActive(false);
+                failReaction.SetActive(true);
+                failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
+                if (pm.partymeter.value > pm.partymeter.minValue)
                 {
-                    pm.partyMeterValue -= value;
-                    successReaction.SetActive(false);
-                    failReaction.SetActive(true);
-                    failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
 
-                    if (pm.partyMeterValue < pm.partymeter.minValue)
-                    {
-                        pm.partyMeterValue = (int)pm.partymeter.minValue;
-                    }
+                    pm.partymeter.value -= value;
+ 
                 }
+               
             }
                
-            pm.partymeter.value = pm.partyMeterValue;
             Debug.Log(pm.partymeter.value);
             yield return new WaitForSeconds(1f);
         }

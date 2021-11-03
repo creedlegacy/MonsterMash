@@ -6,11 +6,25 @@ using UnityEngine.UI;
 
 public class MusicRequestTask : MonoBehaviour
 {
-    //[System.Serializable]
+    [System.Serializable]
+    //The variables inside the StageModifiers class is used to define what value is used on that specific stage
+    public class StageModifiers
+    {
+        public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
+        public float sprintTime = 3f;
 
-    public int minOccurTime = 5, maxOccurTime = 15, decrementMeter = 5, incrementMeter = 10;
-    public float initialCountdown = 5f, taskActivatedCountdown = 10f, sprintTime = 5f;
+    }
+    [Header("Variable Values by Stage")]
+    public StageModifiers stage1Modifiers;
+    public StageModifiers stage2Modifiers;
+    public StageModifiers stage3Modifiers;
+    public StageModifiers stage4Modifiers;
+
+    [Header("Task Variables")]
     public string requestedShape;
+    private int currentStage;
+    public int currentMinOccurTime = 5, currentMaxOccurTime = 15, currentDecrementMeter = 5, currentIncrementMeter = 10;
+    public float currentSprintTime = 5f, initialCountdown = 5f, taskActivatedCountdown = 10f;
     private float tempInitialCountdown = 5f, tempTaskActivatedCountdown = 10f;
     private bool collidedPlayer = false;
     public bool inDanger = false, taskActivated = false;
@@ -19,12 +33,15 @@ public class MusicRequestTask : MonoBehaviour
     PartyManager pm;
     MusicPlayer mp;
     PlayerController pc;
+    //MusicRequestTask[] mrt;
 
     void Start()
     {
         pm = FindObjectOfType<PartyManager>();
         mp = FindObjectOfType<MusicPlayer>();
         pc = FindObjectOfType<PlayerController>();
+        //mrt = FindObjectsOfType<MusicRequestTask>();
+        //Debug.Log(mrt.Length);
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
         countdownDial = gameObject.transform.Find("Canvas/CountdownDial").gameObject;
@@ -34,9 +51,11 @@ public class MusicRequestTask : MonoBehaviour
         shape = gameObject.transform.Find("Canvas/Shape").gameObject;
 
 
+
+        //Checks what the current stage of the party is
+        CheckStage();
         // Start courutine to determine how many seconds until event for this task
         EventOccurCoroutine();
-
 
     }
 
@@ -46,6 +65,70 @@ public class MusicRequestTask : MonoBehaviour
         InitialTaskCountdown();
         TaskActivatedCountdown();
         PlayerTaskInteract();
+        CheckStage();
+    }
+
+    //void CheckMultipleMusicRequest()
+    //{
+
+    //}
+
+    //Checks what the current stage of the party is
+    void CheckStage()
+    {
+        if (pm.currentStage == PartyManager.Stage.stage1)
+        {
+            if (currentStage != 1)
+            {
+                currentStage = 1;
+
+                currentMinOccurTime = stage1Modifiers.minOccurTime;
+                currentMaxOccurTime = stage1Modifiers.maxOccurTime;
+                currentDecrementMeter = stage1Modifiers.decrementMeter;
+                currentIncrementMeter = stage1Modifiers.incrementMeter;
+                currentSprintTime = stage1Modifiers.sprintTime;
+            }
+
+        }
+        else if (pm.currentStage == PartyManager.Stage.stage2)
+        {
+            if (currentStage != 2)
+            {
+                currentStage = 2;
+
+                currentMinOccurTime = stage2Modifiers.minOccurTime;
+                currentMaxOccurTime = stage2Modifiers.maxOccurTime;
+                currentDecrementMeter = stage2Modifiers.decrementMeter;
+                currentIncrementMeter = stage2Modifiers.incrementMeter;
+                currentSprintTime = stage2Modifiers.sprintTime;
+            }
+        }
+        else if (pm.currentStage == PartyManager.Stage.stage3)
+        {
+            if (currentStage != 3)
+            {
+                currentStage = 3;
+
+                currentMinOccurTime = stage3Modifiers.minOccurTime;
+                currentMaxOccurTime = stage3Modifiers.maxOccurTime;
+                currentDecrementMeter = stage3Modifiers.decrementMeter;
+                currentIncrementMeter = stage3Modifiers.incrementMeter;
+                currentSprintTime = stage3Modifiers.sprintTime;
+            }
+        }
+        else if (pm.currentStage == PartyManager.Stage.stage4)
+        {
+            if (currentStage != 4)
+            {
+                currentStage = 4;
+
+                currentMinOccurTime = stage4Modifiers.minOccurTime;
+                currentMaxOccurTime = stage4Modifiers.maxOccurTime;
+                currentDecrementMeter = stage4Modifiers.decrementMeter;
+                currentIncrementMeter = stage4Modifiers.incrementMeter;
+                currentSprintTime = stage4Modifiers.sprintTime;
+            }
+        }
     }
 
     public void EventOccurCoroutine()
@@ -56,7 +139,7 @@ public class MusicRequestTask : MonoBehaviour
     IEnumerator EventOccur()
     {
         
-        int randomOccurTime = Random.Range(minOccurTime, maxOccurTime);
+        int randomOccurTime = Random.Range(currentMinOccurTime, currentMaxOccurTime);
         yield return new WaitForSeconds(randomOccurTime);
         inDanger = true;
         tempInitialCountdown = initialCountdown;
@@ -75,7 +158,7 @@ public class MusicRequestTask : MonoBehaviour
                 GetRandomShape();
                 inDanger = false;
                 taskActivated = true;
-                mp.allowInteract = !mp.allowInteract;
+                //mp.allowInteract = !mp.allowInteract;
                 taskAlert.SetActive(false);
                 bubble.SetActive(true);
                 shape.SetActive(true);
@@ -85,8 +168,6 @@ public class MusicRequestTask : MonoBehaviour
             }
         }
     }
-
-   
 
     private void InitialTaskCountdown()
     {
@@ -106,8 +187,7 @@ public class MusicRequestTask : MonoBehaviour
                 taskAlert.SetActive(false);
                 failReaction.SetActive(true);
                 failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
-                pm.partymeter.value -= decrementMeter;
-                pm.partyMeterValue -= decrementMeter;
+                pm.partymeter.value -= currentDecrementMeter;
                 Debug.Log(pm.partymeter.value);
                 EventOccurCoroutine();
 
@@ -134,8 +214,8 @@ public class MusicRequestTask : MonoBehaviour
                 shape.SetActive(false);
                 failReaction.SetActive(true);
                 failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
-                pm.partymeter.value -= decrementMeter;
-                pm.partyMeterValue -= decrementMeter;
+                pm.partymeter.value -= currentDecrementMeter;
+                
                 Debug.Log(pm.partymeter.value);
                 //call function in music player class to turn off music player elements such as UI and returning player movement
                 mp.MusicPlayerOff();
@@ -161,10 +241,9 @@ public class MusicRequestTask : MonoBehaviour
         countdownDial.SetActive(false);
         bubble.SetActive(false);
         shape.SetActive(false);
-        pm.partymeter.value += incrementMeter;
-        pm.partyMeterValue += incrementMeter;
+        pm.partymeter.value += currentIncrementMeter;
 
-        pc.sprintMeter.value += sprintTime;
+        pc.sprintMeter.value += currentSprintTime;
 
         Debug.Log(pm.partymeter.value);
         successReaction.SetActive(true);
@@ -178,8 +257,8 @@ public class MusicRequestTask : MonoBehaviour
         countdownDial.SetActive(false);
         bubble.SetActive(false);
         shape.SetActive(false);
-        pm.partymeter.value -= decrementMeter;
-        pm.partyMeterValue -= decrementMeter;
+        pm.partymeter.value -= currentDecrementMeter;
+
         Debug.Log(pm.partymeter.value);
         failReaction.SetActive(true);
         failReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
