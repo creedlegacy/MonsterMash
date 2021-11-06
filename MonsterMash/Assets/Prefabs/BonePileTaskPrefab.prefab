@@ -63,14 +63,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc8bbc373af9a8f4a8b7c5a68954b890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfStage: 
-  minOccurTime: 5
-  maxOccurTime: 15
-  decrementMeter: 5
-  incrementMeter: 10
-  sprintTime: 3
+  stage1Modifiers:
+    minOccurTime: 0
+    maxOccurTime: 0
+    decrementMeter: 0
+    incrementMeter: 0
+    sprintTime: 0
+  stage2Modifiers:
+    minOccurTime: 0
+    maxOccurTime: 0
+    decrementMeter: 0
+    incrementMeter: 0
+    sprintTime: 0
+  stage3Modifiers:
+    minOccurTime: 0
+    maxOccurTime: 0
+    decrementMeter: 0
+    incrementMeter: 0
+    sprintTime: 0
+  stage4Modifiers:
+    minOccurTime: 0
+    maxOccurTime: 0
+    decrementMeter: 0
+    incrementMeter: 0
+    sprintTime: 0
   requiredItemName: 
+  currentMinOccurTime: 5
+  currentMaxOccurTime: 15
+  currentDecrementMeter: 5
+  currentIncrementMeter: 10
+  currentSprintTime: 3
   inDanger: 0
+  isTutorial: 0
   spriteChange: {fileID: 0}
 --- !u!1 &3586451872845045066
 GameObject:
@@ -144,7 +168,7 @@ SpriteRenderer:
   m_SortingLayerID: 1942041977
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 47c2523bf1eb95049b34969a351b0644, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 50ccd11f3d15cd24289d48f7ed4f86ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -246,7 +270,7 @@ SpriteRenderer:
   m_SortingLayerID: 1942041977
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 70ace4392d5b9f1468337a5b67015a0b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49ddaae559d21924c858168689c17b6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
