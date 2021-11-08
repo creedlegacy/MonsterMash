@@ -7,12 +7,13 @@ using UnityEngine.UI;
 public class DiscoBallSwitch : MonoBehaviour
 {
     private bool collidedPlayer = false;
+    public Animator switchHandleAnim;
     DiscoBallTask discoBallTask;
 
     void Start()
     {
         discoBallTask = FindObjectOfType<DiscoBallTask>();
-
+        switchHandleAnim = gameObject.transform.Find("SwitchHandle").gameObject.GetComponent<Animator>();
 
     }
 
@@ -22,12 +23,14 @@ public class DiscoBallSwitch : MonoBehaviour
         PlayerInteract();
     }
 
+
     void PlayerInteract()
     {
         if (collidedPlayer)
         {
             if (Input.GetButtonDown("Interact") && discoBallTask.inDanger)
             {
+                switchHandleAnim.SetBool("switchPosition",true);
                 discoBallTask.inDanger = false;
                 discoBallTask.StopContinuousActionCoroutine();
                 discoBallTask.ContinuousActionCoroutine('+', discoBallTask.currentIncrementMeter,true);

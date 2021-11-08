@@ -42,12 +42,14 @@ public class DiscoBallTask : MonoBehaviour
 
     PartyManager pm;
     PlayerController pc;
+    DiscoBallSwitch dbs;
 
     void Start()
     {
      
         pm = FindObjectOfType<PartyManager>();
         pc = FindObjectOfType<PlayerController>();
+        dbs = FindObjectOfType<DiscoBallSwitch>();
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
 
@@ -69,6 +71,7 @@ public class DiscoBallTask : MonoBehaviour
     {
         if (currentStage == ((int)startStage) && !taskStarted)
         {
+            dbs.switchHandleAnim.SetBool("switchActive", true);
             taskStarted = true;
             // Start courutine to determine how many seconds until event for this task
             EventOccurCoroutine();
@@ -148,6 +151,7 @@ public class DiscoBallTask : MonoBehaviour
         int randomOccurTime = Random.Range(currentMinOccurTime, currentMaxOccurTime);
         yield return new WaitForSeconds(randomOccurTime);
         inDanger = true;
+        dbs.switchHandleAnim.SetBool("switchPosition", false);
         StopContinuousActionCoroutine();
         failReaction.SetActive(true);
         ContinuousActionCoroutine('-', currentDecrementMeter);
