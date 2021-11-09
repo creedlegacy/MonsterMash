@@ -30,12 +30,25 @@ public class DiscoBallSwitch : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact") && discoBallTask.inDanger)
             {
-                switchHandleAnim.SetBool("switchPosition",true);
+                
                 discoBallTask.inDanger = false;
                 discoBallTask.StopContinuousActionCoroutine();
-                discoBallTask.ContinuousActionCoroutine('+', discoBallTask.currentIncrementMeter,true);
-                discoBallTask.EventOccurCoroutine();
 
+                //if this disco ball is a tutorial do these steps;
+                if (discoBallTask.isTutorial)
+                {
+                    switchHandleAnim.Play("SwitchOnAnimation");
+                    discoBallTask.tutorialFinished = true;
+                    discoBallTask.taskStarted = false;
+                    discoBallTask.isTutorial = false;
+                }
+                else
+                {
+                    switchHandleAnim.SetBool("switchPosition", true);
+                    discoBallTask.ContinuousActionCoroutine('+', discoBallTask.currentIncrementMeter, true);
+                    discoBallTask.EventOccurCoroutine();
+
+                }
 
             }
         }

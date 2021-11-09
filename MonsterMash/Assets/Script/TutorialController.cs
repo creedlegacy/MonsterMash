@@ -5,12 +5,14 @@ using UnityEngine;
 public class TutorialController : MonoBehaviour
 {
  
-    private List<GameObject> pages = new List<GameObject>();
+    public List<GameObject> pages = new List<GameObject>();
     private GameObject prevButton, nextButton;
     private int numberOfPages,currentPageIndex = 0;
+    TutorialManager tm;
     // Start is called before the first frame update
     void Start()
     {
+        tm = FindObjectOfType<TutorialManager>();
         prevButton = gameObject.transform.Find("PrevButton").gameObject;
         nextButton = gameObject.transform.Find("NextButton").gameObject;
         GameObject parentPage = gameObject.transform.Find("Pages").gameObject;
@@ -24,6 +26,7 @@ public class TutorialController : MonoBehaviour
         prevButton.SetActive(true);
         pages[currentPageIndex].SetActive(true);
 
+        
 
     }
 
@@ -53,7 +56,7 @@ public class TutorialController : MonoBehaviour
     {
         if(currentPageIndex == numberOfPages)
         {
-            gameObject.SetActive(false);
+            tm.ManageTutorialSequence();
         }
         else
         {

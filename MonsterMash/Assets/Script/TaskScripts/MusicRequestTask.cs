@@ -27,6 +27,8 @@ public class MusicRequestTask : MonoBehaviour
     public float currentSprintTime = 5f, initialCountdown = 5f, taskActivatedCountdown = 10f;
     private float tempInitialCountdown = 5f, tempTaskActivatedCountdown = 10f;
     private bool collidedPlayer = false;
+    [HideInInspector]
+    public bool tutorialFinished = false;
     public bool inDanger = false, taskActivated = false, isTutorial = false;
     private GameObject successReaction, failReaction, countdownDial, countdownDialFill, taskAlert, bubble, shape;
 
@@ -55,7 +57,10 @@ public class MusicRequestTask : MonoBehaviour
         //Checks what the current stage of the party is
         CheckStage();
         // Start courutine to determine how many seconds until event for this task
-        EventOccurCoroutine();
+        if (!isTutorial)
+        {
+            EventOccurCoroutine();
+        }
 
     }
 
@@ -248,7 +253,17 @@ public class MusicRequestTask : MonoBehaviour
         Debug.Log(pm.partymeter.value);
         successReaction.SetActive(true);
         successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
-        EventOccurCoroutine();
+
+        //Declare this task's tutorial is finished because succesfully dealt with
+        if (isTutorial)
+        {
+            tutorialFinished = true;
+        }
+        else
+        {
+            EventOccurCoroutine();
+        }
+        
     }
 
     public void MusicRequestFail()
