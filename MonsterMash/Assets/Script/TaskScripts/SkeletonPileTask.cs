@@ -27,6 +27,8 @@ public class SkeletonPileTask : MonoBehaviour
     public float currentSprintTime = 3f;
     private bool collidedPlayer = false;
     public bool inDanger = false, isTutorial = false;
+    [HideInInspector]
+    public bool tutorialFinished = false;
     private IEnumerator continuousActionCoroutine;
     private GameObject successReaction, failReaction, skeletonSprite;
     public Sprite spriteChange;
@@ -47,7 +49,11 @@ public class SkeletonPileTask : MonoBehaviour
         CheckStage();
 
         // Start courutine to determine how many seconds until event for this task
-        EventOccurCoroutine();
+        if(!isTutorial)
+        {
+            EventOccurCoroutine();
+        }
+        
        
         
     }
@@ -155,6 +161,12 @@ public class SkeletonPileTask : MonoBehaviour
                 successReaction.SetActive(true);
                 successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
                 Destroy(gameObject,1);
+
+                //Declare this task's tutorial is finished because succesfully dealt with
+                if (isTutorial)
+                {
+                    tutorialFinished = true;
+                }
                
                 
             }

@@ -30,16 +30,20 @@ public class PartyManager : MonoBehaviour
     [Header("")]
     public Slider partymeter;
     public bool continueCoroutine = true, partyTimeStarted = false, dangerState = false;
+    public int defaultPartyMeter = 20;
     public float partyTime = 121f, dangerTime = 6f;
-    private float partyTimeStatic;
+    private float partyTimeStatic, defaultDangerTime = 6f;
     private GameObject partyTimer,dangerCountdown;
+
+    PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
     {
+        pc = FindObjectOfType<PlayerController>();
         partyTimeStatic = partyTime;
-        //partybar = GetComponent<Slider>();
-        partymeter.value = 20;
+        defaultDangerTime = dangerTime;
+        partymeter.value = defaultPartyMeter;
         partyTimer = GameObject.Find("PartyTimer");
         dangerCountdown = GameObject.Find("DangerCountdown");
 
@@ -62,7 +66,15 @@ public class PartyManager : MonoBehaviour
 
     void StageChange()
     {
-        if (currentStage == Stage.stage2)
+        if(currentStage == Stage.stage1)
+        {
+            foreach (GameObject stage1task in stage1Tasks)
+            {
+                if (stage1task != null)
+                    stage1task.SetActive(true);
+            }
+        }
+        else if (currentStage == Stage.stage2)
         {
             foreach (GameObject stage2task in stage2Tasks)
             {
@@ -91,38 +103,55 @@ public class PartyManager : MonoBehaviour
 
     void PartyTime()
     {
-        if (partyTime >= 1)
+        if (currentStage != Stage.stage1)
         {
-            partyTimeStarted = true;
-            partyTime -= Time.deltaTime;
-            int minutes = Mathf.FloorToInt(partyTime / 60F);
-            int seconds = Mathf.FloorToInt(partyTime - minutes * 60);
-            string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
-            partyTimer.GetComponent<Text>().text = formattedTime;
+            if (partyTime >= 1)
+            {
+                partyTimeStarted = true;
+                partyTime -= Time.deltaTime;
+                int minutes = Mathf.FloorToInt(partyTime / 60F);
+                int seconds = Mathf.FloorToInt(partyTime - minutes * 60);
+                string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
+                partyTimer.GetComponent<Text>().text = formattedTime;
 
-            //Debug.Log(currentStage);
-            //This is where what stage you are in are determined
-            if(partyTime > partyTimeStatic - stage2TimeTreshold)
-            {
-                currentStage = Stage.stage2;
+                //Debug.Log(currentStage);
+                //This is where what stage you are in are determined
+                if (partyTime > partyTimeStatic - stage2TimeTreshold)
+                {
+                    currentStage = Stage.stage2;
+                }
+                else if (partyTime <= (partyTimeStatic - stage2TimeTreshold) && partyTime > (partyTimeStatic - stage3TimeTreshold))
+                {
+                    currentStage = Stage.stage3;
+                }
+                else if (partyTime <= (partyTimeStatic - stage3TimeTreshold))
+                {
+                    currentStage = Stage.stage4;
+                }
             }
-            else if(partyTime <= (partyTimeStatic - stage2TimeTreshold) && partyTime > (partyTimeStatic - stage3TimeTreshold))
+            else
             {
-                currentStage = Stage.stage3;
-            }
-            else if (partyTime <= (partyTimeStatic - stage3TimeTreshold))
-            {
-                currentStage = Stage.stage4;
+                partyTimeStarted = false;
+                SceneManager.LoadScene("PartyEndScene");
+
+                PlayerPrefs.SetInt("LastPartyScore", (int)partymeter.value);
+                PlayerPrefs.SetString("LastPartyScene", SceneManager.GetActiveScene().name);
             }
         }
-        else
+    }
+
+    public void EnterStage2()
+    {
+        currentStage = Stage.stage2;
+        partymeter.value = defaultPartyMeter;
+        dangerTime = defaultDangerTime;
+        pc.sprintMeter.value = pc.defaultSprintMeter;
+        foreach (GameObject stage1task in stage1Tasks)
         {
-            partyTimeStarted = false;
-            SceneManager.LoadScene("PartyEndScene");
-            
-            PlayerPrefs.SetInt("LastPartyScore", (int)partymeter.value);
-            PlayerPrefs.SetString("LastPartyScene", SceneManager.GetActiveScene().name);
+            if (stage1task != null)
+                stage1task.SetActive(false);
         }
+
     }
 
     void EmptyPartyMeterCheck()

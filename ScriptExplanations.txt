@@ -14,9 +14,11 @@ Functionality to change movement speed of the player to slow or sprinting
 /Assets/Script
 This script is used in managing the underlying systems running during a level such as the timer, party meter value and 0 party meter..etc.
 --PartyTime()
-Create and manages timer for the party.
+Create and manages timer for the party, also decides when another stage of the game is entered.
 --EmptyPartyMeterCheck()
 Create countdown before game ends if party meter is 0
+--StageChange()
+Controls and Spawns objects that is placed on a specific stage
 
 -PartyEndManager
 /Assets/Script
@@ -57,6 +59,9 @@ Stops ContinuousAction() Coroutine
 Increment or decrement the party meter per second (Continuous task)
 --InstantTaskCountdown()
 Show countdown for instant tasks, if time runs out reduct party meter
+--CheckStage()
+Applies variable values according to what stage the task is in
+
 
 -MusicPlayer
 /Assets/Script/TaskScripts
@@ -87,6 +92,9 @@ Get random shape from MusicPlayer script, to show as npc task request
 Function if task is successful
 --MusicRequestFail()
 Function if task is failed
+--CheckStage()
+Applies variable values according to what stage the task is in
+
 
 -SkeletonPileTask
 /Assets/Script/SkeletonPileTask
@@ -103,6 +111,9 @@ Starts ContinuousAction() Coroutine function determined by parameters
 Stops ContinuousAction() Coroutine
 --ContinuousAction()
 Increment or decrement the party meter per second (Continuous task)
+--CheckStage()
+Applies variable values according to what stage the task is in
+
 
 -DiscoBallTask
 /Assets/Script/TaskScripts
@@ -117,6 +128,8 @@ Starts ContinuousAction() Coroutine function determined by parameters
 Stops ContinuousAction() Coroutine
 --ContinuousAction()
 Increment or decrement the party meter per second (Continuous task)
+--CheckStage()
+Applies variable values according to what stage the task is in
 
 -DiscoBallSwitch
 /Assets/Script/TaskScripts

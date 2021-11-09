@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public Slider sprintMeter;
+    public int defaultSprintMeter = 5;
     public float normalSpeed = 1,fastSpeed = 1, slowSpeed = 1, speed = 3;
     public bool allowMovement = true, isWalking = false, isIdle = false, pickupFull = false;
     public string pickupItemName;
@@ -19,7 +20,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    	anim = GetComponent<Animator>();
+        sprintMeter.value = defaultSprintMeter;
+        anim = GetComponent<Animator>();
         pickedUpItem = gameObject.transform.Find("PickedUpItem").gameObject;
         pickedUpSpriteRenderer = pickedUpItem.GetComponent<SpriteRenderer>();
     }

@@ -35,8 +35,9 @@ public class DiscoBallTask : MonoBehaviour
     public int currentMaxOccurTime = 15, currentDecrementMeter = 5, currentIncrementMeter = 10;
     private int currentStage;
     public float currentSprintTime = 3f;
-    public bool inDanger = false, isTutorial = false;
-    private bool taskStarted = false;
+    public bool inDanger = false;
+    [HideInInspector]
+    public bool isTutorial = false, tutorialFinished = false, taskStarted = false;
     private IEnumerator continuousActionCoroutine;
     private GameObject successReaction, failReaction;
 
@@ -69,17 +70,34 @@ public class DiscoBallTask : MonoBehaviour
 
     void CheckTaskActivation()
     {
-        if (currentStage == ((int)startStage) && !taskStarted)
+        if (!isTutorial)
         {
-            dbs.switchHandleAnim.SetBool("switchActive", true);
-            taskStarted = true;
-            // Start courutine to determine how many seconds until event for this task
-            EventOccurCoroutine();
-            // If continuous start adding party score on start per second
-            successReaction.SetActive(true);
-            ContinuousActionCoroutine('+', currentIncrementMeter);
+            if (currentStage == ((int)startStage) && !taskStarted)
+            {
+                dbs.switchHandleAnim.SetBool("switchActive", true);
+                taskStarted = true;
+                // Start courutine to determine how many seconds until event for this task
+                EventOccurCoroutine();
+                // If continuous start adding party score on start per second
+                successReaction.SetActive(true);
+                ContinuousActionCoroutine('+', currentIncrementMeter);
+            }
         }
-        
+        else
+        {
+            if (!taskStarted)
+            {
+                dbs.switchHandleAnim.SetBool("switchActive", true);
+                taskStarted = true;
+                // Start courutine to determine how many seconds until event for this task
+                EventOccurCoroutine();
+                // If continuous start adding party score on start per second
+                successReaction.SetActive(true);
+                ContinuousActionCoroutine('+', currentIncrementMeter);
+            }
+          
+        }
+
     }
     
 
