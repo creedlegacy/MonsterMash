@@ -8,6 +8,7 @@ public class MusicPlayer : MonoBehaviour
     public List<Sprite> ListOfShapes = new List<Sprite>();
     public List<Color> ListOfColors = new List<Color>();
     public List<string> ListOfNames = new List<string>();
+    public List<AudioClip> ListOfMusic = new List<AudioClip>();
     public bool allowInteract = true;
     //it is implied that selected shape is always the shape on position 2 order, because position 2 is the middle shape in the order
     public string selectedShape;
@@ -16,12 +17,15 @@ public class MusicPlayer : MonoBehaviour
     private GameObject position1, position2, position3, arrowLeft, arrowRight, bubbleSprite;
     PlayerController pc;
     MusicRequestTask[] mrt;
+    SoundManager sm;
+
 
     // Start is called before the first frame update
     void Start()
     {
         pc = FindObjectOfType<PlayerController>();
         mrt = FindObjectsOfType<MusicRequestTask>();
+        sm = FindObjectOfType<SoundManager>();
 
         position1 = gameObject.transform.Find("Canvas/Position1").gameObject;
         position2 = gameObject.transform.Find("Canvas/Position2").gameObject;
@@ -69,13 +73,18 @@ public class MusicPlayer : MonoBehaviour
                 arrowLeft.SetActive(interactedState);
                 arrowRight.SetActive(interactedState);
                 bubbleSprite.SetActive(interactedState);
+
+                sm.ChangeRunningMusic(ListOfMusic[position2Order]);
+
                 if (!interactedState)
                 {
-                    foreach(MusicRequestTask thisTask in mrt)
+                    sm.ReturnNormalMusic();
+                    foreach (MusicRequestTask thisTask in mrt)
                     {
                         
                         if (thisTask.taskActivated)
                         {
+                            
                             if (thisTask.requestedShape == selectedShape)
                             {
                                 thisTask.MusicRequestSuccess();
@@ -122,6 +131,8 @@ public class MusicPlayer : MonoBehaviour
                     position3.GetComponent<Image>().color = ListOfColors[position3Order];
 
                     selectedShape = ListOfNames[position2Order];
+
+                    sm.ChangeRunningMusic(ListOfMusic[position2Order]);
                 }
                 else if (Input.GetButtonDown("Right"))
                 {
@@ -151,6 +162,8 @@ public class MusicPlayer : MonoBehaviour
                     position3.GetComponent<Image>().color = ListOfColors[position3Order];
 
                     selectedShape = ListOfNames[position2Order];
+
+                    sm.ChangeRunningMusic(ListOfMusic[position2Order]);
                 }
                 else if (Input.GetButtonDown("close_task"))
                 {
@@ -162,6 +175,8 @@ public class MusicPlayer : MonoBehaviour
                     arrowLeft.SetActive(interactedState);
                     arrowRight.SetActive(interactedState);
                     bubbleSprite.SetActive(interactedState);
+
+                    sm.ReturnNormalMusic();
                 }
             }
         }

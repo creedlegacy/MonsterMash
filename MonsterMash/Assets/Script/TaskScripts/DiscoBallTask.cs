@@ -41,13 +41,18 @@ public class DiscoBallTask : MonoBehaviour
     private IEnumerator continuousActionCoroutine;
     private GameObject successReaction, failReaction;
 
+    [HideInInspector]
+    public AudioSource audioSource;
+    [Header("Sound")]
+    public AudioClip successSFX;
+
     PartyManager pm;
     PlayerController pc;
     DiscoBallSwitch dbs;
 
     void Start()
     {
-     
+        audioSource = gameObject.GetComponent<AudioSource>();
         pm = FindObjectOfType<PartyManager>();
         pc = FindObjectOfType<PlayerController>();
         dbs = FindObjectOfType<DiscoBallSwitch>();
