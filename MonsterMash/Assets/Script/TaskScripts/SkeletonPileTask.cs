@@ -31,19 +31,22 @@ public class SkeletonPileTask : MonoBehaviour
     public bool tutorialFinished = false;
     private IEnumerator continuousActionCoroutine;
     private GameObject successReaction, failReaction, skeletonSprite;
-    public Sprite spriteChange;
+    //public Sprite spriteChange;
+
+    private Animator anim;
 
     PartyManager pm;
     PlayerController pc;
 
     void Start()
     {
+    	anim = GetComponent<Animator>();
         pm = FindObjectOfType<PartyManager>();
         pc = FindObjectOfType<PlayerController>();
 
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
-        skeletonSprite = gameObject.transform.Find("TaskSprite").gameObject;
+        //skeletonSprite = gameObject.transform.Find("TaskCharacter").gameObject;
 
 
         CheckStage();
@@ -134,9 +137,9 @@ public class SkeletonPileTask : MonoBehaviour
         int randomOccurTime = Random.Range(currentMinOccurTime, currentMaxOccurTime);
         yield return new WaitForSeconds(randomOccurTime);
         inDanger = true;
-        
+        anim.SetBool("Collapse",true);
         failReaction.SetActive(true);
-        skeletonSprite.GetComponent<SpriteRenderer>().sprite = spriteChange;
+        //skeletonSprite.GetComponent<SpriteRenderer>().sprite = spriteChange;
         ContinuousActionCoroutine('-', currentDecrementMeter);
         
      
@@ -152,7 +155,7 @@ public class SkeletonPileTask : MonoBehaviour
             {
                 StopContinuousActionCoroutine();
                 inDanger = false;
-                skeletonSprite.GetComponent<SpriteRenderer>().sprite = null;
+                //skeletonSprite.GetComponent<SpriteRenderer>().sprite = null;
                 pm.partymeter.value += currentIncrementMeter;
 
                 pc.sprintMeter.value += currentSprintTime;
