@@ -41,7 +41,7 @@ public class SoundManager : MonoBehaviour
         if(musicSource.clip == mainPartyMusic)
         {
             lastMusicTime = musicSource.time;
-            Debug.Log(lastMusicTime);
+            
         }
 
         musicSource.clip = clip;

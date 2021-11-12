@@ -30,7 +30,7 @@ public class SkeletonPileTask : MonoBehaviour
     [HideInInspector]
     public bool tutorialFinished = false;
     private IEnumerator continuousActionCoroutine;
-    private GameObject successReaction, failReaction, skeletonSprite;
+    private GameObject successReaction, failReaction, skeletonSprite,bodyParts;
     //public Sprite spriteChange;
 
     [HideInInspector]
@@ -46,9 +46,11 @@ public class SkeletonPileTask : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
-        anim = GetComponent<Animator>();
+        bodyParts = gameObject.transform.Find("BodyParts").gameObject;
+        anim = bodyParts.GetComponent<Animator>();
         pm = FindObjectOfType<PartyManager>();
         pc = FindObjectOfType<PlayerController>();
+        
 
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
@@ -164,6 +166,7 @@ public class SkeletonPileTask : MonoBehaviour
                 StopContinuousActionCoroutine();
                 inDanger = false;
                 //skeletonSprite.GetComponent<SpriteRenderer>().sprite = null;
+                bodyParts.SetActive(false);
                 pm.partymeter.value += currentIncrementMeter;
 
                 pc.sprintMeter.value += currentSprintTime;

@@ -40,6 +40,7 @@ public class MusicRequestTask : MonoBehaviour
     PartyManager pm;
     MusicPlayer mp;
     PlayerController pc;
+    SoundManager sm;
     //MusicRequestTask[] mrt;
 
     void Start()
@@ -48,6 +49,7 @@ public class MusicRequestTask : MonoBehaviour
         pm = FindObjectOfType<PartyManager>();
         mp = FindObjectOfType<MusicPlayer>();
         pc = FindObjectOfType<PlayerController>();
+        sm = FindObjectOfType<SoundManager>();
         //mrt = FindObjectsOfType<MusicRequestTask>();
         //Debug.Log(mrt.Length);
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
@@ -232,6 +234,7 @@ public class MusicRequestTask : MonoBehaviour
                 Debug.Log(pm.partymeter.value);
                 //call function in music player class to turn off music player elements such as UI and returning player movement
                 mp.MusicPlayerOff();
+                sm.ReturnNormalMusic();
                 EventOccurCoroutine();
 
             }
