@@ -33,6 +33,11 @@ public class SkeletonPileTask : MonoBehaviour
     private GameObject successReaction, failReaction, skeletonSprite;
     //public Sprite spriteChange;
 
+    [HideInInspector]
+    public AudioSource audioSource;
+    [Header("Sound")]
+    public AudioClip successSFX;
+
     private Animator anim;
 
     PartyManager pm;
@@ -40,7 +45,8 @@ public class SkeletonPileTask : MonoBehaviour
 
     void Start()
     {
-    	anim = GetComponent<Animator>();
+        audioSource = gameObject.GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
         pm = FindObjectOfType<PartyManager>();
         pc = FindObjectOfType<PlayerController>();
 
@@ -153,6 +159,8 @@ public class SkeletonPileTask : MonoBehaviour
             //check if there is an item being carried and that item is appropriate
             if (Input.GetButtonDown("Interact") && inDanger && pc.pickupFull && pc.pickupItemName == requiredItemName)
             {
+                audioSource.clip = successSFX;
+                audioSource.Play();
                 StopContinuousActionCoroutine();
                 inDanger = false;
                 //skeletonSprite.GetComponent<SpriteRenderer>().sprite = null;
