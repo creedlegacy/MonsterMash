@@ -21,7 +21,7 @@ public class SoundManager : MonoBehaviour
             musicSource.Play();
         }
         //TestLevel4
-        else if (SceneManager.GetActiveScene().name == "PrototypeLevelWithArt")
+        else if (SceneManager.GetActiveScene().name == "PrototypeLevelWithArt" || SceneManager.GetActiveScene().name == "TestLevel4")
         {
             musicSource.clip = mainPartyMusic;
             musicSource.Play();
