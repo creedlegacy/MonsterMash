@@ -9,10 +9,12 @@ public class TutorialManager : MonoBehaviour
 
     public List<GameObject> skeletonPileTasks = new List<GameObject>();
     public List<GameObject> musicRequestTasks = new List<GameObject>();
+    public List<GameObject> foodPickupTasks = new List<GameObject>();
     public GameObject discoBallTask;
     private int currentTutorialIndex = 0, tutorialCount = 0;
     private bool tutorialPopupActive = false, doSkeletonPileTaskCheck = false, skeletonPileTutorialShown = false,
-        doMusicRequestTaskCheck = false, musicRequestTutorialShown = false, doDiscoBallTaskCheck = false, discoBallTutorialShown = false;
+        doMusicRequestTaskCheck = false, musicRequestTutorialShown = false, doDiscoBallTaskCheck = false, discoBallTutorialShown = false,
+        doFoodPickupTaskCheck = false, foodPickupTutorialShown = false;
 
     PartyManager pm;
     // Start is called before the first frame update
@@ -42,6 +44,7 @@ public class TutorialManager : MonoBehaviour
         SkeletonPileTaskCheck();
         MusicRequestTaskCheck();
         DiscoBallTaskCheck();
+        FoodPickupTaskCheck();
     }
 
     public void ManageTutorialSequence()
@@ -119,6 +122,29 @@ public class TutorialManager : MonoBehaviour
                     discoBallTask.GetComponent<DiscoBallTask>().isTutorial = true;
                     
                     doDiscoBallTaskCheck = true;
+                    currentTutorialIndex++;
+                }
+
+            }
+            else if (tutorialPopups[currentTutorialIndex].name == "FoodPickupTutorial")
+            {
+                if (!foodPickupTutorialShown)
+                {
+                    tutorialPopupActive = true;
+                    tutorialPopups[currentTutorialIndex].SetActive(true);
+                    foodPickupTutorialShown = true;
+                }
+                else
+                {
+                    tutorialPopupActive = false;
+                    tutorialPopups[currentTutorialIndex].SetActive(false);
+
+                    foreach (GameObject foodPickupTask in foodPickupTasks)
+                    {
+                        foodPickupTask.GetComponent<FoodPickupTask>().EventOccurCoroutine();
+                    }
+
+                    doFoodPickupTaskCheck = true;
                     currentTutorialIndex++;
                 }
 
@@ -205,6 +231,30 @@ public class TutorialManager : MonoBehaviour
                 ManageTutorialSequence();
             }
 
+        }
+
+    }
+
+    void FoodPickupTaskCheck()
+    {
+        if (doFoodPickupTaskCheck)
+        {
+            int count = 0;
+            foreach (GameObject foodPickupTask in foodPickupTasks)
+            {
+                if (foodPickupTask != null)
+                    if (foodPickupTask.GetComponent<FoodPickupTask>().tutorialFinished == true)
+                    {
+                        count++;
+                    }
+            }
+
+            if (count == foodPickupTasks.Count)
+            {
+                doFoodPickupTaskCheck = false;
+
+                ManageTutorialSequence();
+            }
         }
 
     }
