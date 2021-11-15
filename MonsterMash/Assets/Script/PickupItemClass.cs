@@ -5,4 +5,6 @@ using UnityEngine;
 public class PickupItemClass : MonoBehaviour
 {
     public string uniqueName;
+    public bool sourceItem;
+    public bool isFood;
 }
