@@ -460,25 +460,25 @@ MonoBehaviour:
   stage1Modifiers:
     minOccurTime: 3
     maxOccurTime: 3
-    decrementMeter: 3
-    incrementMeter: 5
+    decrementMeter: 10
+    incrementMeter: 10
     sprintTime: 3
   stage2Modifiers:
     minOccurTime: 5
     maxOccurTime: 10
-    decrementMeter: 5
+    decrementMeter: 10
     incrementMeter: 10
     sprintTime: 3
   stage3Modifiers:
     minOccurTime: 5
     maxOccurTime: 10
-    decrementMeter: 5
+    decrementMeter: 10
     incrementMeter: 10
     sprintTime: 3
   stage4Modifiers:
     minOccurTime: 5
     maxOccurTime: 10
-    decrementMeter: 5
+    decrementMeter: 10
     incrementMeter: 10
     sprintTime: 3
   foodNames:
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   - {x: -0.6991043, y: -0.46129793, z: 0}
   m_ShapePathHash: 1781557325
   m_Mesh: {fileID: 0}
-  m_InstanceId: 507480
+  m_InstanceId: 24974
 --- !u!95 &1610042310364336803
 Animator:
   serializedVersion: 3
