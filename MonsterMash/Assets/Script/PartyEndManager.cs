@@ -27,4 +27,9 @@ public class PartyEndManager : MonoBehaviour
   
         SceneManager.LoadScene(PlayerPrefs.GetString("LastPartyScene"));
     }
+
+    public void OpenMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene"); //Note: If scene name changes, string must be updated to reflect that
+    }
 }
