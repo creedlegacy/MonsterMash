@@ -33,6 +33,14 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void MainMenu()
+    {
+
+        SceneManager.LoadScene("MainMenuScene");
+
+
+    }
+
     public void PauseGame()
     {
 
