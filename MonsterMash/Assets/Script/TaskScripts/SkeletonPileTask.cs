@@ -30,8 +30,13 @@ public class SkeletonPileTask : MonoBehaviour
     [HideInInspector]
     public bool tutorialFinished = false;
     private IEnumerator continuousActionCoroutine;
-    private GameObject successReaction, failReaction, skeletonSprite;
+    private GameObject successReaction, failReaction, skeletonSprite,bodyParts;
     //public Sprite spriteChange;
+
+    [HideInInspector]
+    public AudioSource audioSource;
+    [Header("Sound")]
+    public AudioClip successSFX;
 
     private Animator anim;
 
@@ -40,9 +45,12 @@ public class SkeletonPileTask : MonoBehaviour
 
     void Start()
     {
-    	anim = GetComponent<Animator>();
+        audioSource = gameObject.GetComponent<AudioSource>();
+        bodyParts = gameObject.transform.Find("BodyParts").gameObject;
+        anim = bodyParts.GetComponent<Animator>();
         pm = FindObjectOfType<PartyManager>();
         pc = FindObjectOfType<PlayerController>();
+        
 
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
@@ -153,9 +161,12 @@ public class SkeletonPileTask : MonoBehaviour
             //check if there is an item being carried and that item is appropriate
             if (Input.GetButtonDown("Interact") && inDanger && pc.pickupFull && pc.pickupItemName == requiredItemName)
             {
+                audioSource.clip = successSFX;
+                audioSource.Play();
                 StopContinuousActionCoroutine();
                 inDanger = false;
                 //skeletonSprite.GetComponent<SpriteRenderer>().sprite = null;
+                bodyParts.SetActive(false);
                 pm.partymeter.value += currentIncrementMeter;
 
                 pc.sprintMeter.value += currentSprintTime;

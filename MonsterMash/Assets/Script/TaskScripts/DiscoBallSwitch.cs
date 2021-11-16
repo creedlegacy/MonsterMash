@@ -30,7 +30,8 @@ public class DiscoBallSwitch : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact") && discoBallTask.inDanger)
             {
-                
+                discoBallTask.audioSource.clip = discoBallTask.successSFX;
+                discoBallTask.audioSource.Play();
                 discoBallTask.inDanger = false;
                 discoBallTask.StopContinuousActionCoroutine();
 

@@ -24,6 +24,15 @@ public class GameManager : MonoBehaviour
         PauseGame();
     }
 
+    public void StartGame()
+    {
+
+        //TestLevel4
+        SceneManager.LoadScene("PrototypeLevelWithArt");
+        
+
+    }
+
     public void PauseGame()
     {
 

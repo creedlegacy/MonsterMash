@@ -32,16 +32,24 @@ public class MusicRequestTask : MonoBehaviour
     public bool inDanger = false, taskActivated = false, isTutorial = false;
     private GameObject successReaction, failReaction, countdownDial, countdownDialFill, taskAlert, bubble, shape;
 
+    private AudioSource audioSource;
+    [Header("Sound")]
+    public AudioClip successSFX;
+    public AudioClip signalSFX;
+
     PartyManager pm;
     MusicPlayer mp;
     PlayerController pc;
+    SoundManager sm;
     //MusicRequestTask[] mrt;
 
     void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
         pm = FindObjectOfType<PartyManager>();
         mp = FindObjectOfType<MusicPlayer>();
         pc = FindObjectOfType<PlayerController>();
+        sm = FindObjectOfType<SoundManager>();
         //mrt = FindObjectsOfType<MusicRequestTask>();
         //Debug.Log(mrt.Length);
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
@@ -151,6 +159,8 @@ public class MusicRequestTask : MonoBehaviour
         tempTaskActivatedCountdown = taskActivatedCountdown;
         taskAlert.SetActive(true);
         taskAlert.GetComponent<Animator>().Play("TaskAlertAnimation", -1, 0f);
+        audioSource.clip = signalSFX;
+        audioSource.Play();
 
     }
 
@@ -224,6 +234,7 @@ public class MusicRequestTask : MonoBehaviour
                 Debug.Log(pm.partymeter.value);
                 //call function in music player class to turn off music player elements such as UI and returning player movement
                 mp.MusicPlayerOff();
+                sm.ReturnNormalMusic();
                 EventOccurCoroutine();
 
             }
@@ -253,6 +264,9 @@ public class MusicRequestTask : MonoBehaviour
         Debug.Log(pm.partymeter.value);
         successReaction.SetActive(true);
         successReaction.GetComponent<Animator>().Play("TaskReactionAnimation", -1, 0f);
+
+        audioSource.clip = successSFX;
+        audioSource.Play();
 
         //Declare this task's tutorial is finished because succesfully dealt with
         if (isTutorial)

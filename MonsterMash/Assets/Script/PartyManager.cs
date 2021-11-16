@@ -30,16 +30,22 @@ public class PartyManager : MonoBehaviour
     [Header("")]
     public Slider partymeter;
     public bool continueCoroutine = true, partyTimeStarted = false, dangerState = false;
+    private bool heartBeatSoundOn = false;
     public int defaultPartyMeter = 20;
     public float partyTime = 121f, dangerTime = 6f;
     private float partyTimeStatic, defaultDangerTime = 6f;
     private GameObject partyTimer,dangerCountdown;
+
+    private AudioSource audioSource;
+    [Header("Sound")]
+    public AudioClip heartbeatSFX;
 
     PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
         pc = FindObjectOfType<PlayerController>();
         partyTimeStatic = partyTime;
         defaultDangerTime = dangerTime;
@@ -158,16 +164,24 @@ public class PartyManager : MonoBehaviour
     {
         if(partymeter.value <= 0)
         {
+            
             dangerTime -= Time.deltaTime;
             if (dangerTime < 1)
             {
-                SceneManager.LoadScene("PartyEndScene");
                 PlayerPrefs.SetInt("LastPartyScore", (int)partymeter.value);
                 PlayerPrefs.SetString("LastPartyScene", SceneManager.GetActiveScene().name);
+                SceneManager.LoadScene("PartyEndScene");
             }
             dangerState = true;
             dangerCountdown.GetComponent<Text>().enabled = true;
-           
+
+            if (!heartBeatSoundOn)
+            {
+                heartBeatSoundOn = true;
+                audioSource.clip = heartbeatSFX;
+                audioSource.Play();
+            }
+
             int minutes = Mathf.FloorToInt(dangerTime / 60F);
             int seconds = Mathf.FloorToInt(dangerTime - minutes * 60);
             string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
@@ -175,9 +189,18 @@ public class PartyManager : MonoBehaviour
         }
         else
         {
+            audioSource.Stop();
+            heartBeatSoundOn = false;
+
             dangerState = false;
             dangerCountdown.GetComponent<Text>().enabled = false;
         }
+    }
+
+    void PlayHeartBeatSound()
+    {
+        
+        
     }
 
 }
