@@ -42,6 +42,7 @@ public class PartyManager : MonoBehaviour
     public AudioClip heartbeatSFX;
 
     PlayerController pc;
+    HiResScreenShots ScreenShot;
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +124,7 @@ public class PartyManager : MonoBehaviour
 
         //In a couroutine to allow the splash image to show then end the game
         partyEnded = true;
+        ScreenShot.TakeHiResShot();
         PlayerPrefs.SetInt("LastPartyScore", (int)partymeter.value);
         PlayerPrefs.SetString("LastPartyScene", SceneManager.GetActiveScene().name);
         

@@ -8,7 +8,6 @@ public class Testing : MonoBehaviour {
 
     [SerializeField] private HeatMapVisual heatMapVisual;
     private Grid grid;
-    public Camera mainCamera;
     public GameObject player;
 
     private void Start() {
@@ -18,12 +17,7 @@ public class Testing : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            Vector3 MPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            MPosition.z = 0f;
-            Vector3 position = MPosition;
-            grid.AddValue(position, 100, 2, 25);
-        }
+
     }
 
 
