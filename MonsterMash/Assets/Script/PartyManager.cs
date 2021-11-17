@@ -27,14 +27,15 @@ public class PartyManager : MonoBehaviour
     public float stage2TimeTreshold = 61f;
     public float stage3TimeTreshold = 121f;
 
-    [Header("")]
+    [Header("Party Manager Variables")]
     public Slider partymeter;
     public bool continueCoroutine = true, partyTimeStarted = false, dangerState = false;
-    private bool heartBeatSoundOn = false;
+    private bool heartBeatSoundOn = false,allowPartyTimerStart = false,partyEnded = false;
     public int defaultPartyMeter = 20;
     public float partyTime = 121f, dangerTime = 6f;
     private float partyTimeStatic, defaultDangerTime = 6f;
     private GameObject partyTimer,dangerCountdown;
+    public GameObject PartyStartSplash,PartyEndSplash;
 
     private AudioSource audioSource;
     [Header("Sound")]
@@ -82,12 +83,8 @@ public class PartyManager : MonoBehaviour
         }
         else if (currentStage == Stage.stage2)
         {
-            foreach (GameObject stage2task in stage2Tasks)
-            {
-                if (stage2task != null)
-                    stage2task.SetActive(true);
-            }
-
+            //In a couroutine to allow the splash image to start first then the game
+            StartCoroutine(PartyStart());
         }
         else if (currentStage == Stage.stage3)
         {
@@ -107,9 +104,41 @@ public class PartyManager : MonoBehaviour
         }
     }
 
+    IEnumerator PartyStart()
+    {
+        //In a couroutine to allow the splash image to start first then the game
+        PartyStartSplash.SetActive(true);
+        yield return new WaitForSeconds(3);
+        allowPartyTimerStart = true;
+        foreach (GameObject stage2task in stage2Tasks)
+        {
+            if (stage2task != null)
+                stage2task.SetActive(true);
+        }
+
+    }
+
+    IEnumerator PartyEnd()
+    {
+
+        //In a couroutine to allow the splash image to show then end the game
+        partyEnded = true;
+        PlayerPrefs.SetInt("LastPartyScore", (int)partymeter.value);
+        PlayerPrefs.SetString("LastPartyScene", SceneManager.GetActiveScene().name);
+        
+        allowPartyTimerStart = false;
+        audioSource.Stop();
+        heartBeatSoundOn = false;
+
+        PartyEndSplash.SetActive(true);
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("PartyEndScene");
+
+    }
+
     void PartyTime()
     {
-        if (currentStage != Stage.stage1)
+        if (currentStage != Stage.stage1 && allowPartyTimerStart)
         {
             if (partyTime >= 1)
             {
@@ -138,10 +167,11 @@ public class PartyManager : MonoBehaviour
             else
             {
                 partyTimeStarted = false;
-                SceneManager.LoadScene("PartyEndScene");
-
-                PlayerPrefs.SetInt("LastPartyScore", (int)partymeter.value);
-                PlayerPrefs.SetString("LastPartyScene", SceneManager.GetActiveScene().name);
+                if (!partyEnded)
+                {
+                    StartCoroutine(PartyEnd());
+                }
+                 
             }
         }
     }
@@ -162,45 +192,45 @@ public class PartyManager : MonoBehaviour
 
     void EmptyPartyMeterCheck()
     {
-        if(partymeter.value <= 0)
+        if (!partyEnded)
         {
-            
-            dangerTime -= Time.deltaTime;
-            if (dangerTime < 1)
+            if (partymeter.value <= 0)
             {
-                PlayerPrefs.SetInt("LastPartyScore", (int)partymeter.value);
-                PlayerPrefs.SetString("LastPartyScene", SceneManager.GetActiveScene().name);
-                SceneManager.LoadScene("PartyEndScene");
-            }
-            dangerState = true;
-            dangerCountdown.GetComponent<Text>().enabled = true;
+                if (!heartBeatSoundOn)
+                {
+                    heartBeatSoundOn = true;
+                    audioSource.clip = heartbeatSFX;
+                    audioSource.Play();
+                }
+                dangerTime -= Time.deltaTime;
+                if (dangerTime < 1)
+                {
+                    if (!partyEnded)
+                    {
+                        StartCoroutine(PartyEnd());
+                    }
+                }
+                dangerState = true;
+                dangerCountdown.GetComponent<Text>().enabled = true;
 
-            if (!heartBeatSoundOn)
+                
+
+                int minutes = Mathf.FloorToInt(dangerTime / 60F);
+                int seconds = Mathf.FloorToInt(dangerTime - minutes * 60);
+                string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
+                dangerCountdown.GetComponent<Text>().text = formattedTime;
+            }
+            else
             {
-                heartBeatSoundOn = true;
-                audioSource.clip = heartbeatSFX;
-                audioSource.Play();
+                audioSource.Stop();
+                heartBeatSoundOn = false;
+
+                dangerState = false;
+                dangerCountdown.GetComponent<Text>().enabled = false;
             }
-
-            int minutes = Mathf.FloorToInt(dangerTime / 60F);
-            int seconds = Mathf.FloorToInt(dangerTime - minutes * 60);
-            string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
-            dangerCountdown.GetComponent<Text>().text = formattedTime;
         }
-        else
-        {
-            audioSource.Stop();
-            heartBeatSoundOn = false;
-
-            dangerState = false;
-            dangerCountdown.GetComponent<Text>().enabled = false;
-        }
+        
     }
 
-    void PlayHeartBeatSound()
-    {
-        
-        
-    }
 
 }
