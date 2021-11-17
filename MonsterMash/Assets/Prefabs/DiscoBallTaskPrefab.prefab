@@ -52,26 +52,26 @@ MonoBehaviour:
   stage1Modifiers:
     minOccurTime: 0
     maxOccurTime: 0
-    decrementMeter: 0
-    incrementMeter: 0
+    decrementMeter: 20
+    incrementMeter: 20
     sprintTime: 0
   stage2Modifiers:
     minOccurTime: 0
     maxOccurTime: 0
-    decrementMeter: 0
-    incrementMeter: 0
+    decrementMeter: 20
+    incrementMeter: 20
     sprintTime: 0
   stage3Modifiers:
     minOccurTime: 0
     maxOccurTime: 0
-    decrementMeter: 0
-    incrementMeter: 0
+    decrementMeter: 20
+    incrementMeter: 20
     sprintTime: 0
   stage4Modifiers:
     minOccurTime: 0
     maxOccurTime: 0
-    decrementMeter: 0
-    incrementMeter: 0
+    decrementMeter: 20
+    incrementMeter: 20
     sprintTime: 0
   startStage: 0
   currentMinOccurTime: 5
