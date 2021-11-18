@@ -117,14 +117,17 @@ public class PlayerController : MonoBehaviour
                 if (fastMode)
                 {
                     sprintMeter.value -= Time.deltaTime;
+                    anim.SetBool("isSprinting",true);
+                } else {
+                    anim.SetBool("isSprinting",false);
                 }
-                
                 anim.SetBool("isRunning",true);
                 isWalking = true;
                 isIdle = false;
             }
             else
             {
+                anim.SetBool("isSprinting",false);
             	anim.SetBool("isRunning",false);
                 isWalking = false;
                 isIdle = true;

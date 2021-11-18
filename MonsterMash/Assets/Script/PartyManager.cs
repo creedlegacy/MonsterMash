@@ -60,7 +60,7 @@ public class PartyManager : MonoBehaviour
         PlayerPrefs.DeleteKey("LastPartyScene");
 
         
-
+        ScreenShot = GameObject.FindGameObjectWithTag("ScreenShot").GetComponent<HiResScreenShots>();
 
     }
 
