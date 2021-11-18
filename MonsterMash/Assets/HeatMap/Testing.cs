@@ -27,7 +27,7 @@ public class Testing : MonoBehaviour {
     	PlayerPosition.x += 10f;
     	PlayerPosition.y += 5f;
     	Vector3 p = PlayerPosition;
-    	grid.AddValue(p, 10, 1, 10);
+    	grid.AddValue(p, 15, 1, 10);
     }
 }
 
