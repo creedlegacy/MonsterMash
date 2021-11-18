@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     {
 
         //TestLevel4
-        SceneManager.LoadScene("PrototypeLevelWithArt");
+        SceneManager.LoadScene("TestLevel4");
         
 
     }
