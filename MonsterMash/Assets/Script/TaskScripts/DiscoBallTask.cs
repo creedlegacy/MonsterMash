@@ -80,6 +80,8 @@ public class DiscoBallTask : MonoBehaviour
             if (currentStage == ((int)startStage) && !taskStarted)
             {
                 dbs.switchHandleAnim.SetBool("switchActive", true);
+                dbs.switchHandleAnim.SetBool("switchPosition", true);
+                dbs.audioSource.Play();
                 taskStarted = true;
                 // Start courutine to determine how many seconds until event for this task
                 EventOccurCoroutine();
@@ -93,6 +95,7 @@ public class DiscoBallTask : MonoBehaviour
             if (!taskStarted)
             {
                 dbs.switchHandleAnim.SetBool("switchActive", true);
+                dbs.audioSource.Play();
                 taskStarted = true;
                 // Start courutine to determine how many seconds until event for this task
                 EventOccurCoroutine();
@@ -175,6 +178,7 @@ public class DiscoBallTask : MonoBehaviour
         yield return new WaitForSeconds(randomOccurTime);
         inDanger = true;
         dbs.switchHandleAnim.SetBool("switchPosition", false);
+        dbs.audioSource.Play();
         StopContinuousActionCoroutine();
         failReaction.SetActive(true);
         ContinuousActionCoroutine('-', currentDecrementMeter);

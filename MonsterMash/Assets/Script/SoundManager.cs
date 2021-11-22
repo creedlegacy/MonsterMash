@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip mainPartyMusic;
     [Header("SoundFX Audio Clips")]
     public AudioClip partyBackgroundNoise;
+    public AudioClip buttonSound;
     private float lastMusicTime;
     // Start is called before the first frame update
     void Start()

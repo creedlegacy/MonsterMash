@@ -9,10 +9,12 @@ public class DiscoBallSwitch : MonoBehaviour
     private bool collidedPlayer = false;
     public Animator switchHandleAnim;
     DiscoBallTask discoBallTask;
+    public AudioSource audioSource;
 
     void Start()
     {
         discoBallTask = FindObjectOfType<DiscoBallTask>();
+        audioSource = GetComponent<AudioSource>();
         switchHandleAnim = gameObject.transform.Find("SwitchHandle").gameObject.GetComponent<Animator>();
 
     }
@@ -30,6 +32,7 @@ public class DiscoBallSwitch : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact") && discoBallTask.inDanger)
             {
+                audioSource.Play();
                 discoBallTask.audioSource.clip = discoBallTask.successSFX;
                 discoBallTask.audioSource.Play();
                 discoBallTask.inDanger = false;
