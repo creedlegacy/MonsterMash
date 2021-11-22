@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
 
     SpriteRenderer pickedUpSpriteRenderer;
+    Sprite droppedFoodSprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -140,13 +142,13 @@ public class PlayerController : MonoBehaviour
 
     void PlayerPickUp()
     {
-        
         if (Input.GetButtonDown("Pickup"))
         {
             if (!pickupFull)
             {
                 if (collidedPickup)
                 {
+                   
                     if (pickupableGameObject != null)
                     {
                         //If item is a source item dont disable
@@ -165,22 +167,26 @@ public class PlayerController : MonoBehaviour
                             //default local position = 0,4.97,0
                             pickedUpItem.transform.localPosition = new Vector3(-2.69f, 1.02f, 0);
                             pickedUpItem.transform.localScale = new Vector3(0.41f, 0.41f, 0.41f);
+                            droppedFoodSprite = pickupableGameObject.GetComponent<SpriteRenderer>().sprite;
                         }
                         else
                         {
-                            pickedUpItem.transform.localPosition = new Vector3(0, 4.97f, 0);
+                            //old
+                            //pickedUpItem.transform.localPosition = new Vector3(0, 4.97f, 0);
+                            //pickedUpItem.transform.localScale = new Vector3(1, 1, 1);
+                            pickedUpItem.transform.localPosition = new Vector3(-2.58f, 5.31f, 0);
                             pickedUpItem.transform.localScale = new Vector3(1, 1, 1);
                         }
-                        
+
                         //if item y dimension is longer than x, flip item
-                        if (pickedUpSpriteRenderer.bounds.size.x < pickedUpSpriteRenderer.bounds.size.y)
-                        {
-                            pickedUpItem.transform.localRotation = Quaternion.Euler(0, 0, 90);
-                        }
-                        else
-                        {
-                            pickedUpItem.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                        }
+                        //if (pickedUpSpriteRenderer.bounds.size.x < pickedUpSpriteRenderer.bounds.size.y)
+                        //{
+                        //    pickedUpItem.transform.localRotation = Quaternion.Euler(0, 0, 90);
+                        //}
+                        //else
+                        //{
+                        //    pickedUpItem.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                        //}
 
                         pickupFull = true;
                     }
@@ -188,28 +194,32 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if (!pickupableGameObject.GetComponent<PickupItemClass>().sourceItem)
+                if (!collidedPickup)
                 {
-                    pickupableGameObject.transform.position = gameObject.transform.position;
-                    pickupableGameObject.SetActive(true);
+                    if (!pickupableGameObject.GetComponent<PickupItemClass>().sourceItem)
+                    {
+                        pickupableGameObject.transform.position = gameObject.transform.position + new Vector3(0, 0.5f, 0);
+                        pickupableGameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        //if (GameObject.Find("DroppedFood") != null)
+                        //{
+                        //   Destroy(GameObject.Find("DroppedFood").gameObject);
+                        //}
+                        GameObject droppedFood = new GameObject();
+                        droppedFood.name = "DroppedFood";
+                        droppedFood.AddComponent<SpriteRenderer>();
+                        droppedFood.GetComponent<SpriteRenderer>().sprite = droppedFoodSprite;
+                        droppedFood.transform.position = gameObject.transform.position + new Vector3(0, -0.8f, 0);
+                        droppedFood.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+                    }
+
+                    EmptyHand();
                 }
-                else
-                {
-                    //if (GameObject.Find("DroppedFood") != null)
-                    //{
-                    //   Destroy(GameObject.Find("DroppedFood").gameObject);
-                    //}
-                    GameObject droppedFood = new GameObject();
-                    droppedFood.name = "DroppedFood";
-                    droppedFood.AddComponent<SpriteRenderer>();
-                    droppedFood.GetComponent<SpriteRenderer>().sprite = pickupableGameObject.GetComponent<SpriteRenderer>().sprite;
-                    droppedFood.transform.position = gameObject.transform.position + new Vector3(0,-0.8f,0);
-                    droppedFood.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-
-                }
-
-
-                EmptyHand();
+                    
+                
             }
                   
         }
@@ -218,22 +228,28 @@ public class PlayerController : MonoBehaviour
 
     public void EmptyHand()
     {
+        
+        pickupableGameObject = null;
+
         pickedUpItem.transform.localRotation = Quaternion.Euler(0, 0, 0);
         pickedUpItem.SetActive(false);
-        pickupableGameObject = null;
         pickupItemName = null;
         pickupFull = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.gameObject.tag == "Pickupable")
         {
+
+            
             if (!pickupFull)
             {
                 pickupableGameObject = collision.gameObject;
- 
             }
+                
+            
             
             collidedPickup = true;
         }

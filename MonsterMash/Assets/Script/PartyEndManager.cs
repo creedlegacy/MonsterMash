@@ -92,7 +92,7 @@ public class PartyEndManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("PrototypeLevelWithArt");
+            SceneManager.LoadScene("PartyLevelScene");
         }
             
     }

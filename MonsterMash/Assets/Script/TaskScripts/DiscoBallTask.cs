@@ -40,11 +40,16 @@ public class DiscoBallTask : MonoBehaviour
     public bool isTutorial = false, tutorialFinished = false, taskStarted = false;
     private IEnumerator continuousActionCoroutine;
     private GameObject successReaction, failReaction;
+    [HideInInspector]
+    public GameObject discoLights;
 
     [HideInInspector]
     public AudioSource audioSource;
     [Header("Sound")]
     public AudioClip successSFX;
+
+    [HideInInspector]
+    public Animator discoBallAnim;
 
     PartyManager pm;
     PlayerController pc;
@@ -58,6 +63,8 @@ public class DiscoBallTask : MonoBehaviour
         dbs = FindObjectOfType<DiscoBallSwitch>();
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
+        discoLights = gameObject.transform.Find("DiscoLight").gameObject;
+        discoBallAnim = gameObject.transform.Find("DiscoBallSprite").gameObject.GetComponent<Animator>();
 
         //Checks what the current stage of the party is
         CheckStage();
@@ -79,6 +86,8 @@ public class DiscoBallTask : MonoBehaviour
         {
             if (currentStage == ((int)startStage) && !taskStarted)
             {
+                discoLights.SetActive(true);
+                discoBallAnim.SetBool("DiscoBallOn", true);
                 dbs.switchHandleAnim.SetBool("switchActive", true);
                 dbs.switchHandleAnim.SetBool("switchPosition", true);
                 dbs.audioSource.Play();
@@ -94,6 +103,8 @@ public class DiscoBallTask : MonoBehaviour
         {
             if (!taskStarted)
             {
+                discoLights.SetActive(true);
+                discoBallAnim.SetBool("DiscoBallOn", true);
                 dbs.switchHandleAnim.SetBool("switchActive", true);
                 dbs.audioSource.Play();
                 taskStarted = true;
@@ -177,6 +188,8 @@ public class DiscoBallTask : MonoBehaviour
         int randomOccurTime = Random.Range(currentMinOccurTime, currentMaxOccurTime);
         yield return new WaitForSeconds(randomOccurTime);
         inDanger = true;
+        discoLights.SetActive(false);
+        discoBallAnim.SetBool("DiscoBallOn", false);
         dbs.switchHandleAnim.SetBool("switchPosition", false);
         dbs.audioSource.Play();
         StopContinuousActionCoroutine();

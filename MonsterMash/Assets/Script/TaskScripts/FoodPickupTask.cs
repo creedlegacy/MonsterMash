@@ -166,7 +166,7 @@ public class FoodPickupTask : MonoBehaviour
     {
         if (collidedPlayer)
         {
-            if (Input.GetButtonDown("Interact") && inDanger && pc.pickupFull)
+            if (Input.GetButtonDown("Interact") && inDanger && pc.pickupFull && pc.pickupItemName != "broom")
             {
                 if(pc.pickupItemName == requiredItemName)
                 {

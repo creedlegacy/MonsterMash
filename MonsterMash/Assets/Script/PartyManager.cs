@@ -124,7 +124,7 @@ public class PartyManager : MonoBehaviour
 
         //In a couroutine to allow the splash image to show then end the game
         partyEnded = true;
-        ScreenShot.TakeHiResShot();
+        //ScreenShot.TakeHiResShot();
         PlayerPrefs.SetInt("LastPartyScore", (int)partymeter.value);
         PlayerPrefs.SetString("LastPartyScene", SceneManager.GetActiveScene().name);
         
@@ -194,7 +194,7 @@ public class PartyManager : MonoBehaviour
 
     void EmptyPartyMeterCheck()
     {
-        if (!partyEnded)
+        if (!partyEnded && currentStage != Stage.stage1)
         {
             if (partymeter.value <= 0)
             {
@@ -224,6 +224,8 @@ public class PartyManager : MonoBehaviour
             }
             else
             {
+                //reset danger time when party meter goes above 0 again
+                dangerTime = defaultDangerTime;
                 audioSource.Stop();
                 heartBeatSoundOn = false;
 

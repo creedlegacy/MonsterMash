@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
 
-        //TestLevel4
-        SceneManager.LoadScene("TestLevel4");
+
+        SceneManager.LoadScene("PartyLevelScene");
         
 
     }

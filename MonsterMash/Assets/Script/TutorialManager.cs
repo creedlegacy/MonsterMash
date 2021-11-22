@@ -32,14 +32,14 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (tutorialPopupActive)
-        {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
+        //if (tutorialPopupActive)
+        //{
+        //    Time.timeScale = 0;
+        //}
+        //else
+        //{
+        //    Time.timeScale = 1;
+        //}
 
         SkeletonPileTaskCheck();
         MusicRequestTaskCheck();
@@ -59,6 +59,7 @@ public class TutorialManager : MonoBehaviour
         {
             //if all tutorials are depleted go here
             tutorialPopupActive = false;
+            Time.timeScale = 1;
             pm.EnterStage2();
 
         }
@@ -69,12 +70,14 @@ public class TutorialManager : MonoBehaviour
                 if (!skeletonPileTutorialShown)
                 {
                     tutorialPopupActive = true;
+                    Time.timeScale = 0;
                     tutorialPopups[currentTutorialIndex].SetActive(true);
                     skeletonPileTutorialShown = true;
                 }
                 else
                 {
                     tutorialPopupActive = false;
+                    Time.timeScale = 1;
                     tutorialPopups[currentTutorialIndex].SetActive(false);
                     foreach (GameObject skeletonPileTask in skeletonPileTasks)
                     {
@@ -90,12 +93,14 @@ public class TutorialManager : MonoBehaviour
                 if (!musicRequestTutorialShown)
                 {
                     tutorialPopupActive = true;
+                    Time.timeScale = 0;
                     tutorialPopups[currentTutorialIndex].SetActive(true);
                     musicRequestTutorialShown = true;
                 }
                 else
                 {
                     tutorialPopupActive = false;
+                    Time.timeScale = 1;
                     tutorialPopups[currentTutorialIndex].SetActive(false);
                     foreach (GameObject musicRequestTask in musicRequestTasks)
                     {
@@ -111,12 +116,14 @@ public class TutorialManager : MonoBehaviour
                 if (!discoBallTutorialShown)
                 {
                     tutorialPopupActive = true;
+                    Time.timeScale = 0;
                     tutorialPopups[currentTutorialIndex].SetActive(true);
                     discoBallTutorialShown = true;
                 }
                 else
                 {
                     tutorialPopupActive = false;
+                    Time.timeScale = 1;
                     tutorialPopups[currentTutorialIndex].SetActive(false);
 
                     discoBallTask.GetComponent<DiscoBallTask>().isTutorial = true;
@@ -131,12 +138,14 @@ public class TutorialManager : MonoBehaviour
                 if (!foodPickupTutorialShown)
                 {
                     tutorialPopupActive = true;
+                    Time.timeScale = 0;
                     tutorialPopups[currentTutorialIndex].SetActive(true);
                     foodPickupTutorialShown = true;
                 }
                 else
                 {
                     tutorialPopupActive = false;
+                    Time.timeScale = 1;
                     tutorialPopups[currentTutorialIndex].SetActive(false);
 
                     foreach (GameObject foodPickupTask in foodPickupTasks)
@@ -151,9 +160,8 @@ public class TutorialManager : MonoBehaviour
             }
             else
             {
-
-
                 tutorialPopupActive = true;
+                Time.timeScale = 0;
                 tutorialPopups[currentTutorialIndex].SetActive(true);
                 currentTutorialIndex++;
 
