@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class DiscoBallSwitch : MonoBehaviour
 {
     private bool collidedPlayer = false;
+    [HideInInspector]
     public Animator switchHandleAnim;
     DiscoBallTask discoBallTask;
+    [HideInInspector]
     public AudioSource audioSource;
 
     void Start()
@@ -48,6 +50,8 @@ public class DiscoBallSwitch : MonoBehaviour
                 }
                 else
                 {
+                    discoBallTask.discoLights.SetActive(true);
+                    discoBallTask.discoBallAnim.SetBool("DiscoBallOn", true);
                     switchHandleAnim.SetBool("switchPosition", true);
                     discoBallTask.ContinuousActionCoroutine('+', discoBallTask.currentIncrementMeter, true);
                     discoBallTask.EventOccurCoroutine();
