@@ -30,7 +30,8 @@ public class SkeletonPileTask : MonoBehaviour
     [HideInInspector]
     public bool tutorialFinished = false;
     private IEnumerator continuousActionCoroutine;
-    private GameObject successReaction, failReaction, skeletonSprite,bodyParts;
+    public GameObject successReaction, failReaction;
+    private GameObject skeletonSprite,bodyParts;
     //public Sprite spriteChange;
 
     [HideInInspector]
@@ -52,8 +53,8 @@ public class SkeletonPileTask : MonoBehaviour
         pc = FindObjectOfType<PlayerController>();
         
 
-        successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
-        failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
+        //successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
+        //failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
         //skeletonSprite = gameObject.transform.Find("TaskCharacter").gameObject;
 
 

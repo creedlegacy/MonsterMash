@@ -6,7 +6,7 @@ public class ReactionMovement : MonoBehaviour
 {
 
 
-
+	public GameObject MovingObject;
 	public GameObject Destination;
 	public float speed;
     // Start is called before the first frame update
@@ -16,8 +16,8 @@ public class ReactionMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, Destination.transform.position, Time.deltaTime * speed);
+        MovingObject.transform.position = Vector3.MoveTowards(MovingObject.transform.position, Destination.transform.position, Time.deltaTime * speed);
     }
 }
