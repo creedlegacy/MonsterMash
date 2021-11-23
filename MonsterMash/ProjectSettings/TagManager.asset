@@ -59,6 +59,9 @@ TagManager:
   - name: Player
     uniqueID: 3520769727
     locked: 0
+  - name: Lighting
+    uniqueID: 2664528507
+    locked: 0
   - name: PickedUpItems
     uniqueID: 2183429877
     locked: 0
