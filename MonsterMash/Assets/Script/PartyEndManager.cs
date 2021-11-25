@@ -14,7 +14,8 @@ public class PartyEndManager : MonoBehaviour
     Text partyScoreText;
     private float partyScoreValue = 0;
     private AudioSource audioSource;
-    private bool countUpCompleted = false;
+    private bool countUpCompleted = false,drumRollOn;
+    public AudioClip drumRoll,winSound,failSound;
 
     // Start is called before the first frame update
     void Start()
@@ -46,23 +47,35 @@ public class PartyEndManager : MonoBehaviour
             {
                 partyScoreValue = partyScoreValue + 1;
                 partyScoreText.text = partyScoreValue.ToString();
-
-                if(partyScoreValue >= PlayerPrefs.GetInt("LastPartyScore"))
+                if (!drumRollOn)
                 {
-                    countUpCompleted = true;
+                    drumRollOn = true;
+                    audioSource.loop = true;
+                    audioSource.clip = drumRoll;
+                    audioSource.Play();
+
                 }
 
-                yield return new WaitForSeconds(0.010f);
+            if (partyScoreValue >= PlayerPrefs.GetInt("LastPartyScore"))
+            {
+                drumRollOn = false;
+                audioSource.loop = false;
+                audioSource.clip = winSound;
+                audioSource.Play();
+                countUpCompleted = true;
+            }
+
+                yield return new WaitForSeconds(countUpSpeed);
             }
         }
         else
         {
             partyScoreText.text = 0.ToString();
         }
-       
+
     }
 
-    void UpdateStars()
+        void UpdateStars()
     {
         if(partyScoreValue < 200 && partyScoreValue > 0)
         {
