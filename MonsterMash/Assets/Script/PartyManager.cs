@@ -30,12 +30,12 @@ public class PartyManager : MonoBehaviour
     [Header("Party Manager Variables")]
     public Slider partymeter;
     public bool continueCoroutine = true, partyTimeStarted = false, dangerState = false;
-    private bool heartBeatSoundOn = false,allowPartyTimerStart = false,partyEnded = false;
+    private bool heartBeatSoundOn = false,allowPartyTimerStart = false,partyEnded = false,queenfaceRunning;
     public int defaultPartyMeter = 20;
     public float partyTime = 121f, dangerTime = 6f;
     private float partyTimeStatic, defaultDangerTime = 6f;
     private GameObject partyTimer,dangerCountdown;
-    public GameObject PartyStartSplash,PartyEndSplash;
+    public GameObject PartyStartSplash,PartyEndSplash,QueenFace;
 
     private AudioSource audioSource;
     [Header("Sound")]
@@ -70,6 +70,8 @@ public class PartyManager : MonoBehaviour
         PartyTime();
         EmptyPartyMeterCheck();
         StageChange();
+        StartCoroutine(QueenFaceManager());
+
     }
 
     void StageChange()
@@ -135,6 +137,45 @@ public class PartyManager : MonoBehaviour
         PartyEndSplash.SetActive(true);
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene("PartyEndScene");
+
+    }
+
+    IEnumerator QueenFaceManager()
+    {
+        if(currentStage != Stage.stage1)
+        {
+            if (!queenfaceRunning)
+            {
+                queenfaceRunning = true;
+                float prevMeterValue = partymeter.value;
+                yield return new WaitForSeconds(10);
+                float meterDifference;
+                if (prevMeterValue > partymeter.value)
+                {
+                    meterDifference = partymeter.value - prevMeterValue;
+                }
+                else
+                {
+                    meterDifference = prevMeterValue - partymeter.value;
+                }
+                Animator QueenAnimator = QueenFace.GetComponent<Animator>();
+                if (meterDifference >= 5)
+                {
+                    QueenAnimator.SetInteger("faceStatus", 1);
+                }
+                else if (meterDifference <= -50)
+                {
+                    QueenAnimator.SetInteger("faceStatus", 2);
+                }
+                else
+                {
+                    QueenAnimator.SetInteger("faceStatus", 0);
+                }
+                Debug.Log("herrrrrrr " + meterDifference);
+                queenfaceRunning = false;
+            }
+        }
+       
 
     }
 

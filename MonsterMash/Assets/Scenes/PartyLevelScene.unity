@@ -10544,6 +10544,8 @@ GameObject:
   - component: {fileID: 596431828}
   - component: {fileID: 596431830}
   - component: {fileID: 596431829}
+  - component: {fileID: 596431832}
+  - component: {fileID: 596431831}
   m_Layer: 5
   m_Name: Queen
   m_TagString: Untagged
@@ -10590,7 +10592,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 587e86a46afd2314bb934f04493eca56, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5bd16a859d8ba784d83caf3d50c1c1c8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10608,6 +10610,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596431827}
   m_CullTransparentMesh: 1
+--- !u!95 &596431831
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596431827}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d652ac858a67ba46b85621259bf4c14, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &596431832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596431827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e1f8cfee46dd04f9d778e0f6b96b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  queenAngry: {fileID: 21300000, guid: fe18c1cc58bc61a4b805c5649832dd07, type: 3}
+  queenNormal: {fileID: 21300000, guid: 587e86a46afd2314bb934f04493eca56, type: 3}
+  queenHappy: {fileID: 21300000, guid: 5bd16a859d8ba784d83caf3d50c1c1c8, type: 3}
 --- !u!1 &609569755
 GameObject:
   m_ObjectHideFlags: 0
@@ -42151,6 +42187,7 @@ MonoBehaviour:
   dangerTime: 6
   PartyStartSplash: {fileID: 1785214939}
   PartyEndSplash: {fileID: 1046184653}
+  QueenFace: {fileID: 596431827}
   heartbeatSFX: {fileID: 8300000, guid: 1049ac438be32214ba4ca4e6919ee2d4, type: 3}
 --- !u!4 &2045401037
 Transform:

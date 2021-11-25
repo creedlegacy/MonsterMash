@@ -56,14 +56,14 @@ public class PartyEndManager : MonoBehaviour
 
                 }
 
-            if (partyScoreValue >= PlayerPrefs.GetInt("LastPartyScore"))
-            {
-                drumRollOn = false;
-                audioSource.loop = false;
-                audioSource.clip = winSound;
-                audioSource.Play();
-                countUpCompleted = true;
-            }
+                if (partyScoreValue >= PlayerPrefs.GetInt("LastPartyScore"))
+                {
+                    drumRollOn = false;
+                    audioSource.loop = false;
+                    audioSource.clip = winSound;
+                    audioSource.Play();
+                    countUpCompleted = true;
+                }
 
                 yield return new WaitForSeconds(countUpSpeed);
             }
