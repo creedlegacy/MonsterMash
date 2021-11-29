@@ -58,9 +58,7 @@ public class TutorialManager : MonoBehaviour
         if (currentTutorialIndex > tutorialCount)
         {
             //if all tutorials are depleted go here
-            tutorialPopupActive = false;
-            Time.timeScale = 1;
-            pm.EnterStage2();
+            CloseTutorial();
 
         }
         else
@@ -169,6 +167,14 @@ public class TutorialManager : MonoBehaviour
         }
 
 
+    }
+
+    public void CloseTutorial()
+    {
+        gameObject.SetActive(false);
+        tutorialPopupActive = false;
+        Time.timeScale = 1;
+        pm.EnterStage2();
     }
 
     void SkeletonPileTaskCheck()

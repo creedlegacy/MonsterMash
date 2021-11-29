@@ -275,6 +275,7 @@ public class MusicRequestTask : MonoBehaviour
         }
         else
         {
+            pm.musicDone++;
             EventOccurCoroutine();
         }
         

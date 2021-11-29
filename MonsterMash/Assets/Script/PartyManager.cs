@@ -36,6 +36,12 @@ public class PartyManager : MonoBehaviour
     private float partyTimeStatic, defaultDangerTime = 6f;
     private GameObject partyTimer,dangerCountdown;
     public GameObject PartyStartSplash,PartyEndSplash,QueenFace;
+    [HideInInspector]
+    public int discoDone, skeletonDone, foodDone, musicDone;
+    [HideInInspector]
+    public float highScore;
+
+
 
     private AudioSource audioSource;
     [Header("Sound")]
@@ -70,7 +76,8 @@ public class PartyManager : MonoBehaviour
         PartyTime();
         EmptyPartyMeterCheck();
         StageChange();
-        StartCoroutine(QueenFaceManager());
+        QueenFaceManager();
+        HighScoreManager();
 
     }
 
@@ -129,7 +136,12 @@ public class PartyManager : MonoBehaviour
         //ScreenShot.TakeHiResShot();
         PlayerPrefs.SetInt("LastPartyScore", (int)partymeter.value);
         PlayerPrefs.SetString("LastPartyScene", SceneManager.GetActiveScene().name);
-        
+        PlayerPrefs.SetInt("LastDiscoDone", discoDone);
+        PlayerPrefs.SetInt("LastSkeletonDone", skeletonDone);
+        PlayerPrefs.SetInt("LastFoodDone", foodDone);
+        PlayerPrefs.SetInt("LastMusicDone", musicDone);
+        PlayerPrefs.SetInt("LastHighScore", (int)highScore);
+
         allowPartyTimerStart = false;
         audioSource.Stop();
         heartBeatSoundOn = false;
@@ -140,42 +152,76 @@ public class PartyManager : MonoBehaviour
 
     }
 
-    IEnumerator QueenFaceManager()
+    void QueenFaceManager()
     {
         if(currentStage != Stage.stage1)
         {
             if (!queenfaceRunning)
             {
                 queenfaceRunning = true;
-                float prevMeterValue = partymeter.value;
-                yield return new WaitForSeconds(10);
-                float meterDifference;
-                if (prevMeterValue > partymeter.value)
-                {
-                    meterDifference = partymeter.value - prevMeterValue;
-                }
-                else
-                {
-                    meterDifference = prevMeterValue - partymeter.value;
-                }
                 Animator QueenAnimator = QueenFace.GetComponent<Animator>();
-                if (meterDifference >= 5)
-                {
-                    QueenAnimator.SetInteger("faceStatus", 1);
-                }
-                else if (meterDifference <= -50)
+                if (partymeter.value <= 150)
                 {
                     QueenAnimator.SetInteger("faceStatus", 2);
                 }
-                else
+                else if (partymeter.value > 150 && partymeter.value < 400)
                 {
                     QueenAnimator.SetInteger("faceStatus", 0);
                 }
-                Debug.Log("herrrrrrr " + meterDifference);
+                else
+                {
+                    QueenAnimator.SetInteger("faceStatus", 1);
+                }
+
+
                 queenfaceRunning = false;
+
+
+                ///Previous Method
+                //queenfaceRunning = true;
+                //float prevMeterValue = partymeter.value;
+                //yield return new WaitForSeconds(10);
+                //float meterDifference;
+                //if (prevMeterValue > partymeter.value)
+                //{
+                //    meterDifference = partymeter.value - prevMeterValue;
+                //}
+                //else
+                //{
+                //    meterDifference = prevMeterValue - partymeter.value;
+                //}
+                //Animator QueenAnimator = QueenFace.GetComponent<Animator>();
+                //if (meterDifference >= -20)
+                //{
+                //    QueenAnimator.SetInteger("faceStatus", 1);
+                //}
+                //else if (meterDifference <= -80)
+                //{
+                //    QueenAnimator.SetInteger("faceStatus", 2);
+                //}
+                //else
+                //{
+                //    QueenAnimator.SetInteger("faceStatus", 0);
+                //}
+                //Debug.Log("herrrrrrr " + meterDifference);
+                //queenfaceRunning = false;
             }
         }
        
+
+    }
+
+    void HighScoreManager()
+    {
+        if (currentStage != Stage.stage1 && !partyEnded)
+        {
+            if(partymeter.value > highScore)
+            {
+                highScore = partymeter.value;
+            }
+            
+        }
+
 
     }
 

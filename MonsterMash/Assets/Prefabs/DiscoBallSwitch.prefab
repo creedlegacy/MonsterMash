@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   switchHandleAnim: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!212 &450223532192215704
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f4878178a4957eb42b13de14278fdf98, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
