@@ -151,6 +151,7 @@ public class PlayerController : MonoBehaviour
                    
                     if (pickupableGameObject != null)
                     {
+                        
                         //If item is a source item dont disable
                         if (!pickupableGameObject.GetComponent<PickupItemClass>().sourceItem)
                         {
@@ -158,6 +159,8 @@ public class PlayerController : MonoBehaviour
                         }
                             
                         pickedUpItem.SetActive(true);
+                        pickedUpItem.GetComponent<AudioSource>().clip = pickupableGameObject.GetComponent<AudioSource>().clip;
+                        pickedUpItem.GetComponent<AudioSource>().Play();
                         pickupItemName = pickupableGameObject.GetComponent<PickupItemClass>().uniqueName;
                         pickedUpSpriteRenderer.sprite = pickupableGameObject.GetComponent<SpriteRenderer>().sprite;
 
@@ -174,6 +177,7 @@ public class PlayerController : MonoBehaviour
                             //old
                             //pickedUpItem.transform.localPosition = new Vector3(0, 4.97f, 0);
                             //pickedUpItem.transform.localScale = new Vector3(1, 1, 1);
+
                             pickedUpItem.transform.localPosition = new Vector3(-2.58f, 5.31f, 0);
                             pickedUpItem.transform.localScale = new Vector3(1, 1, 1);
                         }
@@ -196,13 +200,16 @@ public class PlayerController : MonoBehaviour
             {
                 if (!collidedPickup)
                 {
+
                     if (!pickupableGameObject.GetComponent<PickupItemClass>().sourceItem)
                     {
                         pickupableGameObject.transform.position = gameObject.transform.position + new Vector3(0, 0.5f, 0);
                         pickupableGameObject.SetActive(true);
+                        pickupableGameObject.GetComponent<AudioSource>().Play();
                     }
                     else
                     {
+                        pickupableGameObject.GetComponent<AudioSource>().Play();
                         //if (GameObject.Find("DroppedFood") != null)
                         //{
                         //   Destroy(GameObject.Find("DroppedFood").gameObject);

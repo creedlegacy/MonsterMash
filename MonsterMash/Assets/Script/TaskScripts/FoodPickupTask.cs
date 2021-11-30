@@ -189,6 +189,7 @@ public class FoodPickupTask : MonoBehaviour
                     }
                     else
                     {
+                        pm.foodDone++;
                         EventOccurCoroutine();
                     }
                 }

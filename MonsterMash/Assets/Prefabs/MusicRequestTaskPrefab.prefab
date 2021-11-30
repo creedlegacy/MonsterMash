@@ -472,7 +472,7 @@ MonoBehaviour:
   inDanger: 0
   taskActivated: 0
   isTutorial: 0
-  successSFX: {fileID: 8300000, guid: b16c427b9fd416545be7ab0a40b933ec, type: 3}
+  successSFX: {fileID: 8300000, guid: 17d78ba10f6363e4c8630654a0c680be, type: 3}
   signalSFX: {fileID: 8300000, guid: 988e17830f40b5c42984da0e6dd4600d, type: 3}
 --- !u!58 &1248351362082383291
 CircleCollider2D:
@@ -521,7 +521,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -839,7 +839,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1942041977
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 50ccd11f3d15cd24289d48f7ed4f86ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -941,7 +941,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1942041977
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: dcf13dc7f29fe2e40af67dec1898e151, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1043,8 +1043,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1942041977
-  m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingLayer: 6
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 49ddaae559d21924c858168689c17b6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1554,7 +1554,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1942041977
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e41e5fe5ed81fdc4b9804e54916279d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

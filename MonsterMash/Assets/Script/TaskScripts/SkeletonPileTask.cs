@@ -182,6 +182,10 @@ public class SkeletonPileTask : MonoBehaviour
                 {
                     tutorialFinished = true;
                 }
+                else
+                {
+                    pm.skeletonDone++;
+                }
                
                 
             }

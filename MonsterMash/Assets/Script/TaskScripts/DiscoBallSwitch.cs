@@ -12,9 +12,11 @@ public class DiscoBallSwitch : MonoBehaviour
     DiscoBallTask discoBallTask;
     [HideInInspector]
     public AudioSource audioSource;
+    PartyManager pm;
 
     void Start()
     {
+        pm = FindObjectOfType<PartyManager>();
         discoBallTask = FindObjectOfType<DiscoBallTask>();
         audioSource = GetComponent<AudioSource>();
         switchHandleAnim = gameObject.transform.Find("SwitchHandle").gameObject.GetComponent<Animator>();
@@ -53,6 +55,7 @@ public class DiscoBallSwitch : MonoBehaviour
                     discoBallTask.discoLights.SetActive(true);
                     discoBallTask.discoBallAnim.SetBool("DiscoBallOn", true);
                     switchHandleAnim.SetBool("switchPosition", true);
+                    pm.discoDone++;
                     discoBallTask.ContinuousActionCoroutine('+', discoBallTask.currentIncrementMeter, true);
                     discoBallTask.EventOccurCoroutine();
 

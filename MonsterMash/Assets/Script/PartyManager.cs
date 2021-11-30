@@ -30,12 +30,18 @@ public class PartyManager : MonoBehaviour
     [Header("Party Manager Variables")]
     public Slider partymeter;
     public bool continueCoroutine = true, partyTimeStarted = false, dangerState = false;
-    private bool heartBeatSoundOn = false,allowPartyTimerStart = false,partyEnded = false;
+    private bool heartBeatSoundOn = false,allowPartyTimerStart = false,partyEnded = false,queenfaceRunning;
     public int defaultPartyMeter = 20;
     public float partyTime = 121f, dangerTime = 6f;
     private float partyTimeStatic, defaultDangerTime = 6f;
     private GameObject partyTimer,dangerCountdown;
-    public GameObject PartyStartSplash,PartyEndSplash;
+    public GameObject PartyStartSplash,PartyEndSplash,QueenFace;
+    [HideInInspector]
+    public int discoDone, skeletonDone, foodDone, musicDone;
+    [HideInInspector]
+    public float highScore;
+
+
 
     private AudioSource audioSource;
     [Header("Sound")]
@@ -70,6 +76,9 @@ public class PartyManager : MonoBehaviour
         PartyTime();
         EmptyPartyMeterCheck();
         StageChange();
+        QueenFaceManager();
+        HighScoreManager();
+
     }
 
     void StageChange()
@@ -127,7 +136,12 @@ public class PartyManager : MonoBehaviour
         //ScreenShot.TakeHiResShot();
         PlayerPrefs.SetInt("LastPartyScore", (int)partymeter.value);
         PlayerPrefs.SetString("LastPartyScene", SceneManager.GetActiveScene().name);
-        
+        PlayerPrefs.SetInt("LastDiscoDone", discoDone);
+        PlayerPrefs.SetInt("LastSkeletonDone", skeletonDone);
+        PlayerPrefs.SetInt("LastFoodDone", foodDone);
+        PlayerPrefs.SetInt("LastMusicDone", musicDone);
+        PlayerPrefs.SetInt("LastHighScore", (int)highScore);
+
         allowPartyTimerStart = false;
         audioSource.Stop();
         heartBeatSoundOn = false;
@@ -135,6 +149,79 @@ public class PartyManager : MonoBehaviour
         PartyEndSplash.SetActive(true);
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene("PartyEndScene");
+
+    }
+
+    void QueenFaceManager()
+    {
+        if(currentStage != Stage.stage1)
+        {
+            if (!queenfaceRunning)
+            {
+                queenfaceRunning = true;
+                Animator QueenAnimator = QueenFace.GetComponent<Animator>();
+                if (partymeter.value <= 150)
+                {
+                    QueenAnimator.SetInteger("faceStatus", 2);
+                }
+                else if (partymeter.value > 150 && partymeter.value < 400)
+                {
+                    QueenAnimator.SetInteger("faceStatus", 0);
+                }
+                else
+                {
+                    QueenAnimator.SetInteger("faceStatus", 1);
+                }
+
+
+                queenfaceRunning = false;
+
+
+                ///Previous Method
+                //queenfaceRunning = true;
+                //float prevMeterValue = partymeter.value;
+                //yield return new WaitForSeconds(10);
+                //float meterDifference;
+                //if (prevMeterValue > partymeter.value)
+                //{
+                //    meterDifference = partymeter.value - prevMeterValue;
+                //}
+                //else
+                //{
+                //    meterDifference = prevMeterValue - partymeter.value;
+                //}
+                //Animator QueenAnimator = QueenFace.GetComponent<Animator>();
+                //if (meterDifference >= -20)
+                //{
+                //    QueenAnimator.SetInteger("faceStatus", 1);
+                //}
+                //else if (meterDifference <= -80)
+                //{
+                //    QueenAnimator.SetInteger("faceStatus", 2);
+                //}
+                //else
+                //{
+                //    QueenAnimator.SetInteger("faceStatus", 0);
+                //}
+                //Debug.Log("herrrrrrr " + meterDifference);
+                //queenfaceRunning = false;
+            }
+        }
+       
+
+    }
+
+    void HighScoreManager()
+    {
+        if (currentStage != Stage.stage1 && !partyEnded)
+        {
+            if(partymeter.value > highScore)
+            {
+                highScore = partymeter.value;
+            }
+            
+        }
+
 
     }
 
