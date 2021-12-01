@@ -151,7 +151,9 @@ public class PlayerController : MonoBehaviour
                    
                     if (pickupableGameObject != null)
                     {
-                        
+
+                        anim.SetTrigger("isInteract");
+
                         //If item is a source item dont disable
                         if (!pickupableGameObject.GetComponent<PickupItemClass>().sourceItem)
                         {
@@ -167,7 +169,6 @@ public class PlayerController : MonoBehaviour
                         //If item is food change position and scale
                         if (pickupableGameObject.GetComponent<PickupItemClass>().isFood)
                         {
-                            anim.SetTrigger("isInteractFood");
                             //default local position = 0,4.97,0
                             pickedUpItem.transform.localPosition = new Vector3(-2.69f, 1.02f, 0);
                             pickedUpItem.transform.localScale = new Vector3(0.41f, 0.41f, 0.41f);
@@ -175,7 +176,6 @@ public class PlayerController : MonoBehaviour
                         }
                         else
                         {
-                            anim.SetTrigger("isInteract");
                             //old
                             //pickedUpItem.transform.localPosition = new Vector3(0, 4.97f, 0);
                             //pickedUpItem.transform.localScale = new Vector3(1, 1, 1);
@@ -202,6 +202,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (!collidedPickup)
                 {
+                    anim.SetTrigger("isInteract");
 
                     if (!pickupableGameObject.GetComponent<PickupItemClass>().sourceItem)
                     {

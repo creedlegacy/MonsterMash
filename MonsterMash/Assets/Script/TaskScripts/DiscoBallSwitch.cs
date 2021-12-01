@@ -13,9 +13,11 @@ public class DiscoBallSwitch : MonoBehaviour
     [HideInInspector]
     public AudioSource audioSource;
     PartyManager pm;
+    PlayerController pc;
 
     void Start()
     {
+        pc = FindObjectOfType<PlayerController>();
         pm = FindObjectOfType<PartyManager>();
         discoBallTask = FindObjectOfType<DiscoBallTask>();
         audioSource = GetComponent<AudioSource>();
@@ -36,6 +38,7 @@ public class DiscoBallSwitch : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact") && discoBallTask.inDanger)
             {
+                pc.anim.SetTrigger("isInteract");
                 audioSource.Play();
                 discoBallTask.audioSource.clip = discoBallTask.successSFX;
                 discoBallTask.audioSource.Play();

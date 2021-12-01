@@ -170,6 +170,7 @@ public class SkeletonPileTask : MonoBehaviour
             //check if there is an item being carried and that item is appropriate
             if (Input.GetButtonDown("Interact") && inDanger && pc.pickupFull && pc.pickupItemName == requiredItemName)
             {
+                pc.anim.SetTrigger("isInteract");
                 audioSource.clip = successSFX;
                 audioSource.Play();
                 StopContinuousActionCoroutine();
