@@ -156,6 +156,7 @@ public class SkeletonPileTask : MonoBehaviour
         inDanger = true;
         anim.SetBool("Collapse",true);
         failReaction.SetActive(true);
+        gameObject.GetComponent<PolygonCollider2D>().enabled = false;
         //skeletonSprite.GetComponent<SpriteRenderer>().sprite = spriteChange;
         ContinuousActionCoroutine('-', currentDecrementMeter);
         

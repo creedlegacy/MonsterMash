@@ -1427,7 +1427,7 @@ MonoBehaviour:
   - {x: -0.6991043, y: -0.46129793, z: 0}
   m_ShapePathHash: 1781557325
   m_Mesh: {fileID: 0}
-  m_InstanceId: 583444
+  m_InstanceId: 384404
 --- !u!95 &1610042310364336803
 Animator:
   serializedVersion: 3
@@ -1839,6 +1839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7111371588057395342}
+  - component: {fileID: 8437202711552863799}
   m_Layer: 0
   m_Name: GuestSprite
   m_TagString: Untagged
@@ -1861,6 +1862,22 @@ Transform:
   m_Father: {fileID: 5145052298739726442}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &8437202711552863799
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7497806905378049018}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.04339753, y: -0.5}
+  m_Size: {x: 1.5849389, y: 2.95289}
+  m_Direction: 0
 --- !u!1 &7504953598375122996
 GameObject:
   m_ObjectHideFlags: 0
