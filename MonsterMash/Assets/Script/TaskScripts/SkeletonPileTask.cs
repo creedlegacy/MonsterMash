@@ -33,7 +33,7 @@ public class SkeletonPileTask : MonoBehaviour
     private GameObject successReaction, failReaction;
     private GameObject skeletonSprite,bodyParts;
     //public Sprite spriteChange;
-    public GameObject queenDestination;
+    //public GameObject queenDestination;
 
     [HideInInspector]
     public AudioSource audioSource;
