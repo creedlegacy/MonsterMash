@@ -33,6 +33,7 @@ public class SkeletonPileTask : MonoBehaviour
     private GameObject successReaction, failReaction;
     private GameObject skeletonSprite,bodyParts;
     //public Sprite spriteChange;
+    //public GameObject queenDestination;
 
     [HideInInspector]
     public AudioSource audioSource;
@@ -43,6 +44,7 @@ public class SkeletonPileTask : MonoBehaviour
 
     PartyManager pm;
     PlayerController pc;
+    GoToQueen goToQueen;
 
     void Start()
     {
@@ -55,8 +57,14 @@ public class SkeletonPileTask : MonoBehaviour
 
         successReaction = gameObject.transform.Find("TaskSuccessReaction").gameObject;
         failReaction = gameObject.transform.Find("TaskFailReaction").gameObject;
-        //skeletonSprite = gameObject.transform.Find("TaskCharacter").gameObject;
 
+        //Used to send scene objects to animator state machine behaviour
+        //goToQueen = failReaction.GetComponent<Animator>().GetBehaviour<GoToQueen>();
+        //Debug.Log(goToQueen);
+        //goToQueen.thisObject = failReaction.transform;
+        //goToQueen.destinationObject = queenDestination.transform;
+
+        //skeletonSprite = gameObject.transform.Find("TaskCharacter").gameObject;
 
         CheckStage();
 
