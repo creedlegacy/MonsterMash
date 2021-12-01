@@ -5,7 +5,6 @@ using UnityEngine;
 public class ReactionMovement : MonoBehaviour
 {
 
-
 	public GameObject MovingObject;
 	public GameObject Destination;
 	public float speed;
@@ -16,7 +15,7 @@ public class ReactionMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         MovingObject.transform.position = Vector3.MoveTowards(MovingObject.transform.position, Destination.transform.position, Time.deltaTime * speed);
     }
