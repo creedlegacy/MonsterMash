@@ -64,6 +64,7 @@ public class MusicPlayer : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact"))
             {
+                pc.anim.SetTrigger("isInteract");
                 pc.allowMovement = !pc.allowMovement;
                 pc.anim.SetBool("isRunning", false);
                 interactedState = !interactedState;
@@ -104,7 +105,7 @@ public class MusicPlayer : MonoBehaviour
             {
                 if (Input.GetButtonDown("Left"))
                 {
-
+                    pc.anim.SetTrigger("isInteract");
                     StartCoroutine(ButtonDownColorChange("left"));
                     position1Order += 1;
                     position2Order += 1;
@@ -136,6 +137,7 @@ public class MusicPlayer : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("Right"))
                 {
+                    pc.anim.SetTrigger("isInteract");
                     StartCoroutine(ButtonDownColorChange("right"));
                     position1Order -= 1;
                     position2Order -= 1;
@@ -167,6 +169,7 @@ public class MusicPlayer : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("close_task"))
                 {
+                    pc.anim.SetTrigger("isInteract");
                     pc.allowMovement = true;
                     interactedState = false;
                     position1.SetActive(interactedState);

@@ -56,14 +56,14 @@ TagManager:
   - name: Character
     uniqueID: 3703638655
     locked: 0
+  - name: PickedUpItems
+    uniqueID: 2183429877
+    locked: 0
   - name: Player
     uniqueID: 3520769727
     locked: 0
   - name: Lighting
     uniqueID: 2664528507
-    locked: 0
-  - name: PickedUpItems
-    uniqueID: 2183429877
     locked: 0
   - name: UI
     uniqueID: 1942041977

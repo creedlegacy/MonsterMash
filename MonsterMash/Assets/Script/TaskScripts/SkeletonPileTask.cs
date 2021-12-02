@@ -156,6 +156,7 @@ public class SkeletonPileTask : MonoBehaviour
         inDanger = true;
         anim.SetBool("Collapse",true);
         failReaction.SetActive(true);
+        gameObject.GetComponent<PolygonCollider2D>().enabled = false;
         //skeletonSprite.GetComponent<SpriteRenderer>().sprite = spriteChange;
         ContinuousActionCoroutine('-', currentDecrementMeter);
         
@@ -170,6 +171,7 @@ public class SkeletonPileTask : MonoBehaviour
             //check if there is an item being carried and that item is appropriate
             if (Input.GetButtonDown("Interact") && inDanger && pc.pickupFull && pc.pickupItemName == requiredItemName)
             {
+                pc.anim.SetTrigger("isInteract");
                 audioSource.clip = successSFX;
                 audioSource.Play();
                 StopContinuousActionCoroutine();

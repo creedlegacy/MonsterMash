@@ -151,7 +151,9 @@ public class PlayerController : MonoBehaviour
                    
                     if (pickupableGameObject != null)
                     {
-                        
+
+                        anim.SetTrigger("isInteract");
+
                         //If item is a source item dont disable
                         if (!pickupableGameObject.GetComponent<PickupItemClass>().sourceItem)
                         {
@@ -200,6 +202,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (!collidedPickup)
                 {
+                    anim.SetTrigger("isInteract");
 
                     if (!pickupableGameObject.GetComponent<PickupItemClass>().sourceItem)
                     {

@@ -168,7 +168,8 @@ public class FoodPickupTask : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact") && inDanger && pc.pickupFull && pc.pickupItemName != "broom")
             {
-                if(pc.pickupItemName == requiredItemName)
+                pc.anim.SetTrigger("isInteract");
+                if (pc.pickupItemName == requiredItemName)
                 {
                     audioSource.clip = successSFX;
                     audioSource.Play();

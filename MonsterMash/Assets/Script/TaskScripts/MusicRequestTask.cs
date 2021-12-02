@@ -37,6 +37,9 @@ public class MusicRequestTask : MonoBehaviour
     public AudioClip successSFX;
     public AudioClip signalSFX;
 
+
+    private Animator anim;
+
     PartyManager pm;
     MusicPlayer mp;
     PlayerController pc;
@@ -60,7 +63,7 @@ public class MusicRequestTask : MonoBehaviour
         bubble = gameObject.transform.Find("Canvas/BubbleSprite").gameObject;
         shape = gameObject.transform.Find("Canvas/Shape").gameObject;
 
-
+        anim = GetComponent<Animator>();
 
         //Checks what the current stage of the party is
         CheckStage();
@@ -151,7 +154,7 @@ public class MusicRequestTask : MonoBehaviour
 
     IEnumerator EventOccur()
     {
-        
+
         int randomOccurTime = Random.Range(currentMinOccurTime, currentMaxOccurTime);
         yield return new WaitForSeconds(randomOccurTime);
         inDanger = true;
@@ -159,6 +162,7 @@ public class MusicRequestTask : MonoBehaviour
         tempTaskActivatedCountdown = taskActivatedCountdown;
         taskAlert.SetActive(true);
         taskAlert.GetComponent<Animator>().Play("TaskAlertAnimation", -1, 0f);
+        anim.SetBool("IsRequesting",true);
         audioSource.clip = signalSFX;
         audioSource.Play();
 
@@ -253,6 +257,8 @@ public class MusicRequestTask : MonoBehaviour
 
     public void MusicRequestSuccess()
     {
+    	anim.SetBool("IsRequesting",false);
+
         taskActivated = false;
         countdownDial.SetActive(false);
         bubble.SetActive(false);
@@ -283,6 +289,8 @@ public class MusicRequestTask : MonoBehaviour
 
     public void MusicRequestFail()
     {
+    	anim.SetBool("IsRequesting",false);
+
         taskActivated = false;
         countdownDial.SetActive(false);
         bubble.SetActive(false);
