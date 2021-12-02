@@ -1400,15 +1400,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ListOfShapes:
-  - {fileID: -2413806693520163455, guid: 4ecd6bc8e2fde3a4c94f7016749d2ae4, type: 3}
-  - {fileID: 2747690628134850419, guid: 79f6a5fe2e6f8f14a9244a8bab788cd9, type: 3}
-  - {fileID: 3625043607559282579, guid: c2328da5f12433941b4551ea7152c932, type: 3}
-  - {fileID: 7482667652216324306, guid: 3f54f9aad72286b4aa9c24a299ea5cfa, type: 3}
+  - {fileID: 21300000, guid: 08dd67e00b01dac4881b523eded86582, type: 3}
+  - {fileID: 21300000, guid: 7d18e12b6ace1c2469b19df51587634e, type: 3}
+  - {fileID: 21300000, guid: a395e272d815a954aa91face4948fb5a, type: 3}
+  - {fileID: 21300000, guid: 1f7e705a0fcd39644bfcd85f9274168f, type: 3}
   ListOfColors:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0.021122217, a: 1}
-  - {r: 1, g: 0.8806951, b: 0, a: 1}
-  - {r: 0, g: 0.1756835, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
   ListOfNames:
   - circle
   - hexagon
