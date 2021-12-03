@@ -16,6 +16,7 @@ public class PartyEndManager : MonoBehaviour
     private AudioSource audioSource;
     private bool countUpCompleted = false,drumRollOn;
     public AudioClip drumRoll,winSound,failSound;
+    private Animator kingAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,8 @@ public class PartyEndManager : MonoBehaviour
         discoTask = GameObject.Find("Canvas/Panel/ExtraInfo/DiscoResult").gameObject.GetComponent<Text>();
         skeletonTask = GameObject.Find("Canvas/Panel/ExtraInfo/SkeletonsResult").gameObject.GetComponent<Text>();
         foodTask = GameObject.Find("Canvas/Panel/ExtraInfo/FoodOrdersResult").gameObject.GetComponent<Text>(); 
-        musicTask = GameObject.Find("Canvas/Panel/ExtraInfo/SongResult").gameObject.GetComponent<Text>(); 
+        musicTask = GameObject.Find("Canvas/Panel/ExtraInfo/SongResult").gameObject.GetComponent<Text>();
+        kingAnimator = GameObject.Find("KingParent/King").gameObject.GetComponent<Animator>();
         partyScoreText = partyScore.GetComponent<Text>();
 
         StartCoroutine(CountUpScore());
@@ -78,6 +80,7 @@ public class PartyEndManager : MonoBehaviour
                         audioSource.clip = winSound;
                         audioSource.Play();
                         countUpCompleted = true;
+                        kingAnimator.Play("EndWinning");
                         
                         extraInfo.SetActive(true);
                     }
@@ -87,6 +90,7 @@ public class PartyEndManager : MonoBehaviour
             }
             else
             {
+                kingAnimator.Play("EndLosing");
                 extraInfo.SetActive(true);
             }
 
