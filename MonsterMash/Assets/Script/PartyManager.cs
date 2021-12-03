@@ -30,7 +30,7 @@ public class PartyManager : MonoBehaviour
     [Header("Party Manager Variables")]
     public Slider partymeter;
     public bool continueCoroutine = true, partyTimeStarted = false, dangerState = false;
-    private bool heartBeatSoundOn = false,allowPartyTimerStart = false,partyEnded = false,queenfaceRunning;
+    private bool heartBeatSoundOn = false,allowPartyTimerStart = false,partyEnded = false, partyStarted, queenfaceRunning;
     public int defaultPartyMeter = 20;
     public float partyTime = 121f, dangerTime = 6f;
     private float partyTimeStatic, defaultDangerTime = 6f;
@@ -46,6 +46,7 @@ public class PartyManager : MonoBehaviour
     private AudioSource audioSource;
     [Header("Sound")]
     public AudioClip heartbeatSFX;
+    public AudioClip partyStartSFX,partyEndSFX;
 
     PlayerController pc;
     HiResScreenShots ScreenShot;
@@ -83,7 +84,7 @@ public class PartyManager : MonoBehaviour
 
     void StageChange()
     {
-        if(currentStage == Stage.stage1)
+        if (currentStage == Stage.stage1)
         {
             foreach (GameObject stage1task in stage1Tasks)
             {
@@ -93,8 +94,11 @@ public class PartyManager : MonoBehaviour
         }
         else if (currentStage == Stage.stage2)
         {
-            //In a couroutine to allow the splash image to start first then the game
-            StartCoroutine(PartyStart());
+            if (!partyStarted)
+            {
+                //In a couroutine to allow the splash image to start first then the game
+                StartCoroutine(PartyStart());
+            }
         }
         else if (currentStage == Stage.stage3)
         {
@@ -116,8 +120,12 @@ public class PartyManager : MonoBehaviour
 
     IEnumerator PartyStart()
     {
+        partyStarted = true;
         //In a couroutine to allow the splash image to start first then the game
         PartyStartSplash.SetActive(true);
+        audioSource.loop = false;
+        audioSource.clip = partyStartSFX;
+        audioSource.Play();
         yield return new WaitForSeconds(3);
         allowPartyTimerStart = true;
         foreach (GameObject stage2task in stage2Tasks)
@@ -143,7 +151,9 @@ public class PartyManager : MonoBehaviour
         PlayerPrefs.SetInt("LastHighScore", (int)highScore);
 
         allowPartyTimerStart = false;
-        audioSource.Stop();
+        audioSource.loop = false;
+        audioSource.clip = partyEndSFX;
+        audioSource.Play();
         heartBeatSoundOn = false;
 
         PartyEndSplash.SetActive(true);
@@ -288,6 +298,7 @@ public class PartyManager : MonoBehaviour
                 if (!heartBeatSoundOn)
                 {
                     heartBeatSoundOn = true;
+                    audioSource.loop = true;
                     audioSource.clip = heartbeatSFX;
                     audioSource.Play();
                 }
@@ -313,9 +324,12 @@ public class PartyManager : MonoBehaviour
             {
                 //reset danger time when party meter goes above 0 again
                 dangerTime = defaultDangerTime;
-                audioSource.Stop();
-                heartBeatSoundOn = false;
-
+                if (heartBeatSoundOn)
+                {
+                    audioSource.Stop();
+                    heartBeatSoundOn = false;
+                }
+                
                 dangerState = false;
                 dangerCountdown.GetComponent<Text>().enabled = false;
             }

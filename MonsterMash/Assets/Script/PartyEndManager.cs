@@ -92,6 +92,9 @@ public class PartyEndManager : MonoBehaviour
             {
                 kingAnimator.Play("EndLosing");
                 extraInfo.SetActive(true);
+                audioSource.loop = false;
+                audioSource.clip = failSound;
+                audioSource.Play();
             }
 
         }
