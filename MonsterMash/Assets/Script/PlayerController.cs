@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private bool collidedPickup = false, slowMode = false, fastMode = false;
     private GameObject pickedUpItem, pickupableGameObject;
+    private List<GameObject> pickupableCollided = new List<GameObject>();
 
     public Animator anim;
 
@@ -249,13 +250,42 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        //Debug.Log(collision.gameObject.name);
         if (collision.gameObject.tag == "Pickupable")
         {
+            if (!pickupableCollided.Contains(collision.gameObject))
+            {
+                Debug.Log("in "+collision.gameObject.name);
+                pickupableCollided.Add(collision.gameObject);
+            }
 
-            
+
             if (!pickupFull)
             {
+                //GameObject itemToBePicked = collision.gameObject;
+                //if(pickupableCollided.Count > 1)
+                //{
+                //    foreach(GameObject item in pickupableCollided)
+                //    {
+                //        if(item.name != "Broom")
+                //        {
+                //            itemToBePicked = item;
+                //            break;
+                //        }
+                //    }
+                    //for(int i = 0; i < pickupableCollided.Count -1;i++)
+                    //{
+                        
+                    //    float temp1 = Vector3.Distance(pickupableCollided[i].transform.position, gameObject.transform.position);
+                    //    float temp2 = Vector3.Distance(pickupableCollided[i+1].transform.position, gameObject.transform.position);
+                    //    Debug.Log(pickupableCollided[i].name + " "+ temp1);
+                    //    Debug.Log(pickupableCollided[i+1].name + " " + temp2);
+                    //    itemToBePicked = temp1 < temp2 ? pickupableCollided[i] : pickupableCollided[i + 1];
+                        
+                        
+                    //}
+                    
+                //}
                 pickupableGameObject = collision.gameObject;
             }
                 
@@ -270,11 +300,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        //Debug.Log(collision.gameObject.name);
+        //if (collision.gameObject.tag == "Pickupable")
+        //{
+        //    if (!pickupFull)
+        //    {
+        //        pickupableGameObject = collision.gameObject;
+        //    }
+
+        //    collidedPickup = true;
+        //}
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Pickupable")
         {
-            collidedPickup = false;
+            if (pickupableCollided.Contains(collision.gameObject))
+            {
+                Debug.Log("out "+collision.gameObject.name);
+                pickupableCollided.Remove(collision.gameObject);
+            }
+            if(pickupableCollided.Count <= 0)
+            {
+                collidedPickup = false;
+            }
+            
         }
 
         if (collision.gameObject.tag == "SlowMonsters")
