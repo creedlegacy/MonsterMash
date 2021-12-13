@@ -48,10 +48,11 @@ public class DiscoBallSwitch : MonoBehaviour
                 //if this disco ball is a tutorial do these steps;
                 if (discoBallTask.isTutorial)
                 {
-                    switchHandleAnim.Play("SwitchOnAnimation");
-                    discoBallTask.tutorialFinished = true;
-                    discoBallTask.taskStarted = false;
-                    discoBallTask.isTutorial = false;
+                    //switchHandleAnim.Play("SwitchOnAnimation");
+                    //discoBallTask.tutorialFinished = true;
+                    //discoBallTask.taskStarted = false;
+                    //discoBallTask.isTutorial = false;
+                    StartCoroutine(WaitTutorialDiscoBall());
                 }
                 else
                 {
@@ -66,6 +67,23 @@ public class DiscoBallSwitch : MonoBehaviour
 
             }
         }
+    }
+
+    IEnumerator WaitTutorialDiscoBall()
+    {
+        discoBallTask.discoLights.SetActive(true);
+        discoBallTask.discoBallAnim.SetBool("DiscoBallOn", true);
+        switchHandleAnim.SetBool("switchPosition", true);
+        discoBallTask.ContinuousActionCoroutine('+', discoBallTask.currentIncrementMeter, true);
+        yield return new WaitForSeconds(4);
+        discoBallTask.discoLights.SetActive(false);
+        discoBallTask.discoBallAnim.SetBool("DiscoBallOn", false);
+        switchHandleAnim.SetBool("switchPosition", false);
+        audioSource.Play();
+        discoBallTask.StopContinuousActionCoroutine();
+        discoBallTask.tutorialFinished = true;
+        discoBallTask.taskStarted = false;
+        discoBallTask.isTutorial = false;
     }
 
 
