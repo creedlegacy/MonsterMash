@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-       
         PlayerMovement();
     }
 
@@ -177,7 +176,7 @@ public class PlayerController : MonoBehaviour
                         }
                         else
                         {
-                            //old
+                            ///old
                             //pickedUpItem.transform.localPosition = new Vector3(0, 4.97f, 0);
                             //pickedUpItem.transform.localScale = new Vector3(1, 1, 1);
 
@@ -262,6 +261,7 @@ public class PlayerController : MonoBehaviour
 
             if (!pickupFull)
             {
+                ///Old
                 //GameObject itemToBePicked = collision.gameObject;
                 //if(pickupableCollided.Count > 1)
                 //{

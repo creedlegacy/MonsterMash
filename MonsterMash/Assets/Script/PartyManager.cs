@@ -30,17 +30,16 @@ public class PartyManager : MonoBehaviour
     [Header("Party Manager Variables")]
     public Slider partymeter;
     public bool continueCoroutine = true, partyTimeStarted = false, dangerState = false;
-    private bool heartBeatSoundOn = false,allowPartyTimerStart = false,partyEnded = false, partyStarted, queenfaceRunning;
     public int defaultPartyMeter = 20;
     public float partyTime = 121f, dangerTime = 6f;
-    private float partyTimeStatic, defaultDangerTime = 6f;
-    private GameObject partyTimer,dangerCountdown;
     public GameObject PartyStartSplash,PartyEndSplash,QueenFace;
+    private float partyTimeStatic, defaultDangerTime = 6f;
+    private GameObject partyTimer, dangerCountdown;
+    private bool heartBeatSoundOn = false, allowPartyTimerStart = false, partyEnded = false, partyStarted, queenfaceRunning;
     [HideInInspector]
     public int discoDone, skeletonDone, foodDone, musicDone;
     [HideInInspector]
     public float highScore;
-
 
 
     private AudioSource audioSource;
@@ -188,6 +187,7 @@ public class PartyManager : MonoBehaviour
 
 
                 ///Previous Method
+                ///
                 //queenfaceRunning = true;
                 //float prevMeterValue = partymeter.value;
                 //yield return new WaitForSeconds(10);
@@ -249,6 +249,7 @@ public class PartyManager : MonoBehaviour
                 partyTimer.GetComponent<Text>().text = formattedTime;
 
                 //Debug.Log(currentStage);
+
                 //This is where what stage you are in are determined
                 if (partyTime > partyTimeStatic - stage2TimeTreshold)
                 {
@@ -312,8 +313,6 @@ public class PartyManager : MonoBehaviour
                 }
                 dangerState = true;
                 dangerCountdown.GetComponent<Text>().enabled = true;
-
-                
 
                 int minutes = Mathf.FloorToInt(dangerTime / 60F);
                 int seconds = Mathf.FloorToInt(dangerTime - minutes * 60);
